@@ -1,0 +1,122 @@
+<%- include("partials/header.ejs") %>
+
+<!-- SLIDERS POSITION AND STYLE -->
+<link href="/css/vensim.css" rel="stylesheet" type="text/css">
+
+<!-- CHARTS SETUP -->
+<script type="text/javascript" src="/js/vensim/charts.js"></script>
+<script type="text/javascript" src="/js/vensim/mdl.js"></script>
+<script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
+
+
+<%- include("partials/navbar.ejs") %>
+
+
+<div class="jumbotron" style="padding-bottom:24px;">
+    <h1> Run the Model </h1>
+    <!-- RESET SLIDERS BUTTON -->
+    <div class="topBar">
+        <button class="btn btn-outline-primary resetAll">Reset All Sliders</button>
+    </div>
+</div>
+
+<!-- SKETCH VIEW -->
+<div class="sketch">
+    <img src="/img/sketch.png"></img>
+    <a class="sketchLink" href="http://metasd.com" style="position: absolute; top: 0px; left: 708px; width: 76px; height: 26px"></a>
+    <a class="sketchLink" href="http://vensim.com" style="position: absolute; top: 0px; left: 810px; width: 76px; height: 26px"></a>
+    <a class="sketchLink" href="https://opensource.org/licenses/MIT" style="position: absolute; top: 51px; left: 388px; width: 268px; height: 14px"></a>
+    <div class="io-slider-box" name="Incubation Time" style="position: absolute; top: 332px; left: 364px; width: 82px; height: 14px">
+    5
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 346px; left: 364px; width: 82px" type="range" name="Incubation Time" min="1" max="10" value="5" step="0.1"></input>
+    <div class="io-slider-box" name="R0" style="position: absolute; top: 38px; left: 142px; width: 60px; height: 14px">
+    2.4
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 52px; left: 142px; width: 60px" type="range" name="R0" min="1" max="4" value="2.4" step="0.01"></input>
+    <div class="io-slider-box" name="Infection Duration" style="position: absolute; top: 228px; left: 722px; width: 90px; height: 14px">
+    7
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 242px; left: 722px; width: 90px" type="range" name="Infection Duration" min="1" max="10" value="7" step="0.1"></input>
+    <div class="io-slider-box" name="Initial Population" style="position: absolute; top: 334px; left: 120px; width: 84px; height: 14px">
+    6.65752e+07
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 348px; left: 120px; width: 84px" type="range" name="Initial Population" min="1" max="200000" value="6.65752e+07" step="1000"></input>
+    <div class="io-slider-box" name="Infection Duration" style="position: absolute; top: 40px; left: 60px; width: 102px; height: 14px">
+    7
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 54px; left: 60px; width: 102px" type="range" name="Infection Duration" min="1" max="10" value="7" step="0.1"></input>
+    <div class="io-slider-box" name="N Imported Infections" style="position: absolute; top: 114px; left: 381px; width: 106px; height: 14px">
+    5
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 128px; left: 381px; width: 106px" type="range" name="N Imported Infections" min="0" max="100" value="5" step="1"></input>
+    <div class="io-slider-box" name="Import Time" style="position: absolute; top: 156px; left: 371px; width: 64px; height: 14px">
+    20
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 170px; left: 371px; width: 64px" type="range" name="Import Time" min="1" max="100" value="20" step="1"></input>
+    <div class="io-slider-box" name="Isolation Reaction Time" style="position: absolute; top: 437px; left: 520px; width: 116px; height: 14px">
+    5
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 451px; left: 520px; width: 116px" type="range" name="Isolation Reaction Time" min="1" max="30" value="5" step="0.1"></input>
+    <div class="io-slider-box" name="Behavior Reaction Time" style="position: absolute; top: 35px; left: 282px; width: 118px; height: 14px">
+    50
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 49px; left: 282px; width: 118px" type="range" name="Behavior Reaction Time" min="1" max="60" value="50" step="1"></input>
+    <div class="io-slider-box" name="Behavioral Risk Reduction" style="position: absolute; top: 34px; left: 187px; width: 128px; height: 14px">
+    0
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 48px; left: 187px; width: 128px" type="range" name="Behavioral Risk Reduction" min="0" max="1" value="0" step="0.01"></input>
+    <div class="io-slider-box" name="Hospital Capacity" style="position: absolute; top: 53px; left: 628px; width: 60px; height: 14px">
+    200000
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 67px; left: 628px; width: 60px" type="range" name="Hospital Capacity" min="0" max="1000" value="200000" step="10"></input>
+    <div class="io-slider-box" name="Treated Fatality Rate" style="position: absolute; top: 65px; left: 706px; width: 104px; height: 14px">
+    0.2
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 79px; left: 706px; width: 104px" type="range" name="Treated Fatality Rate" min="0" max="0.1" value="0.2" step="0.001"></input>
+    <div class="io-slider-box" name="Untreated Fatality Rate" style="position: absolute; top: 89px; left: 774px; width: 114px; height: 14px">
+    0.4
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 103px; left: 774px; width: 114px" type="range" name="Untreated Fatality Rate" min="0" max="0.1" value="0.4" step="0.001"></input>
+    <div class="io-slider-box" name="Fraction Requiring Hospitalization" style="position: absolute; top: 114px; left: 493px; width: 94px; height: 14px">
+    0.1
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 128px; left: 493px; width: 94px" type="range" name="Fraction Requiring Hospitalization" min="0" max="1" value="0.1" step="0.01"></input>
+    <div class="io-slider-box" name="Public Health Capacity" style="position: absolute; top: 354px; left: 673px; width: 80px; height: 14px">
+    1e+06
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 368px; left: 673px; width: 80px" type="range" name="Public Health Capacity" min="-1e+06" max="2e+06" value="1e+06" step="10000"></input>
+    <div class="io-slider-box" name="Potential Isolation Effectiveness" style="position: absolute; top: 422px; left: 638px; width: 90px; height: 14px">
+    0
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 436px; left: 638px; width: 90px" type="range" name="Potential Isolation Effectiveness" min="0" max="1" value="0" step="0.01"></input>
+    <div class="io-slider-box" name="Import Time" style="position: absolute; top: 442px; left: 413px; width: 76px; height: 14px">
+    20
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 456px; left: 413px; width: 76px" type="range" name="Import Time" min="1" max="100" value="20" step="1"></input>
+    <div class="io-slider-box" name="Import Time" style="position: absolute; top: 73px; left: 336px; width: 76px; height: 14px">
+    20
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 87px; left: 336px; width: 76px" type="range" name="Import Time" min="1" max="100" value="20" step="1"></input>
+    <div class="io-slider-box" name="Contact Density Decline" style="position: absolute; top: 88px; left: 0px; width: 118px; height: 14px">
+    0
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 102px; left: 0px; width: 118px" type="range" name="Contact Density Decline" min="0" max="4" value="0" step="0.1"></input>
+    <div class="io-slider-box" name="Seasonal Amplitude" style="position: absolute; top: 435px; left: 234px; width: 100px; height: 14px">
+    0
+    </div>
+    <input class="io-slider-slide" style="position: absolute; top: 449px; left: 234px; width: 100px" type="range" name="Seasonal Amplitude" min="0" max="1" value="0" step="0.01"></input>
+    <div class="io-chart" name="Susceptible" varname="Susceptible" xaxisname="day" yaxisname="people" style="position: absolute; top: 458px; left: 12px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Exposed" varname="Exposed" xaxisname="day" yaxisname="people" style="position: absolute; top: 458px; left: 236px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Infected" varname="Infected" xaxisname="day" yaxisname="people" style="position: absolute; top: 458px; left: 460px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Recovered" varname="Recovered" xaxisname="day" yaxisname="people" style="position: absolute; top: 458px; left: 684px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Deaths" varname="Deaths" xaxisname="day" yaxisname="people" style="position: absolute; top: 458px; left: 909px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Public Health Strain" varname="Public Health Strain" xaxisname="day" yaxisname="Index" style="position: absolute; top: 233px; left: 908px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Hospital Strain" varname="Hospital Strain" xaxisname="day" yaxisname="Index" style="position: absolute; top: 8px; left: 908px; width: 226px; height: 226px"></div>
+    <div class="io-chart" name="Confirmed" varname="Confirmed" xaxisname="day" yaxisname="people" style="position: absolute; top: 457px; left: 1131px; width: 226px; height: 226px"></div>
+</div>
+
+<!-- SLIDERS ACTIVATION -->
+<script type="text/javascript" src="/js/vensim/sliders.js"></script>
+
+<%- include("partials/footer.ejs") %>

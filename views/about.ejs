@@ -1,0 +1,31 @@
+<%- include("partials/header.ejs") %>
+<%- include("partials/navbar.ejs") %>
+
+<div class="jumbotron">
+    <div class="container">
+
+        <h2 class="display-4">About us</h2>
+
+
+        <hr class="my-4">
+
+        <p class="lead">This application was realized by Valerio Cappuccio as an experiment and demonstration of the integrating of a system dynamics model into a web page. It is not an official page and is still work in progress. The model is abstract and not initialized with real data, so any output is dummy data.</p>
+        <p>
+            The system dynamics model used is the publicly available <a href="http://vensim.com/coronavirus/">Community Coronavirus Conceptual Model</a> Tom Fiddaman, Ventana Systems, Inc., 2020.
+        </p>
+        <p>
+            The application uses a <a href="https://expressjs.com/">Express JS</a> server to render <a href="https://ejs.co/">.ejs</a> templates and run in the background the Web Assembly version of the model.
+        </p>
+        <p>
+            The system dynamics model was converted into WebAssembly using <a href="http://vensim.com/">Vensim</a> and <a href="https://emscripten.org/index.html">Emscripten</a>.
+        </p>
+
+        <hr class="my-4">
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="/vensim" role="button">Run Model</a>
+        </p>
+    </div>
+</div>
+
+<%- include("partials/footer") %>
+

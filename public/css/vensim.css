@@ -1,11 +1,11 @@
 
-* { 
+/* * { 
     box-sizing: border-box;
 }
 div.sketch {
     position: relative; 
-}
-.io-slider-box {
+} */
+/* .io-slider-box {
     background-color: white; border: 1px solid gray; font-size: 12px;
     text-align: center; vertical-align: middle; line-height: 14px;
 }
@@ -26,18 +26,36 @@ div.sketch {
 .io-slider-slide::-ms-thumb {
     height: 15px; width: 15px;
     border-radius: 20%; background: blue; cursor: pointer;
+} */
+
+.sliderGroup{
+    background-color:rgba(245,245,245,0.6);
+    margin: 7px auto;
+    padding:10px;
+    border-radius:10px;
+}
+.io-slider-slide{
+    cursor:pointer;
+}
+.chartsDiv{
+    min-width:80%;
+    /* margin:auto; */
 }
 div.io-chart {
-    background: white;
-    border: 1px solid gray;
+    /* margin:10px; */
+    /* border: 1px solid gray; */
+    background-color: rgba(248, 248, 255,0.6);
+    border-radius:15px;
+    height: 300px;
+    margin: 15px auto;
 }
 div.io-chart > .svg {
     width: 100%;
     height: 100%;
 }
-div.topBar * {
+/* div.topBar * {
     display: inline-block;
-}
+} */
 /* h1, h3 {
     margin: 0 9px;
 } */

@@ -12,6 +12,10 @@ app.get("/vensim",(req,res)=>{
     res.render("vensim");
 });
 
+app.get("/vensim-orig",(req,res)=>{
+    res.render("vensim-original");
+});
+
 app.get("/about",(req,res)=>{
     res.render("about");
 });

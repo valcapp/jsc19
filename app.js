@@ -19,6 +19,7 @@ app.get("/about",(req,res)=>{
 app.get("/links",(req,res)=>{
     res.render("links");
 });
+
 app.listen(
     3000,
     ()=>{console.log('app is running');}

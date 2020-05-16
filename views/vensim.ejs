@@ -11,12 +11,39 @@
 
 <%- include("partials/navbar.ejs") %>
 
+<!-- SAVE MODAL -->
+<div class="modal fade" id="runSaveModal" tabindex="-1" role="dialog" aria-labelledby="unSaveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="unSaveModalLabel">Save Run</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="runName" class="col-form-label">Please, choose the name of the run:</label>
+                <input type="text" class="form-control" id="runName" placeholder="Run Name">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton">Save</button>
+        </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="jumbotron" style="padding-bottom:24px;">
     <h1> Run the Model </h1>
-    <!-- RESET SLIDERS BUTTON -->
+    <!-- CONTROL BUTTONS -->
     <div class="topBar">
-        <button class="btn btn-outline-primary resetAll">Reset All Sliders</button>
+        <!-- RESET -->
+        <button class="btn btn-outline-secondary resetAll">Reset Sliders</button>
+        <!-- SAVE BUTTON -->
+        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#runSaveModal">Save Run</button>
     </div>
 </div>
 

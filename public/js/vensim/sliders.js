@@ -15,3 +15,11 @@ d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
         runModel("Current");
     };
 });
+
+// ACTIVATE SAVE BUTTON
+d3.select('#saveButton').on("click", function(){
+    runName = d3.select('#runName').nodes()[0];
+    runModel(runName.value);
+    runName.value = '';
+});
+

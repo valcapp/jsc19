@@ -3,7 +3,7 @@ var VensimLoadedFlag = 0;
 function OnVensimLoaded()
     {
         VensimLoadedFlag = _IsVensimLoaded();
-        runModel("Baseline");
+        runModel("Current");
     }
 
 var VensimCharts = [];
@@ -80,8 +80,8 @@ function UpdateCharts(run){
             .text(div.attr("yaxisname"));
         
         //legend
-        var colorList = ['red','blue','green','orange','purple','turquoise','brown','olive','violet','navy'];
-        // var colorList = "1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf".match(/.{6}/g).map(s=>'#'+s); 
+        // var colorList = ['red','blue','green','orange','purple','turquoise','brown','olive','violet','navy'];
+        var colorList = "1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf".match(/.{6}/g).map(s=>'#'+s); 
         var legendGroup = chart.append('g')
             .attr('transform',`translate(${0.7*width},${0.15*height})`);
         var runNames = Object.keys(o.runs);
@@ -94,11 +94,9 @@ function UpdateCharts(run){
             .scale(color)
             .shapePadding(0 );
         legendGroup.call(legend);
-        legendGroup.selectAll('text').attr('font-size', '13');
+        legendGroup.selectAll('text').attr('font-size', '10px');
         
         for (r in o.runs) {
-            // var color = "red";
-            // if (r == "Baseline") { color = "blue"; }
             chart.selectAll("path.data" + r)
             .data([o.runs[r].vals])
             .join("path")
@@ -134,4 +132,5 @@ function runModel(run) {
     RunSim();
     UpdateCharts(run);
 }
+
 

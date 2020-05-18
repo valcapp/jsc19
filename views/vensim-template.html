@@ -1,0 +1,74 @@
+##ejsOpen##- include("partials/header.ejs") ##ejsClose##
+
+
+<!-- SLIDERS POSITION AND STYLE -->
+<link href="/css/vensim.css" rel="stylesheet" type="text/css">
+
+<!-- CHARTS SETUP -->
+<script type="text/javascript" src="/js/vensim/charts.js"></script>
+<script type="text/javascript" src="/js/vensim/mdl.js"></script>
+<script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
+
+##ejsOpen##- include("partials/navbar.ejs") ##ejsClose##
+
+
+<!-- SAVE MODAL -->
+<div class="modal fade" id="runSaveModal" tabindex="-1" role="dialog" aria-labelledby="unSaveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="unSaveModalLabel">Save Run</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="runName" class="col-form-label">Please, choose the name of the run:</label>
+                <input type="text" class="form-control" id="runName" placeholder="Run Name">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton">Save</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="jumbotron" style="padding-bottom:24px;">
+    <h1> Run the Model </h1>
+    <!-- CONTROL BUTTONS -->
+    <div class="topBar">
+        <!-- RESET -->
+        <button class="btn btn-outline-secondary resetAll">Reset Sliders</button>
+        <!-- DIAGRAM BUTTON -->
+        <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
+            Diagram
+        </button>
+        <!-- SAVE BUTTON -->
+        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#runSaveModal">Save Run</button>
+    </div>
+</div>
+
+<div class="diagramDiv collapse container" id="diagram">
+    <img src="/img/cld.png"></img>
+</div>
+
+<div class="slidersDiv container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 align-items-around  text-center">
+    </div>
+</div>
+
+<div class="container"><hr></div>
+
+<div class="chartsDiv container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 align-items-around">
+    </div>
+</div>
+
+<!-- SLIDERS ACTIVATION -->
+<script type="text/javascript" src="/js/vensim/sliders.js"></script>
+
+##ejsOpen##- include("partials/footer.ejs") ##ejsClose##

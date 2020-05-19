@@ -1,7 +1,7 @@
-##ejsOpen##- include("partials/header.ejs") ##ejsClose##
+<!-- ##ejsOpen##- include("partials/header.ejs") ##ejsClose## -->
+<%- include("partials/header.ejs") %>
 
 
-<!-- SLIDERS POSITION AND STYLE -->
 <link href="/css/dashb.css" rel="stylesheet" type="text/css">
 
 <!-- CHARTS SETUP -->
@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/js/vensim/mdl.js"></script>
 <script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
 
-##ejsOpen##- include("partials/navbar.ejs") ##ejsClose##
+<%- include("partials/navbar.ejs") %>
 
 
 <!-- SAVE MODAL -->
@@ -44,17 +44,21 @@
         <!-- RESET -->
         <button class="btn btn-outline-secondary resetAll">Reset Sliders</button>
         <!-- DIAGRAM BUTTON -->
+        <% if (dashbDiagram) { %>
         <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
-            Diagram
-        </button>
+            Diagram</button>
+        <% } %>
         <!-- SAVE BUTTON -->
         <button class="btn btn-outline-primary" data-toggle="modal" data-target="#runSaveModal">Save Run</button>
     </div>
 </div>
 
+<% if (dashbDiagram) { %>
 <div class="diagramDiv collapse container" id="diagram">
-    <img src="/img/cld.png"></img>
+    <img src="<%= dashbDiagram %>"></img>
 </div>
+<% } %>
+
 
 <div class="slidersDiv container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 align-items-around  text-center">
@@ -71,4 +75,4 @@
 <!-- SLIDERS ACTIVATION -->
 <script type="text/javascript" src="/js/vensim/sliders.js"></script>
 
-##ejsOpen##- include("partials/footer.ejs") ##ejsClose##
+<%- include("partials/footer") %> 

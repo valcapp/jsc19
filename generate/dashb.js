@@ -5,8 +5,9 @@ const path = require("path"),
     {JSDOM} = jsdom,
     appDir = path.resolve(__dirname,'..'),
     sourcePath = path.join(appDir,'sd','web','index.html'),
-    templatePath = path.join(__dirname,'dashb-template.html'),
+    templatePath = path.join(__dirname,'dashb-template.ejs'),
     targetPath = path.join(appDir,'views','dashb.ejs');
+
 let sliders = {},
     charts = {};
 
@@ -62,13 +63,14 @@ function returnElmts(dom){
 
 function myParser(inString){
     const expressions = {
-        "<%": /##ejsOpen##/g,
-        "%>": /##ejsClose##/g
+        "<%": /&lt;%/g,
+        "%>": /%&gt;/g
     };
     let outString=inString;
     for (let key in expressions){
         outString = outString.replace(expressions[key],key);
     }
+    // console.log(outString);
     return outString;
 }
 

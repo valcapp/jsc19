@@ -7,12 +7,16 @@ const path = require("path"),
     mdlPublic = path.join(sdPublic,'mdl.js'),
     wasmWeb = path.join(sdWeb,'mdl.wasm'),
     wasmPublic = path.join(sdPublic,'mdl.wasm'),
+    sketchWeb = path.join(sdWeb,'sketch.png'),
+    sketchPublic = path.join(appDir,'public','img','sketch.png'),
+
     copyPaste = function(from,to){
         fs.copyFile(from, to, (err) => {
             if (err) throw err;
-            console.log(`\n file copied from:  ${from}\n to:                ${to}`);
+            // console.log(`\n file copied from:  ${from}\n to:                ${to}`);
         });
     };
 
 copyPaste(mdlWeb,mdlPublic);
 copyPaste(wasmWeb,wasmPublic);
+copyPaste(sketchWeb,sketchPublic);

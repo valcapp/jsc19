@@ -3,11 +3,9 @@ const express = require('express'),
     app = express();
 
 // generate files
-require(path.join(__dirname,'generate','dashb.js'));
-debugMode = true;
-if(!debugMode){
-    require(path.join(__dirname,'generate','publicMdl.js'));
-}
+debugMode = false;
+require('./generate');
+
 
 // set app views
 app.set("view engine","ejs");

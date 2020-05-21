@@ -17,6 +17,7 @@ JSDOM.fromFile(sourcePath).then(dom => {
 
 function sourceElmts(window){
     let $ = jquery(window);
+    sdTitle = $("h1").html();
     // identify sliders
     $(".io-slider-slide").each(function(){
         sliders[$(this).attr('name')] = $(this).removeAttr("style");

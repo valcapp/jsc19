@@ -3,7 +3,11 @@ const express = require('express'),
     app = express();
 
 // generate files
-debugMode = false;
+debugMode = false; 
+sdTitle = 'sd';
+introText = '';
+aboutText = '';
+linksList = {};
 require('./generate');
 
 

@@ -1,2 +1,23 @@
-# jsc19
-This app is a prototype of integration of system-dynamics model into a web page using WebAssembly and ExpressJS.
+# Vensim Dashboard Generator
+
+This app allows you to build a decent looking dashboard from your system dynamics model and running it on a browser locally.
+
+## Requirements
+
+Before running this application, the Vensim web folder needs to be published first. The Vensim web publishing feature is available only on  v8.1+. 
+
+The app also requires node.js to run, available on the DigitalDevTools drive for Windows users.
+
+## Usage
+
+Copy the repository on your machine. Inside the repository there is a "sd" directory: replace that with your own directory, which is the one containing the system-dynamics model you want to publish (or a copy of it). Make sure the web folder within that has been published and then run the commands from the cmd:
+
+```bash
+cd "\path\to\your\folder"
+node app.js
+```
+On Windows, if you are working on the local drive (rather than the cloud one from GT) make sure to run cmd as admin, or you won't be able to access the directory from the cmd (i.e. running the cd command above). 
+
+## Limitations
+
+Being built on top of the Vensim Web folder, this app has same limitation as for the models complexity it can support. It supports all functiona and subscript, but not read from file or optimization for example. For the same reason, the graphs that can be visualized as of now are just one-variable line graphs, not bar charts or stack graphs for example.

@@ -4,26 +4,22 @@
 <div class="jumbotron">
     <div class="container">
 
-        <h2 class="display-4">About us</h2>
+        <h2 class="display-4">About</h2>
 
 
         <hr class="my-4">
 
-        <p class="lead">This application was realized by Valerio Cappuccio as a demonstration of the integration of a system dynamics model into a web page. It is not an official page and is still work in progress.</p>
-        <p class="lead"> The model is abstract and not initialized with real data, so any output is dummy data.</p>
-        <p>
-            The system dynamics model used is the publicly available <a href="http://vensim.com/coronavirus/">Community Coronavirus Conceptual Model</a> Tom Fiddaman, Ventana Systems, Inc., 2020.
-        </p>
-        <p>
-            The application uses a <a href="https://expressjs.com/">Express JS</a> server to render <a href="https://ejs.co/">.ejs</a> templates and run in the background the Web Assembly version of the model.
-        </p>
-        <p>
-            The system dynamics model was converted into WebAssembly using <a href="http://vensim.com/">Vensim</a> and <a href="https://emscripten.org/index.html">Emscripten</a>.
-        </p>
+        <p class="lead">
 
+        </p>
+        This page was developed by the system dynamics team within LBG. It combines data mathematical modelling (system-dynamics) with web interaction and visualization.
+        <p>
+            <%= aboutText %>
+        </p>
         <hr class="my-4">
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="/vensim" role="button">Run Model</a>
+            <p> Explore the model scenarios by running the model! </p>
+            <a class="btn btn-primary btn-lg" href="/run" role="button">Run Model</a>
         </p>
     </div>
 </div>

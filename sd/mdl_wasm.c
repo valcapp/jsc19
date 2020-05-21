@@ -1,4 +1,4 @@
-/*(Thu May 14 18:35:58 2020) From community corona 8.mdl - C equations for the model */
+/*(Tue May 19 11:55:18 2020) From placeholder.mdl - C equations for the model */
 
 #define _VDFX
 #define VDFX
@@ -11,131 +11,51 @@
 #define _WASM
 
 typedef unsigned char charutf8;
-#define NUM_VARS 57
-#define NUM_LEVELS 12
+#define NUM_VARS 17
+#define NUM_LEVELS 3
 #define NUM_DELAYS 0
-#define NUM_AUX 45
+#define NUM_AUX 14
 #define NUM_LOOKUPS 0
 
 
 charutf8 *strVarNames[NUM_VARS] = { 
 "Time" 	/*0*/
-, "#Isolation Effectiveness>SMOOTH3#" 	/*1*/
-, "#Isolation Effectiveness>SMOOTH3>LV1#" 	/*2*/
-, "#Isolation Effectiveness>SMOOTH3>LV2#" 	/*3*/
-, "#Relative Behavioral Risk>SMOOTH3#" 	/*4*/
-, "#Relative Behavioral Risk>SMOOTH3>LV1#" 	/*5*/
-, "#Relative Behavioral Risk>SMOOTH3>LV2#" 	/*6*/
-, "Deaths" 	/*7*/
-, "Exposed" 	/*8*/
-, "Infected" 	/*9*/
-, "Recovered" 	/*10*/
-, "Susceptible" 	/*11*/
-, "#Isolation Effectiveness>SMOOTH3>DL#" 	/*12*/
-, "#Relative Behavioral Risk>SMOOTH3>DL#" 	/*13*/
-, "Active Infected" 	/*14*/
-, "Advancing" 	/*15*/
-, "Behavior Reaction Time" 	/*16*/
-, "Behavioral Risk Reduction" 	/*17*/
-, "Confirmed" 	/*18*/
-, "Contact Density Decline" 	/*19*/
-, "Dying" 	/*20*/
-, "Effect of Season" 	/*21*/
-, "Fatality Rate" 	/*22*/
-, "FINAL TIME" 	/*23*/
-, "Fraction Requiring Hospitalization" 	/*24*/
-, "Fraction Susceptible" 	/*25*/
-, "Hospital Capacity" 	/*26*/
-, "Hospital Capacity Sensitivity" 	/*27*/
-, "Hospital Strain" 	/*28*/
-, "Import Time" 	/*29*/
-, "Importing Infected" 	/*30*/
-, "Incubation Time" 	/*31*/
-, "Infecting" 	/*32*/
-, "Infection Duration" 	/*33*/
-, "Initial Population" 	/*34*/
-, "INITIAL TIME" 	/*35*/
-, "Initial Uncontrolled Transmission Rate" 	/*36*/
-, "Isolation Effectiveness" 	/*37*/
-, "Isolation Reaction Time" 	/*38*/
-, "N Imported Infections" 	/*39*/
-, "Peak Season" 	/*40*/
-, "Potential Isolation Effectiveness" 	/*41*/
-, "Public Health Capacity" 	/*42*/
-, "Public Health Capacity Sensitivity" 	/*43*/
-, "Public Health Strain" 	/*44*/
-, "R0" 	/*45*/
-, "Recovering" 	/*46*/
-, "Relative Behavioral Risk" 	/*47*/
-, "Relative Contact Density" 	/*48*/
-, "SAVEPER" 	/*49*/
-, "Seasonal Amplitude" 	/*50*/
-, "Seasonal Period" 	/*51*/
-, "Serious Cases" 	/*52*/
-, "TIME STEP" 	/*53*/
-, "Transmission Rate" 	/*54*/
-, "Treated Fatality Rate" 	/*55*/
-, "Untreated Fatality Rate" 	/*56*/
+, "stock[a]" 	/*1*/
+, "stock[b]" 	/*2*/
+, "FINAL TIME" 	/*3*/
+, "growth rate[a]" 	/*4*/
+, "growth rate[b]" 	/*5*/
+, "growth rate a" 	/*6*/
+, "growth rate b" 	/*7*/
+, "inflow[a]" 	/*8*/
+, "inflow[b]" 	/*9*/
+, "initial stock[a]" 	/*10*/
+, "initial stock[b]" 	/*11*/
+, "initial stock a" 	/*12*/
+, "initial stock b" 	/*13*/
+, "INITIAL TIME" 	/*14*/
+, "SAVEPER" 	/*15*/
+, "TIME STEP" 	/*16*/
 };
 
 int nTypesVector[NUM_VARS] = { 
 15	/*0*/
 , 8	/*1*/
 , 8	/*2*/
-, 8	/*3*/
-, 8	/*4*/
-, 8	/*5*/
-, 8	/*6*/
-, 8	/*7*/
-, 8	/*8*/
-, 8	/*9*/
-, 8	/*10*/
-, 8	/*11*/
-, 17	/*12*/
-, 17	/*13*/
-, 17	/*14*/
+, 23	/*3*/
+, 17	/*4*/
+, 17	/*5*/
+, 23	/*6*/
+, 23	/*7*/
+, 17	/*8*/
+, 17	/*9*/
+, 17	/*10*/
+, 17	/*11*/
+, 23	/*12*/
+, 23	/*13*/
+, 23	/*14*/
 , 17	/*15*/
 , 23	/*16*/
-, 23	/*17*/
-, 17	/*18*/
-, 23	/*19*/
-, 17	/*20*/
-, 17	/*21*/
-, 17	/*22*/
-, 23	/*23*/
-, 23	/*24*/
-, 17	/*25*/
-, 23	/*26*/
-, 23	/*27*/
-, 17	/*28*/
-, 23	/*29*/
-, 17	/*30*/
-, 23	/*31*/
-, 17	/*32*/
-, 23	/*33*/
-, 23	/*34*/
-, 23	/*35*/
-, 17	/*36*/
-, 17	/*37*/
-, 23	/*38*/
-, 23	/*39*/
-, 23	/*40*/
-, 23	/*41*/
-, 23	/*42*/
-, 23	/*43*/
-, 17	/*44*/
-, 23	/*45*/
-, 17	/*46*/
-, 17	/*47*/
-, 17	/*48*/
-, 17	/*49*/
-, 23	/*50*/
-, 23	/*51*/
-, 17	/*52*/
-, 23	/*53*/
-, 17	/*54*/
-, 23	/*55*/
-, 23	/*56*/
 };
 
 charutf8 *strLookupNames = 0; 
@@ -143,30 +63,13 @@ charutf8 *strLookupNames = 0;
 
 void InitConstants()
 {
-SetConstant (16, "Behavior Reaction Time", 50.000000);
-SetConstant (17, "Behavioral Risk Reduction", 0.000000);
-SetConstant (19, "Contact Density Decline", 0.000000);
-SetConstant (23, "FINAL TIME", 365.000000);
-SetConstant (24, "Fraction Requiring Hospitalization", 0.100000);
-SetConstant (26, "Hospital Capacity", 200000.000000);
-SetConstant (27, "Hospital Capacity Sensitivity", 2.000000);
-SetConstant (29, "Import Time", 20.000000);
-SetConstant (31, "Incubation Time", 5.000000);
-SetConstant (33, "Infection Duration", 7.000000);
-SetConstant (34, "Initial Population", 66575200.000000);
-SetConstant (35, "INITIAL TIME", 0.000000);
-SetConstant (38, "Isolation Reaction Time", 5.000000);
-SetConstant (39, "N Imported Infections", 5.000000);
-SetConstant (40, "Peak Season", 0.000000);
-SetConstant (41, "Potential Isolation Effectiveness", 0.000000);
-SetConstant (42, "Public Health Capacity", 1000000.000000);
-SetConstant (43, "Public Health Capacity Sensitivity", 2.000000);
-SetConstant (45, "R0", 2.400000);
-SetConstant (50, "Seasonal Amplitude", 0.000000);
-SetConstant (51, "Seasonal Period", 365.000000);
-SetConstant (53, "TIME STEP", 0.125000);
-SetConstant (55, "Treated Fatality Rate", 0.200000);
-SetConstant (56, "Untreated Fatality Rate", 0.400000);
+SetConstant (3, "FINAL TIME", 100.000000);
+SetConstant (6, "growth rate a", 0.010000);
+SetConstant (7, "growth rate b", -0.010000);
+SetConstant (12, "initial stock a", 100.000000);
+SetConstant (13, "initial stock b", 200.000000);
+SetConstant (14, "INITIAL TIME", 0.000000);
+SetConstant (16, "TIME STEP", 1.000000);
 }
 
 long Get_NUM_VARS() { return NUM_VARS; }
@@ -200,15 +103,18 @@ static int sumind5,forind5 ;
 static int sumind6,forind6 ; 
 static int sumind7,forind7 ; 
 static int simultid ;
+static int sub0[]  /* subs */ = {0,1,-1} ;
 void SetupDIMS(){
-CreateDIMS(1);
+CreateDIMS(2);
 SetDIM_INFO(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1);
+SetDIM_INFO(1,442,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+2);
 };
 #ifndef LINKEXTERN
 #endif
 unsigned char *mdl_desc()
 {
-return("(Thu May 14 18:35:58 2020) From community corona 8.mdl") ;
+return("(Tue May 19 11:55:18 2020) From placeholder.mdl") ;
 }
 
 /* compute the model rates */
@@ -216,74 +122,12 @@ void mdl_func0()
 {
 double temp[10];
 VGV->RATE[0] = 1.0 ;/* this is time */
-/* #Isolation Effectiveness>SMOOTH3# */
+/* stock */
+for(forind0=0;forind0<2;forind0++)
  {
-  VGV->lastpos = 1 ;
-  VGV->RATE[1] = (VGV->LEVEL[3]-VGV->LEVEL[1])/VGV->LEVEL[12] ;
-} /* #Isolation Effectiveness>SMOOTH3# */
-
-/* #Isolation Effectiveness>SMOOTH3>LV1# */
- {
-  VGV->lastpos = 2 ;
-  VGV->RATE[2] = ((STEP(VGV->LEVEL[41],VGV->LEVEL[29]))-VGV->LEVEL[2
-])/VGV->LEVEL[12] ;
-} /* #Isolation Effectiveness>SMOOTH3>LV1# */
-
-/* #Isolation Effectiveness>SMOOTH3>LV2# */
- {
-  VGV->lastpos = 3 ;
-  VGV->RATE[3] = (VGV->LEVEL[2]-VGV->LEVEL[3])/VGV->LEVEL[12] ;
-} /* #Isolation Effectiveness>SMOOTH3>LV2# */
-
-/* #Relative Behavioral Risk>SMOOTH3# */
- {
-  VGV->lastpos = 4 ;
-  VGV->RATE[4] = (VGV->LEVEL[6]-VGV->LEVEL[4])/VGV->LEVEL[13] ;
-} /* #Relative Behavioral Risk>SMOOTH3# */
-
-/* #Relative Behavioral Risk>SMOOTH3>LV1# */
- {
-  VGV->lastpos = 5 ;
-  VGV->RATE[5] = ((1.000000-STEP(VGV->LEVEL[17],VGV->LEVEL[29]))-VGV->LEVEL[5
-])/VGV->LEVEL[13] ;
-} /* #Relative Behavioral Risk>SMOOTH3>LV1# */
-
-/* #Relative Behavioral Risk>SMOOTH3>LV2# */
- {
-  VGV->lastpos = 6 ;
-  VGV->RATE[6] = (VGV->LEVEL[5]-VGV->LEVEL[6])/VGV->LEVEL[13] ;
-} /* #Relative Behavioral Risk>SMOOTH3>LV2# */
-
-/* Deaths */
- {
-  VGV->lastpos = 7 ;
-  VGV->RATE[7] = VGV->LEVEL[20] ;
-} /* Deaths */
-
-/* Exposed */
- {
-  VGV->lastpos = 8 ;
-  VGV->RATE[8] = VGV->LEVEL[32]-VGV->LEVEL[15] ;
-} /* Exposed */
-
-/* Infected */
- {
-  VGV->lastpos = 9 ;
-  VGV->RATE[9] = VGV->LEVEL[15]+VGV->LEVEL[30]-VGV->LEVEL[20]-VGV->LEVEL[46
-] ;
-} /* Infected */
-
-/* Recovered */
- {
-  VGV->lastpos = 10 ;
-  VGV->RATE[10] = VGV->LEVEL[46] ;
-} /* Recovered */
-
-/* Susceptible */
- {
-  VGV->lastpos = 11 ;
-  VGV->RATE[11] = (-VGV->LEVEL[32]) ;
-} /* Susceptible */
+  VGV->lastpos = 1+sub0[forind0]*1 ;
+  VGV->RATE[1+sub0[forind0]*1] = VGV->LEVEL[8+sub0[forind0]*1] ;
+} /* stock */
 
 } /* comp_rate */
 
@@ -298,7 +142,7 @@ void mdl_func2()
 {
 double temp[10];
 vec_arglist_init();
-VGV->LEVEL[0] = VGV->LEVEL[35] ;
+VGV->LEVEL[0] = VGV->LEVEL[14] ;
 } /* init_time */
 
 /* initialize time step */
@@ -312,60 +156,20 @@ double temp[10];
 void mdl_func4()
 {
 double temp[10];
-/* #Isolation Effectiveness>SMOOTH3# */
+/* initial stock */
  {
-  VGV->lastpos = 1 ;
-  VGV->LEVEL[1] = (STEP(VGV->LEVEL[41],VGV->LEVEL[29])) ;
+  VGV->lastpos = 10+0*1 ;
+  VGV->LEVEL[10+0*1] = VGV->LEVEL[12] ;
 }
-/* #Isolation Effectiveness>SMOOTH3>LV1# */
  {
-  VGV->lastpos = 2 ;
-  VGV->LEVEL[2] = (STEP(VGV->LEVEL[41],VGV->LEVEL[29])) ;
+  VGV->lastpos = 10+1*1 ;
+  VGV->LEVEL[10+1*1] = VGV->LEVEL[13] ;
 }
-/* #Isolation Effectiveness>SMOOTH3>LV2# */
+/* stock */
+for(forind0=0;forind0<2;forind0++)
  {
-  VGV->lastpos = 3 ;
-  VGV->LEVEL[3] = (STEP(VGV->LEVEL[41],VGV->LEVEL[29])) ;
-}
-/* #Relative Behavioral Risk>SMOOTH3# */
- {
-  VGV->lastpos = 4 ;
-  VGV->LEVEL[4] = (1.000000-STEP(VGV->LEVEL[17],VGV->LEVEL[29])) ;
-}
-/* #Relative Behavioral Risk>SMOOTH3>LV1# */
- {
-  VGV->lastpos = 5 ;
-  VGV->LEVEL[5] = (1.000000-STEP(VGV->LEVEL[17],VGV->LEVEL[29])) ;
-}
-/* #Relative Behavioral Risk>SMOOTH3>LV2# */
- {
-  VGV->lastpos = 6 ;
-  VGV->LEVEL[6] = (1.000000-STEP(VGV->LEVEL[17],VGV->LEVEL[29])) ;
-}
-/* Deaths */
- {
-  VGV->lastpos = 7 ;
-  VGV->LEVEL[7] = 0 ;
-}
-/* Exposed */
- {
-  VGV->lastpos = 8 ;
-  VGV->LEVEL[8] = 0 ;
-}
-/* Infected */
- {
-  VGV->lastpos = 9 ;
-  VGV->LEVEL[9] = 0 ;
-}
-/* Recovered */
- {
-  VGV->lastpos = 10 ;
-  VGV->LEVEL[10] = 0 ;
-}
-/* Susceptible */
- {
-  VGV->lastpos = 11 ;
-  VGV->LEVEL[11] = VGV->LEVEL[34] ;
+  VGV->lastpos = 1+sub0[forind0]*1 ;
+  VGV->LEVEL[1+sub0[forind0]*1] = VGV->LEVEL[10+sub0[forind0]*1] ;
 }
 } /* comp_init */
 
@@ -384,119 +188,35 @@ double temp[10];
 void mdl_func7()
 {
 double temp[10];
-/* #Isolation Effectiveness>SMOOTH3>DL# */
+/* growth rate */
  {
-  VGV->lastpos = 12 ;
-  VGV->LEVEL[12] = VGV->LEVEL[38]/3.000000 ;
+  VGV->lastpos = 4+0*1 ;
+  VGV->LEVEL[4+0*1] = VGV->LEVEL[6] ;
 }
-/* #Relative Behavioral Risk>SMOOTH3>DL# */
  {
-  VGV->lastpos = 13 ;
-  VGV->LEVEL[13] = VGV->LEVEL[16]/3.000000 ;
+  VGV->lastpos = 4+1*1 ;
+  VGV->LEVEL[4+1*1] = VGV->LEVEL[7] ;
 }
-/* Public Health Strain */
+/* inflow */
+for(forind0=0;forind0<2;forind0++)
  {
-  VGV->lastpos = 44 ;
-  VGV->LEVEL[44] = MAX(0,VGV->LEVEL[9]/VGV->LEVEL[42]) ;
+  VGV->lastpos = 8+sub0[forind0]*1 ;
+  VGV->LEVEL[8+sub0[forind0]*1] = VGV->LEVEL[1+sub0[forind0]*1]*VGV->LEVEL[4
++sub0[forind0]*1] ;
 }
-/* Isolation Effectiveness */
+/* initial stock */
  {
-  VGV->lastpos = 37 ;
-  VGV->LEVEL[37] = VGV->LEVEL[1]/(1.000000+POWER(VGV->LEVEL[44],VGV->LEVEL[43
-])) ;
+  VGV->lastpos = 10+0*1 ;
+  VGV->LEVEL[10+0*1] = VGV->LEVEL[12] ;
 }
-/* Active Infected */
  {
-  VGV->lastpos = 14 ;
-  VGV->LEVEL[14] = VGV->LEVEL[9]*(1.000000-VGV->LEVEL[37]) ;
-}
-/* Advancing */
- {
-  VGV->lastpos = 15 ;
-  VGV->LEVEL[15] = VGV->LEVEL[8]/VGV->LEVEL[31] ;
-}
-/* Confirmed */
- {
-  VGV->lastpos = 18 ;
-  VGV->LEVEL[18] = VGV->LEVEL[7]+VGV->LEVEL[8]+VGV->LEVEL[9]+VGV->LEVEL[10
-] ;
-}
-/* Serious Cases */
- {
-  VGV->lastpos = 52 ;
-  VGV->LEVEL[52] = VGV->LEVEL[9]*VGV->LEVEL[24] ;
-}
-/* Hospital Strain */
- {
-  VGV->lastpos = 28 ;
-  VGV->LEVEL[28] = VGV->LEVEL[52]/VGV->LEVEL[26] ;
-}
-/* Fatality Rate */
- {
-  VGV->lastpos = 22 ;
-  VGV->LEVEL[22] = VGV->LEVEL[56]+(VGV->LEVEL[55]-VGV->LEVEL[56])/
-(1.000000+POWER(VGV->LEVEL[28],VGV->LEVEL[27])) ;
-}
-/* Dying */
- {
-  VGV->lastpos = 20 ;
-  VGV->LEVEL[20] = VGV->LEVEL[9]*VGV->LEVEL[22]/VGV->LEVEL[33] ;
-}
-/* Effect of Season */
- {
-  VGV->lastpos = 21 ;
-  VGV->LEVEL[21] = 1.000000-VGV->LEVEL[50]+VGV->LEVEL[50]*(1.000000
-+COS(2.000000*3.141590*(VGV->LEVEL[0]-VGV->LEVEL[40])/VGV->LEVEL[51
-]))/2.000000 ;
-}
-/* Fraction Susceptible */
- {
-  VGV->lastpos = 25 ;
-  VGV->LEVEL[25] = VGV->LEVEL[11]/VGV->LEVEL[34] ;
-}
-/* Importing Infected */
- {
-  VGV->lastpos = 30 ;
-  VGV->LEVEL[30] = VGV->LEVEL[39]*PULSE(VGV->LEVEL[29],VGV->LEVEL[53
-])/VGV->LEVEL[53] ;
-}
-/* Initial Uncontrolled Transmission Rate */
- {
-  VGV->lastpos = 36 ;
-  VGV->LEVEL[36] = VGV->LEVEL[45]/VGV->LEVEL[33] ;
-}
-/* Relative Behavioral Risk */
- {
-  VGV->lastpos = 47 ;
-  VGV->LEVEL[47] = VGV->LEVEL[4] ;
-}
-/* Relative Contact Density */
- {
-  VGV->lastpos = 48 ;
-  VGV->LEVEL[48] = 1.000000/(1.000000+VGV->LEVEL[19]*(1.000000-VGV->LEVEL[25
-])) ;
-}
-/* Transmission Rate */
- {
-  VGV->lastpos = 54 ;
-  VGV->LEVEL[54] = VGV->LEVEL[36]*VGV->LEVEL[47]*VGV->LEVEL[25]*VGV->LEVEL[48
-] ;
-}
-/* Infecting */
- {
-  VGV->lastpos = 32 ;
-  VGV->LEVEL[32] = VGV->LEVEL[14]*VGV->LEVEL[54]*VGV->LEVEL[21] ;
-}
-/* Recovering */
- {
-  VGV->lastpos = 46 ;
-  VGV->LEVEL[46] = VGV->LEVEL[9]/VGV->LEVEL[33]*(1.000000-VGV->LEVEL[22
-]) ;
+  VGV->lastpos = 10+1*1 ;
+  VGV->LEVEL[10+1*1] = VGV->LEVEL[13] ;
 }
 /* SAVEPER */
  {
-  VGV->lastpos = 49 ;
-  VGV->LEVEL[49] = VGV->LEVEL[53] ;
+  VGV->lastpos = 15 ;
+  VGV->LEVEL[15] = VGV->LEVEL[16] ;
 }
 } /* comp_aux */
 int execute_curloop() {return(0);}

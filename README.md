@@ -1,22 +1,21 @@
 # Vensim Dashboard Generator
 
-This app allows you to build a decent looking dashboard from your system dynamics model and running it on a browser locally.
+This app allows to build a decent looking dashboard from a Vensim system dynamics model and to run it on a browser locally.
 
 ## Requirements
 
 Before running this application, the Vensim web folder needs to be published first. The Vensim web publishing feature is available only on  v8.1+. 
 
-The app also requires node.js to run, available on the DigitalDevTools drive for Windows users.
+The app also requires node.js to run.
 
 ## Usage
 
-Copy the repository on your machine. Inside the repository there is a "sd" directory: replace that with your own directory, which is the one containing the system-dynamics model you want to publish (or a copy of it). Make sure the web folder within that has been published and then run the commands from the cmd:
+Clone the repository on your machine. Inside the repository there is a "sd" directory: replace that with your own directory, which is the one containing the system-dynamics model you want to publish (or a copy of it). Make sure the web folder within that has been published and then run:
 
 ```bash
 cd "\path\to\your\folder"
 node app.js
 ```
-On Windows, if you are working on the local drive (rather than the cloud one from GT) make sure to run cmd as admin, or you won't be able to access the directory from the cmd (i.e. running the cd command above). 
 
 ## Limitations
 

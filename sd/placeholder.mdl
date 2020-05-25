@@ -4,7 +4,8 @@ growth rate[a]=
 growth rate[b]=
 	growth rate b
 	~	1/Month [-0.05,0.05,0.001]
-	~		|
+	~	it is the fractional rate by which the stock grows in time.
+	|
 
 growth rate a=
 	0.01
@@ -19,7 +20,8 @@ growth rate b=
 initial stock a=
 	100
 	~	u
-	~		|
+	~	A comment for var a: bla bla
+	|
 
 initial stock[a]=
 	initial stock a ~~|
@@ -31,7 +33,8 @@ initial stock[b]=
 initial stock b=
 	200
 	~	u
-	~		|
+	~	A comment for var b: bla bla
+	|
 
 subs:
 	a,b
@@ -41,13 +44,15 @@ subs:
 inflow[subs]=
 	stock[subs] * growth rate[subs]
 	~	u/Month
-	~		|
+	~	This is the rate the stock changes in time.
+	|
 
 stock[subs]= INTEG (
 	inflow[subs],
 		initial stock[subs])
 	~	u
-	~		|
+	~	This represent the quantity in the stock for the two categories a and b.
+	|
 
 ********************************************************
 	.Control
@@ -125,7 +130,7 @@ stock[b],Graph
 72:0
 73:0
 4:Time
-5:initial stock[subs]
+5:growth rate[subs]
 35:Date
 36:YYYY-MM-DD
 37:2000

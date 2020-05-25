@@ -4,4 +4,5 @@ if (!debugMode){
     require('./vensim.js');
 }
 diag = require('./diagram.js');
+require('./variables.js');
 

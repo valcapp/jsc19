@@ -5,4 +5,5 @@ if (!debugMode){
 }
 diag = require('./diagram.js');
 require('./variables.js');
+debugMode=false;
 

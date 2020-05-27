@@ -1,10 +1,12 @@
 resetAllSliders();
 
 // ACTIVATE RESET BUTTON
-d3.select("button.resetAll").nodes()[0].onclick = function() {
-    resetAllSliders();
-    runModel("Current");
-};
+d3.selectAll(".resetAll").nodes().forEach(function(i){
+    i.onclick = function() {
+        resetAllSliders();
+        runModel("Current");
+    };
+});
 
 // ACTIVATE SLIDERS
 d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){

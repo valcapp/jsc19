@@ -36,42 +36,95 @@
 </div>
 
 
-<div class="jumbotron" style="padding-bottom:24px;">
+<div class="jumbotron" style="padding-bottom:24px; margin-bottom:0px;">
     <h1> Run the Model </h1>
-    <!-- CONTROL BUTTONS -->
-    <div class="topBar">
-        <!-- RESET -->
-        <button class="btn btn-outline-secondary resetAll">Reset Sliders</button>
-        <!-- DIAGRAM BUTTON -->
+    <p> Modify model inputs to see the change in the results.</p>
+</div>
+
+
+
+<div class="wrapper">
+
+    <nav id="sideBar" class="nav flex-column navbar-light bg-light">
+        
+        <div id="sidebarCollapse" class="sidebar-header btn btn-primary" type="button">
+            <div class="hint"><img src="/img/icons/menu.svg" alt=""></div>
+            <div class="compress">
+                <div><h4 style="margin:0px;">Menu</h4></div>
+                <div><img src="/img/icons/chevron-left.svg" alt=""></div>
+            </div>
+        </div>
+
+        <!-- <div class="dropdown-divider"></div> -->
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link resetAll" type="button">
+                    <!-- <i class="fas fa-fast-backward"></i> -->
+                    <img src="/img/icons/reset.svg" alt="">
+                    <span class="compress">Reset sliders</span>
+                </a>
+            </li>
+            <% if (dashbDiagram) { %>
+            <li class="nav-item">
+                <a class="nav-link" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
+                    <!-- <i class="fas fa-project-diagram"></i> -->
+                    <img src="/img/icons/eye.svg" alt="">
+                    <span class="compress">Show diagram</span>
+                </a>
+            </li>
+            <% } %>
+
+            <li class="nav-item">
+                <div class="dropright">
+                    <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <i class="fas fa-tachometer-alt"></i> -->
+                        <img src="/img/icons/sliders.svg" alt="">
+                        <span class="compress">Customize View</span> 
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">Sliders</a>
+                        <a class="dropdown-item">Charts</a>
+                    </div>
+                </div>
+            </li>
+
+            
+            <li class="nav-item">
+                <a class="nav-link" type="button" data-toggle="modal" data-target="#runSaveModal">
+                    <!-- <i class="far fa-save"></i> -->
+                    <img src="/img/icons/save.svg" alt="">
+                    <span class="compress">Save run</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="ioDiv">
         <% if (dashbDiagram) { %>
-        <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
-            Diagram</button>
+            <div class="diagramDiv collapse container" id="diagram">
+                <img src="<%= dashbDiagram %>">
+            </div>
         <% } %>
-        <!-- SAVE BUTTON -->
-        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#runSaveModal">Save Run</button>
+
+        <div class="slidersDiv container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
+            <div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="growth rate a" class="mb-auto mx-auto"><strong>growth rate a</strong></label><div class="io-slider-box mx-auto" name="growth rate a">0.01</div><input class="io-slider-slide mx-auto" type="range" name="growth rate a" min="-0.05" max="0.05" value="0.01" step="0.001"></div></div><div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="initial stock a" class="mb-auto mx-auto"><strong>initial stock a</strong></label><div class="io-slider-box mx-auto" name="initial stock a">100</div><input class="io-slider-slide mx-auto" type="range" name="initial stock a" min="-100" max="200" value="100" step="1"></div></div><div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="growth rate b" class="mb-auto mx-auto"><strong>growth rate b</strong></label><div class="io-slider-box mx-auto" name="growth rate b">-0.01</div><input class="io-slider-slide mx-auto" type="range" name="growth rate b" min="-0.05" max="0.05" value="-0.01" step="0.001"></div></div><div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="initial stock b" class="mb-auto mx-auto"><strong>initial stock b</strong></label><div class="io-slider-box mx-auto" name="initial stock b">200</div><input class="io-slider-slide mx-auto" type="range" name="initial stock b" min="-1000" max="2000" value="200" step="10"></div></div></div>
+        </div>
+
+        <div class="container"><hr></div>
+
+        <div class="chartsDiv container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
+            <div class="col"><div class="io-chart" name="stock[a]" varname="stock[a]" xaxisname="Month" yaxisname="u"></div></div><div class="col"><div class="io-chart" name="stock[b]" varname="stock[b]" xaxisname="Month" yaxisname="u"></div></div></div>
+        </div>
+
     </div>
+
 </div>
 
-<% if (dashbDiagram) { %>
-<div class="diagramDiv collapse container" id="diagram">
-    <img src="<%= dashbDiagram %>">
-</div>
-<% } %>
-
-
-<div class="slidersDiv container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
-    <div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="growth rate a" class="mb-auto mx-auto"><strong>growth rate a</strong></label><div class="io-slider-box mx-auto" name="growth rate a">0.01</div><input class="io-slider-slide mx-auto" type="range" name="growth rate a" min="-0.05" max="0.05" value="0.01" step="0.001"></div></div><div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="initial stock a" class="mb-auto mx-auto"><strong>initial stock a</strong></label><div class="io-slider-box mx-auto" name="initial stock a">100</div><input class="io-slider-slide mx-auto" type="range" name="initial stock a" min="-100" max="200" value="100" step="1"></div></div><div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="growth rate b" class="mb-auto mx-auto"><strong>growth rate b</strong></label><div class="io-slider-box mx-auto" name="growth rate b">-0.01</div><input class="io-slider-slide mx-auto" type="range" name="growth rate b" min="-0.05" max="0.05" value="-0.01" step="0.001"></div></div><div class="col d-flex align-items-stretch"><div class="sliderGroup d-flex align-items-start flex-column justify-content-center"><label for="initial stock b" class="mb-auto mx-auto"><strong>initial stock b</strong></label><div class="io-slider-box mx-auto" name="initial stock b">200</div><input class="io-slider-slide mx-auto" type="range" name="initial stock b" min="-1000" max="2000" value="200" step="10"></div></div></div>
-</div>
-
-<div class="container"><hr></div>
-
-<div class="chartsDiv container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
-    <div class="col"><div class="io-chart" name="stock[a]" varname="stock[a]" xaxisname="Month" yaxisname="u"></div></div><div class="col"><div class="io-chart" name="stock[b]" varname="stock[b]" xaxisname="Month" yaxisname="u"></div></div></div>
-</div>
 
 <!-- SLIDERS ACTIVATION -->
 <script type="text/javascript" src="/js/vensim/sliders.js"></script>
+<script type="text/javascript" src="/js/vensim/compress.js"></script>
 
 <%- include("partials/footer") %> 

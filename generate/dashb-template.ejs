@@ -37,42 +37,95 @@
 </div>
 
 
-<div class="jumbotron" style="padding-bottom:24px;">
+<div class="jumbotron" style="padding-bottom:24px; margin-bottom:0px;">
     <h1> Run the Model </h1>
-    <!-- CONTROL BUTTONS -->
-    <div class="topBar">
-        <!-- RESET -->
-        <button class="btn btn-outline-secondary resetAll">Reset Sliders</button>
-        <!-- DIAGRAM BUTTON -->
+    <p> Modify model inputs to see the change in the results.</p>
+</div>
+
+
+
+<div class="wrapper">
+
+    <nav id="sideBar" class="nav flex-column navbar-light bg-light">
+        
+        <div id="sidebarCollapse" class="sidebar-header btn btn-primary" type="button">
+            <div class="hint"><img  src="/img/icons/menu.svg" alt=""></div>
+            <div class="compress">
+                <div><h4 style="margin:0px;">Menu</h4></div>
+                <div><img src="/img/icons/chevron-left.svg" alt=""></div>
+            </div>
+        </div>
+
+        <!-- <div class="dropdown-divider"></div> -->
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link resetAll" type="button">
+                    <!-- <i class="fas fa-fast-backward"></i> -->
+                    <img src="/img/icons/reset.svg" alt="">
+                    <span class="compress">Reset sliders</span>
+                </a>
+            </li>
+            <% if (dashbDiagram) { %>
+            <li class="nav-item">
+                <a class="nav-link" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
+                    <!-- <i class="fas fa-project-diagram"></i> -->
+                    <img src="/img/icons/eye.svg" alt="">
+                    <span class="compress">Show diagram</span>
+                </a>
+            </li>
+            <% } %>
+
+            <li class="nav-item">
+                <div class="dropright">
+                    <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <i class="fas fa-tachometer-alt"></i> -->
+                        <img src="/img/icons/sliders.svg" alt="">
+                        <span class="compress">Customize View</span> 
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item">Sliders</a>
+                        <a class="dropdown-item">Charts</a>
+                    </div>
+                </div>
+            </li>
+
+            
+            <li class="nav-item">
+                <a class="nav-link" type="button" data-toggle="modal" data-target="#runSaveModal">
+                    <!-- <i class="far fa-save"></i> -->
+                    <img src="/img/icons/save.svg" alt="">
+                    <span class="compress">Save run</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="ioDiv">
         <% if (dashbDiagram) { %>
-        <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
-            Diagram</button>
+            <div class="diagramDiv collapse container" id="diagram">
+                <img src="<%= dashbDiagram %>"></img>
+            </div>
         <% } %>
-        <!-- SAVE BUTTON -->
-        <button class="btn btn-outline-primary" data-toggle="modal" data-target="#runSaveModal">Save Run</button>
+
+        <div class="slidersDiv container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
+            </div>
+        </div>
+
+        <div class="container"><hr></div>
+
+        <div class="chartsDiv container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
+            </div>
+        </div>
+
     </div>
+
 </div>
 
-<% if (dashbDiagram) { %>
-<div class="diagramDiv collapse container" id="diagram">
-    <img src="<%= dashbDiagram %>"></img>
-</div>
-<% } %>
-
-
-<div class="slidersDiv container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
-    </div>
-</div>
-
-<div class="container"><hr></div>
-
-<div class="chartsDiv container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
-    </div>
-</div>
 
 <!-- SLIDERS ACTIVATION -->
 <script type="text/javascript" src="/js/vensim/sliders.js"></script>
+<script type="text/javascript" src="/js/vensim/compress.js"></script>
 
 <%- include("partials/footer") %> 

@@ -24,11 +24,12 @@ function strTill(str,brk){
 }
 
 function firstIndex(str,target){
-    let index = str.indexOf(target);
-    if (index<0){
-        index = str.length;
-    }
-    return index;
+    let index = str.indexOf(target),
+        length = str.length;
+    // if (index<0){
+    //     index = str.length;
+    // }
+    return (length+index)%length;
 }
 
 if (mdlFile){
@@ -68,7 +69,7 @@ if (mdlFile){
             comment:comment
         };
     }
-    console.log(variables);
+    // console.log(variables);
 
 // save them into an object
 

@@ -1,3 +1,88 @@
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+#sideBar{
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+#sideBar.compressed {
+    min-width: 60px;
+    max-width: 60px;
+    text-align: center;
+}
+#sideBar.compressed .compress {
+    display: none;
+}
+#sideBar .compress {
+    /* display: block; */
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+#sideBar.compressed .hint {
+    display: block;
+}
+#sideBar .hint {
+    display: none;
+}
+.sidebar-header{
+    margin:0px;
+    padding:15px;
+    border-radius:0px;
+}
+.sidebar-header img{
+    filter: invert(100%);
+}
+.sidebar-header div.compress{
+    display: flex;
+    justify-content: space-between;
+}
+.sidebar-header div div{
+    display: inline-block;
+}
+.sidebar-header img{
+    filter: invert(100%);
+}
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+#sideBar ul li a {
+    display: flex;
+    justify-content: start;
+}
+#sideBar ul li a img {
+    margin-right:10px;
+    /* display: inline-block; */
+}
+#sideBar ul li a:hover {
+    color: white;
+    background: #007bff;
+}
+#sideBar ul li a:hover img {
+    filter: invert(100%);
+    transition: all 0.3s;
+}
+a[data-toggle="collapse"] {
+    position: relative;
+}
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+#ioDiv{
+    margin-top:32px;
+    width:100%;
+}
+
 .diagramDiv{
     margin: 30px auto;
     overflow: hidden;
@@ -7,6 +92,7 @@
     width: 100%;
     object-fit: cover;
 }
+
 .sliderGroup{
     background-color:rgba(245,245,245,0.6);
     margin: 7px auto;

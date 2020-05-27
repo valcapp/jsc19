@@ -3,7 +3,7 @@ const express = require('express'),
     app = express();
 
 // generate files
-debugMode = false; 
+debugMode = true; 
 sdTitle = 'sd';
 introText = '';
 aboutText = '';

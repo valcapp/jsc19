@@ -11,7 +11,6 @@
 
 <%- include("partials/navbar.ejs") %>
 
-
 <!-- SAVE MODAL -->
 <div class="modal fade" id="runSaveModal" tabindex="-1" role="dialog" aria-labelledby="unSaveModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -37,14 +36,8 @@
 </div>
 
 
-<div class="jumbotron" style="padding-bottom:24px; margin-bottom:0px;">
-    <h1> Run the Model </h1>
-    <p> Modify model inputs to see the change in the results.</p>
-</div>
 
-
-
-<div class="wrapper">
+<div class="wrapper" id="mainContainer">
 
     <nav id="sideBar" class="nav flex-column navbar-light bg-light">
         
@@ -100,25 +93,35 @@
         </ul>
     </nav>
 
-    <div id="ioDiv">
-        <% if (dashbDiagram) { %>
-            <div class="diagramDiv collapse container" id="diagram">
-                <img src="<%= dashbDiagram %>"></img>
-            </div>
-        <% } %>
+    <div id="contentDiv" class="compressed">
 
-        <div class="slidersDiv container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
-            </div>
+        <br>
+        <div id="runTalk" class="jumbotron" style="margin-top:0;padding-top:32px;padding-bottom:24px;background-color:transparent;">
+            <h1>Run the model</h1>
+            <p> Modify model inputs to see the change in the results.</p>
         </div>
 
-        <div class="container"><hr></div>
+        <div id="ioDiv">
 
-        <div class="chartsDiv container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
+            <% if (dashbDiagram) { %>
+                <div class="diagramDiv collapse container" id="diagram">
+                    <img src="<%= dashbDiagram %>"></img>
+                </div>
+            <% } %>
+
+            <div class="slidersDiv container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
+                </div>
             </div>
-        </div>
 
+            <div class="container"><hr></div>
+
+            <div class="chartsDiv container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </div>

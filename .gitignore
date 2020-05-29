@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+sd1/
+*.0mdl
+*.1mdl
+*.2mdl

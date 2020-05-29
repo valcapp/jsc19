@@ -1,9 +1,18 @@
 // load .mdl as a string
 const fs = require('fs'),
     path = require('path'),
-    sdDir = path.join(path.resolve(__dirname,'..'),'sd'),
+    appDir = path.resolve(__dirname,'..'),
+    sdDir = path.join(appDir,'sd'),
+    // publicJS = path.join(appDir,'public','js','vensim'),
     sdFiles = fs.readdirSync(sdDir);
+
+// require(path.join(publicJS,'charts.js'));
+// require(path.join(publicJS,'mdl.js'));
+// let vesm = require(path.join(publicJS,'vensim_wasm.js'));
+
+
 let mdlFile = undefined;
+// find mdl file
 for (let f of sdFiles){
     if (format = f.split('.').slice(-1)[0]==='mdl'){
         mdlFile = f;
@@ -12,6 +21,7 @@ for (let f of sdFiles){
 }
 variables = {};
 
+// couple of useful functions
 function strTill(str,brk){
     let brkIndex = str.indexOf(brk);
     let newStr;
@@ -22,7 +32,6 @@ function strTill(str,brk){
     }
     return newStr;
 }
-
 function firstIndex(str,target){
     let index = str.indexOf(target),
         length = str.length;
@@ -34,8 +43,8 @@ function firstIndex(str,target){
 
 if (mdlFile){
     const mdlPath = path.join(sdDir,mdlFile);
-    let mdlString = fs.readFileSync(mdlPath,"utf8");
-    mdlString = mdlString.replace("{UTF-8}\n","")
+    let mdlString = fs.readFileSync(mdlPath,"utf8"); 
+    mdlString = mdlString.replace("{UTF-8}\n","");
     mdlString = mdlString.slice(0,mdlString.indexOf("\n\\\\\\---///"));
 
     // break into variables
@@ -69,7 +78,7 @@ if (mdlFile){
             comment:comment
         };
     }
-    // console.log(variables);
+    console.log(variables);
 
 // save them into an object
 

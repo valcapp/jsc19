@@ -5,6 +5,11 @@ const fs = require('fs'),
     diagramPath = path.join(appDir,'public',diagramHref),
     sketchHref = '/img/sketch.png',
     sketchPath = path.join(appDir,'public',sketchHref);
+
+dashbDiagram = fs.existsSync(sketchPath)? sketchHref :
+    fs.existsSync(diagramPath)? diagramHref :
+        false;
+
 // const checkPath = function(filePath,successCallback){
 //         fs.access(filePath, (err) => {
 //             if (err) {
@@ -18,7 +23,5 @@ const fs = require('fs'),
 // checkPath(sketchPath, ()=> {dashbDiagram = sketchHref;});
 // checkPath(diagramPath, ()=> {dashbDiagram = diagramHref;});
 
-dashbDiagram = fs.existsSync(sketchPath)? sketchHref :
-    fs.existsSync(diagramPath)? diagramHref :
-    false;
+
 

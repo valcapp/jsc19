@@ -8,6 +8,10 @@
 <script type="text/javascript" src="/js/vensim/charts.js"></script>
 <script type="text/javascript" src="/js/vensim/mdl.js"></script>
 <script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
+<script>
+    var mdlString = <%- JSON.stringify(mdlString) %>;
+</script>
+<script type="text/javascript" src="/js/vensim/variables.js"></script>
 
 <%- include("partials/navbar.ejs") %>
 
@@ -39,7 +43,7 @@
 
 <div class="wrapper" id="mainContainer">
 
-    <nav id="sideBar" class="nav flex-column navbar-light bg-light">
+    <nav id="sideBar" class="compressed nav flex-column navbar-light bg-light">
         
         <div id="sidebarCollapse" class="sidebar-header btn btn-primary" type="button">
             <div class="hint"><img  src="/img/icons/menu.svg" alt=""></div>
@@ -93,7 +97,7 @@
         </ul>
     </nav>
 
-    <div id="contentDiv" class="compressed">
+    <div id="contentDiv">
 
         <br>
         <div id="runTalk" class="jumbotron" style="margin-top:0;padding-top:32px;padding-bottom:24px;background-color:transparent;">

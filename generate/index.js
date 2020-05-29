@@ -3,7 +3,9 @@ if (!debugMode){
     require('./public.js');
     require('./vensim.js');
 }
-diag = require('./diagram.js');
-require('./variables.js');
+mdlString = require('./mdlString.js');
+require('./diagram.js');
 debugMode=false;
+
+
 

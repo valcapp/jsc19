@@ -69,4 +69,3 @@ function GetValueAtTime(strVarName, fTime)
 	var ptr  = allocate(intArrayFromString(strVarName), 'i8', ALLOC_NORMAL);
 	return _GetValueAtTime(ptr, fTime);
 }
-

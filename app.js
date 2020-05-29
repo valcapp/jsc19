@@ -3,12 +3,15 @@ const express = require('express'),
     app = express();
 
 // generate files
-debugMode = true; 
+debugMode = false; 
 sdTitle = 'sd';
 introText = '';
 aboutText = '';
 linksList = {};
 require('./generate');
+
+
+// console.log('from app.js: mdlString = ',mdlString);
 
 
 // set app views

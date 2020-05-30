@@ -12,7 +12,7 @@ varTypes ={
 };
 mdlStr = mdlString.mdlString;
 chunks = mdlStr.split("|\n\n").filter((chunk)=>!chunk.includes("**********************"));
-anonymousChunks = [];
+
 
 // function indx(str,target){
 //     let index = str.indexOf(target),
@@ -72,37 +72,28 @@ function readVars(){
         if (varNames.indexOf(variables[variable].name)<0){varNames.push(name);}
     }
     varNames.sort((a,b)=> b.length - a.length); //descending order because a shorter name can be contained in a longer name but not viceversa
-    
-    varList = Object.keys(variables).sort((a,b)=> b.length - a.length);
-    console.log(`varList.legth = ${varList.length} ; GetNumVariables() = ${GetNumVariables()} `);
     unexpectedMeta ={};
+    unmatchedChunks = [];
+    checkChunks = {varNames,unexpectedMeta,unmatchedChunks};
     for (let i =0; i<chunks.length; i++){
-        var lines = chunks[i].split('\n').filter((line)=>line.length>0);
-        for (let iVar of varList){ // for each chunk we loop across variables names to see which variable matches the chunk
-            if (lines[0].indexOf(iVar) > -1 && variables[iVar].meta){ unexpectedMeta[`chunk:${lines[0]}, iVar:${iVar}`]=variables[iVar].meta;}
-            if (lines[0].indexOf(iVar) > -1 && !variables[iVar].meta){ 
-                // console.log(iVar,variables[iVar]);
-                variables[iVar].meta=getMeta(lines);
-                varList.splice(iVar,1); // once a variable got metadata assigned to it, we don't need to loop over it for the next chunks
-                if (variables[iVar].subs){ //if it is a subscripted variable, same meta can be inherited by all subscripted variables that share same name
-                    for(let jVar of varList){
-                        if( variables[jVar].name === variables[iVar].name && variables[jVar].meta ){ unexpectedMeta[`chunk:${lines[0]}, iVar:${jVar}`]=variables[jVar].meta;}
-                        if( variables[jVar].name === variables[iVar].name && !variables[jVar].meta ){
-                            variables[jVar].meta = variables[iVar].meta;
-                            varList.splice(jVar,1);
-                        }
-                    }
-                }
+        let lines = chunks[i].split('\n').filter((line)=>line.length>0),
+            meta = getMeta(lines);
+        for (let iName of varNames){ // for each chunk we loop across variables names to see which variable matches the chunk
+            match = lines[0].indexOf(iName) > -1;
+            if (match){
+                // console.log(`Is "${iName}" contained in "${lines[0]}"? `, match );
+                iVars = Object.keys(variables).filter((v)=>variables[v].name===iName);
+                iVars.map((iVar)=>{if(variables[iVar].meta){unexpectedMeta[iVar]=variables[iVar].meta;}});
+                iVars.map((iVar)=>{variables[iVar].meta = meta;});
+                varNames.splice(varNames.indexOf(iName),1); // once a variable got metadata assigned to it, we don't need to loop over it for the next chunks
                 break; // once we found a variable that matches the chunk we don't need to check other variables as well, so we break the loop across variables
             }
         }
-        anonymousChunks.push(lines[0]); //if the loop across variables didn't break, there was no variable matching the chunk
+        if (!match){unmatchedChunks.push(lines[0]);}//if the loop across variables didn't break, there was no variable matching the chunk
     }
-    
-    console.log("variables: ",variables);
-    console.log("subscripts: ",subscripts);
-    console.log('unexpectedMeta: ',unexpectedMeta);
-    console.log("anonymousChunks: ",anonymousChunks);
+    // console.log("subscripts: ",subscripts);
+    // console.log("checkChunks: ",checkChunks);
+    // console.log("variables: ",variables);
 }
 
 function getSubs(variable){ //returns the name of the variable without subscripts, and its 
@@ -132,7 +123,7 @@ function getSubs(variable){ //returns the name of the variable without subscript
             } //if there was no match between var elements and subscipts elements the name and subs are the default ones
         }
     }
-    name = name.replace(/"/,"");
+    name = name.replace(/"/g,"");
     return{name,subs};
 }
 function getMeta(lines){

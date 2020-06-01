@@ -128,6 +128,9 @@ a[data-toggle="collapse"] {
 .io-slider-slide{
     cursor:pointer;
 }
+.unit{
+    font-size: smaller;
+}
 .chartsDiv{
     min-width:80%;
     /* margin:auto; */

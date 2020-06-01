@@ -1,4 +1,4 @@
-/*(Fri May 29 20:20:35 2020) From placeholder.mdl - C equations for the model */
+/*(Mon Jun  1 10:38:12 2020) From placeholder.mdl - C equations for the model */
 
 #define _VDFX
 #define VDFX
@@ -11,10 +11,10 @@
 #define _WASM
 
 typedef unsigned char charutf8;
-#define NUM_VARS 278
+#define NUM_VARS 280
 #define NUM_LEVELS 91
 #define NUM_DELAYS 0
-#define NUM_AUX 187
+#define NUM_AUX 189
 #define NUM_LOOKUPS 1
 
 
@@ -120,183 +120,185 @@ charutf8 *strVarNames[NUM_VARS] = {
 , "aggregate stocks[x3]" 	/*98*/
 , "aggregate stocks[x4]" 	/*99*/
 , "aggregate stocks[x5]" 	/*100*/
-, "FINAL TIME" 	/*101*/
-, "growth rate a" 	/*102*/
-, "growth rate abc[a]" 	/*103*/
-, "growth rate abc[b]" 	/*104*/
-, "growth rate abc[c]" 	/*105*/
-, "INITIAL TIME" 	/*106*/
-, "SAVEPER" 	/*107*/
-, "\"test =\"" 	/*108*/
-, "\"test [\"" 	/*109*/
-, "feedback var[x1]" 	/*110*/
-, "feedback var[x2]" 	/*111*/
-, "feedback var[x3]" 	/*112*/
-, "feedback var[x4]" 	/*113*/
-, "feedback var[x5]" 	/*114*/
-, "g factor" 	/*115*/
-, "growth rate b" 	/*116*/
-, "growth rate c" 	/*117*/
-, "growth rate x" 	/*118*/
-, "growth rate xyz[x]" 	/*119*/
-, "growth rate xyz[y]" 	/*120*/
-, "growth rate xyz[z]" 	/*121*/
-, "growth rate y" 	/*122*/
-, "growth rate z" 	/*123*/
-, "i factor[i1]" 	/*124*/
-, "i factor[i2]" 	/*125*/
-, "i factor[i3]" 	/*126*/
-, "i factor[i4]" 	/*127*/
-, "i factor[i5]" 	/*128*/
-, "inflow abc[a,x1]" 	/*129*/
-, "inflow abc[a,x2]" 	/*130*/
-, "inflow abc[a,x3]" 	/*131*/
-, "inflow abc[a,x4]" 	/*132*/
-, "inflow abc[a,x5]" 	/*133*/
-, "inflow abc[b,x1]" 	/*134*/
-, "inflow abc[b,x2]" 	/*135*/
-, "inflow abc[b,x3]" 	/*136*/
-, "inflow abc[b,x4]" 	/*137*/
-, "inflow abc[b,x5]" 	/*138*/
-, "inflow abc[c,x1]" 	/*139*/
-, "inflow abc[c,x2]" 	/*140*/
-, "inflow abc[c,x3]" 	/*141*/
-, "inflow abc[c,x4]" 	/*142*/
-, "inflow abc[c,x5]" 	/*143*/
-, "inflow xyz[x1,i1,x]" 	/*144*/
-, "inflow xyz[x1,i1,y]" 	/*145*/
-, "inflow xyz[x1,i1,z]" 	/*146*/
-, "inflow xyz[x1,i2,x]" 	/*147*/
-, "inflow xyz[x1,i2,y]" 	/*148*/
-, "inflow xyz[x1,i2,z]" 	/*149*/
-, "inflow xyz[x1,i3,x]" 	/*150*/
-, "inflow xyz[x1,i3,y]" 	/*151*/
-, "inflow xyz[x1,i3,z]" 	/*152*/
-, "inflow xyz[x1,i4,x]" 	/*153*/
-, "inflow xyz[x1,i4,y]" 	/*154*/
-, "inflow xyz[x1,i4,z]" 	/*155*/
-, "inflow xyz[x1,i5,x]" 	/*156*/
-, "inflow xyz[x1,i5,y]" 	/*157*/
-, "inflow xyz[x1,i5,z]" 	/*158*/
-, "inflow xyz[x2,i1,x]" 	/*159*/
-, "inflow xyz[x2,i1,y]" 	/*160*/
-, "inflow xyz[x2,i1,z]" 	/*161*/
-, "inflow xyz[x2,i2,x]" 	/*162*/
-, "inflow xyz[x2,i2,y]" 	/*163*/
-, "inflow xyz[x2,i2,z]" 	/*164*/
-, "inflow xyz[x2,i3,x]" 	/*165*/
-, "inflow xyz[x2,i3,y]" 	/*166*/
-, "inflow xyz[x2,i3,z]" 	/*167*/
-, "inflow xyz[x2,i4,x]" 	/*168*/
-, "inflow xyz[x2,i4,y]" 	/*169*/
-, "inflow xyz[x2,i4,z]" 	/*170*/
-, "inflow xyz[x2,i5,x]" 	/*171*/
-, "inflow xyz[x2,i5,y]" 	/*172*/
-, "inflow xyz[x2,i5,z]" 	/*173*/
-, "inflow xyz[x3,i1,x]" 	/*174*/
-, "inflow xyz[x3,i1,y]" 	/*175*/
-, "inflow xyz[x3,i1,z]" 	/*176*/
-, "inflow xyz[x3,i2,x]" 	/*177*/
-, "inflow xyz[x3,i2,y]" 	/*178*/
-, "inflow xyz[x3,i2,z]" 	/*179*/
-, "inflow xyz[x3,i3,x]" 	/*180*/
-, "inflow xyz[x3,i3,y]" 	/*181*/
-, "inflow xyz[x3,i3,z]" 	/*182*/
-, "inflow xyz[x3,i4,x]" 	/*183*/
-, "inflow xyz[x3,i4,y]" 	/*184*/
-, "inflow xyz[x3,i4,z]" 	/*185*/
-, "inflow xyz[x3,i5,x]" 	/*186*/
-, "inflow xyz[x3,i5,y]" 	/*187*/
-, "inflow xyz[x3,i5,z]" 	/*188*/
-, "inflow xyz[x4,i1,x]" 	/*189*/
-, "inflow xyz[x4,i1,y]" 	/*190*/
-, "inflow xyz[x4,i1,z]" 	/*191*/
-, "inflow xyz[x4,i2,x]" 	/*192*/
-, "inflow xyz[x4,i2,y]" 	/*193*/
-, "inflow xyz[x4,i2,z]" 	/*194*/
-, "inflow xyz[x4,i3,x]" 	/*195*/
-, "inflow xyz[x4,i3,y]" 	/*196*/
-, "inflow xyz[x4,i3,z]" 	/*197*/
-, "inflow xyz[x4,i4,x]" 	/*198*/
-, "inflow xyz[x4,i4,y]" 	/*199*/
-, "inflow xyz[x4,i4,z]" 	/*200*/
-, "inflow xyz[x4,i5,x]" 	/*201*/
-, "inflow xyz[x4,i5,y]" 	/*202*/
-, "inflow xyz[x4,i5,z]" 	/*203*/
-, "inflow xyz[x5,i1,x]" 	/*204*/
-, "inflow xyz[x5,i1,y]" 	/*205*/
-, "inflow xyz[x5,i1,z]" 	/*206*/
-, "inflow xyz[x5,i2,x]" 	/*207*/
-, "inflow xyz[x5,i2,y]" 	/*208*/
-, "inflow xyz[x5,i2,z]" 	/*209*/
-, "inflow xyz[x5,i3,x]" 	/*210*/
-, "inflow xyz[x5,i3,y]" 	/*211*/
-, "inflow xyz[x5,i3,z]" 	/*212*/
-, "inflow xyz[x5,i4,x]" 	/*213*/
-, "inflow xyz[x5,i4,y]" 	/*214*/
-, "inflow xyz[x5,i4,z]" 	/*215*/
-, "inflow xyz[x5,i5,x]" 	/*216*/
-, "inflow xyz[x5,i5,y]" 	/*217*/
-, "inflow xyz[x5,i5,z]" 	/*218*/
-, "initial stock a" 	/*219*/
-, "initial stock abc[a,x1]" 	/*220*/
-, "initial stock abc[a,x2]" 	/*221*/
-, "initial stock abc[a,x3]" 	/*222*/
-, "initial stock abc[a,x4]" 	/*223*/
-, "initial stock abc[a,x5]" 	/*224*/
-, "initial stock abc[b,x1]" 	/*225*/
-, "initial stock abc[b,x2]" 	/*226*/
-, "initial stock abc[b,x3]" 	/*227*/
-, "initial stock abc[b,x4]" 	/*228*/
-, "initial stock abc[b,x5]" 	/*229*/
-, "initial stock abc[c,x1]" 	/*230*/
-, "initial stock abc[c,x2]" 	/*231*/
-, "initial stock abc[c,x3]" 	/*232*/
-, "initial stock abc[c,x4]" 	/*233*/
-, "initial stock abc[c,x5]" 	/*234*/
-, "initial stock b" 	/*235*/
-, "initial stock c" 	/*236*/
-, "initial stock x[x1]" 	/*237*/
-, "initial stock x[x2]" 	/*238*/
-, "initial stock x[x3]" 	/*239*/
-, "initial stock x[x4]" 	/*240*/
-, "initial stock x[x5]" 	/*241*/
-, "initial stock xyz[x,x1]" 	/*242*/
-, "initial stock xyz[x,x2]" 	/*243*/
-, "initial stock xyz[x,x3]" 	/*244*/
-, "initial stock xyz[x,x4]" 	/*245*/
-, "initial stock xyz[x,x5]" 	/*246*/
-, "initial stock xyz[y,x1]" 	/*247*/
-, "initial stock xyz[y,x2]" 	/*248*/
-, "initial stock xyz[y,x3]" 	/*249*/
-, "initial stock xyz[y,x4]" 	/*250*/
-, "initial stock xyz[y,x5]" 	/*251*/
-, "initial stock xyz[z,x1]" 	/*252*/
-, "initial stock xyz[z,x2]" 	/*253*/
-, "initial stock xyz[z,x3]" 	/*254*/
-, "initial stock xyz[z,x4]" 	/*255*/
-, "initial stock xyz[z,x5]" 	/*256*/
-, "initial stock y[x1]" 	/*257*/
-, "initial stock y[x2]" 	/*258*/
-, "initial stock y[x3]" 	/*259*/
-, "initial stock y[x4]" 	/*260*/
-, "initial stock y[x5]" 	/*261*/
-, "initial stock z[x1]" 	/*262*/
-, "initial stock z[x2]" 	/*263*/
-, "initial stock z[x3]" 	/*264*/
-, "initial stock z[x4]" 	/*265*/
-, "initial stock z[x5]" 	/*266*/
-, "ref stock" 	/*267*/
-, "test without max" 	/*268*/
-, "test without min" 	/*269*/
-, "test without unit" 	/*270*/
-, "TIME STEP" 	/*271*/
-, "u reference" 	/*272*/
-, "x factor[x1]" 	/*273*/
-, "x factor[x2]" 	/*274*/
-, "x factor[x3]" 	/*275*/
-, "x factor[x4]" 	/*276*/
-, "x factor[x5]" 	/*277*/
+, "feedback var[x1]" 	/*101*/
+, "feedback var[x2]" 	/*102*/
+, "feedback var[x3]" 	/*103*/
+, "feedback var[x4]" 	/*104*/
+, "feedback var[x5]" 	/*105*/
+, "FINAL TIME" 	/*106*/
+, "g factor" 	/*107*/
+, "growth rate a" 	/*108*/
+, "growth rate abc[a]" 	/*109*/
+, "growth rate abc[b]" 	/*110*/
+, "growth rate abc[c]" 	/*111*/
+, "growth rate b" 	/*112*/
+, "growth rate c" 	/*113*/
+, "growth rate x" 	/*114*/
+, "growth rate xyz[x]" 	/*115*/
+, "growth rate xyz[y]" 	/*116*/
+, "growth rate xyz[z]" 	/*117*/
+, "growth rate y" 	/*118*/
+, "growth rate z" 	/*119*/
+, "i factor[i1]" 	/*120*/
+, "i factor[i2]" 	/*121*/
+, "i factor[i3]" 	/*122*/
+, "i factor[i4]" 	/*123*/
+, "i factor[i5]" 	/*124*/
+, "inflow abc[a,x1]" 	/*125*/
+, "inflow abc[a,x2]" 	/*126*/
+, "inflow abc[a,x3]" 	/*127*/
+, "inflow abc[a,x4]" 	/*128*/
+, "inflow abc[a,x5]" 	/*129*/
+, "inflow abc[b,x1]" 	/*130*/
+, "inflow abc[b,x2]" 	/*131*/
+, "inflow abc[b,x3]" 	/*132*/
+, "inflow abc[b,x4]" 	/*133*/
+, "inflow abc[b,x5]" 	/*134*/
+, "inflow abc[c,x1]" 	/*135*/
+, "inflow abc[c,x2]" 	/*136*/
+, "inflow abc[c,x3]" 	/*137*/
+, "inflow abc[c,x4]" 	/*138*/
+, "inflow abc[c,x5]" 	/*139*/
+, "inflow xyz[x1,i1,x]" 	/*140*/
+, "inflow xyz[x1,i1,y]" 	/*141*/
+, "inflow xyz[x1,i1,z]" 	/*142*/
+, "inflow xyz[x1,i2,x]" 	/*143*/
+, "inflow xyz[x1,i2,y]" 	/*144*/
+, "inflow xyz[x1,i2,z]" 	/*145*/
+, "inflow xyz[x1,i3,x]" 	/*146*/
+, "inflow xyz[x1,i3,y]" 	/*147*/
+, "inflow xyz[x1,i3,z]" 	/*148*/
+, "inflow xyz[x1,i4,x]" 	/*149*/
+, "inflow xyz[x1,i4,y]" 	/*150*/
+, "inflow xyz[x1,i4,z]" 	/*151*/
+, "inflow xyz[x1,i5,x]" 	/*152*/
+, "inflow xyz[x1,i5,y]" 	/*153*/
+, "inflow xyz[x1,i5,z]" 	/*154*/
+, "inflow xyz[x2,i1,x]" 	/*155*/
+, "inflow xyz[x2,i1,y]" 	/*156*/
+, "inflow xyz[x2,i1,z]" 	/*157*/
+, "inflow xyz[x2,i2,x]" 	/*158*/
+, "inflow xyz[x2,i2,y]" 	/*159*/
+, "inflow xyz[x2,i2,z]" 	/*160*/
+, "inflow xyz[x2,i3,x]" 	/*161*/
+, "inflow xyz[x2,i3,y]" 	/*162*/
+, "inflow xyz[x2,i3,z]" 	/*163*/
+, "inflow xyz[x2,i4,x]" 	/*164*/
+, "inflow xyz[x2,i4,y]" 	/*165*/
+, "inflow xyz[x2,i4,z]" 	/*166*/
+, "inflow xyz[x2,i5,x]" 	/*167*/
+, "inflow xyz[x2,i5,y]" 	/*168*/
+, "inflow xyz[x2,i5,z]" 	/*169*/
+, "inflow xyz[x3,i1,x]" 	/*170*/
+, "inflow xyz[x3,i1,y]" 	/*171*/
+, "inflow xyz[x3,i1,z]" 	/*172*/
+, "inflow xyz[x3,i2,x]" 	/*173*/
+, "inflow xyz[x3,i2,y]" 	/*174*/
+, "inflow xyz[x3,i2,z]" 	/*175*/
+, "inflow xyz[x3,i3,x]" 	/*176*/
+, "inflow xyz[x3,i3,y]" 	/*177*/
+, "inflow xyz[x3,i3,z]" 	/*178*/
+, "inflow xyz[x3,i4,x]" 	/*179*/
+, "inflow xyz[x3,i4,y]" 	/*180*/
+, "inflow xyz[x3,i4,z]" 	/*181*/
+, "inflow xyz[x3,i5,x]" 	/*182*/
+, "inflow xyz[x3,i5,y]" 	/*183*/
+, "inflow xyz[x3,i5,z]" 	/*184*/
+, "inflow xyz[x4,i1,x]" 	/*185*/
+, "inflow xyz[x4,i1,y]" 	/*186*/
+, "inflow xyz[x4,i1,z]" 	/*187*/
+, "inflow xyz[x4,i2,x]" 	/*188*/
+, "inflow xyz[x4,i2,y]" 	/*189*/
+, "inflow xyz[x4,i2,z]" 	/*190*/
+, "inflow xyz[x4,i3,x]" 	/*191*/
+, "inflow xyz[x4,i3,y]" 	/*192*/
+, "inflow xyz[x4,i3,z]" 	/*193*/
+, "inflow xyz[x4,i4,x]" 	/*194*/
+, "inflow xyz[x4,i4,y]" 	/*195*/
+, "inflow xyz[x4,i4,z]" 	/*196*/
+, "inflow xyz[x4,i5,x]" 	/*197*/
+, "inflow xyz[x4,i5,y]" 	/*198*/
+, "inflow xyz[x4,i5,z]" 	/*199*/
+, "inflow xyz[x5,i1,x]" 	/*200*/
+, "inflow xyz[x5,i1,y]" 	/*201*/
+, "inflow xyz[x5,i1,z]" 	/*202*/
+, "inflow xyz[x5,i2,x]" 	/*203*/
+, "inflow xyz[x5,i2,y]" 	/*204*/
+, "inflow xyz[x5,i2,z]" 	/*205*/
+, "inflow xyz[x5,i3,x]" 	/*206*/
+, "inflow xyz[x5,i3,y]" 	/*207*/
+, "inflow xyz[x5,i3,z]" 	/*208*/
+, "inflow xyz[x5,i4,x]" 	/*209*/
+, "inflow xyz[x5,i4,y]" 	/*210*/
+, "inflow xyz[x5,i4,z]" 	/*211*/
+, "inflow xyz[x5,i5,x]" 	/*212*/
+, "inflow xyz[x5,i5,y]" 	/*213*/
+, "inflow xyz[x5,i5,z]" 	/*214*/
+, "initial stock a" 	/*215*/
+, "initial stock abc[a,x1]" 	/*216*/
+, "initial stock abc[a,x2]" 	/*217*/
+, "initial stock abc[a,x3]" 	/*218*/
+, "initial stock abc[a,x4]" 	/*219*/
+, "initial stock abc[a,x5]" 	/*220*/
+, "initial stock abc[b,x1]" 	/*221*/
+, "initial stock abc[b,x2]" 	/*222*/
+, "initial stock abc[b,x3]" 	/*223*/
+, "initial stock abc[b,x4]" 	/*224*/
+, "initial stock abc[b,x5]" 	/*225*/
+, "initial stock abc[c,x1]" 	/*226*/
+, "initial stock abc[c,x2]" 	/*227*/
+, "initial stock abc[c,x3]" 	/*228*/
+, "initial stock abc[c,x4]" 	/*229*/
+, "initial stock abc[c,x5]" 	/*230*/
+, "initial stock b" 	/*231*/
+, "initial stock c" 	/*232*/
+, "initial stock x[x1]" 	/*233*/
+, "initial stock x[x2]" 	/*234*/
+, "initial stock x[x3]" 	/*235*/
+, "initial stock x[x4]" 	/*236*/
+, "initial stock x[x5]" 	/*237*/
+, "initial stock xyz[x,x1]" 	/*238*/
+, "initial stock xyz[x,x2]" 	/*239*/
+, "initial stock xyz[x,x3]" 	/*240*/
+, "initial stock xyz[x,x4]" 	/*241*/
+, "initial stock xyz[x,x5]" 	/*242*/
+, "initial stock xyz[y,x1]" 	/*243*/
+, "initial stock xyz[y,x2]" 	/*244*/
+, "initial stock xyz[y,x3]" 	/*245*/
+, "initial stock xyz[y,x4]" 	/*246*/
+, "initial stock xyz[y,x5]" 	/*247*/
+, "initial stock xyz[z,x1]" 	/*248*/
+, "initial stock xyz[z,x2]" 	/*249*/
+, "initial stock xyz[z,x3]" 	/*250*/
+, "initial stock xyz[z,x4]" 	/*251*/
+, "initial stock xyz[z,x5]" 	/*252*/
+, "initial stock y[x1]" 	/*253*/
+, "initial stock y[x2]" 	/*254*/
+, "initial stock y[x3]" 	/*255*/
+, "initial stock y[x4]" 	/*256*/
+, "initial stock y[x5]" 	/*257*/
+, "initial stock z[x1]" 	/*258*/
+, "initial stock z[x2]" 	/*259*/
+, "initial stock z[x3]" 	/*260*/
+, "initial stock z[x4]" 	/*261*/
+, "initial stock z[x5]" 	/*262*/
+, "INITIAL TIME" 	/*263*/
+, "ref stock" 	/*264*/
+, "SAVEPER" 	/*265*/
+, "\"test =\"" 	/*266*/
+, "\"test [\"[a]" 	/*267*/
+, "\"test [\"[b]" 	/*268*/
+, "\"test [\"[c]" 	/*269*/
+, "test without max" 	/*270*/
+, "test without min" 	/*271*/
+, "test without unit" 	/*272*/
+, "TIME STEP" 	/*273*/
+, "u reference" 	/*274*/
+, "x factor[x1]" 	/*275*/
+, "x factor[x2]" 	/*276*/
+, "x factor[x3]" 	/*277*/
+, "x factor[x4]" 	/*278*/
+, "x factor[x5]" 	/*279*/
 };
 
 int nTypesVector[NUM_VARS] = { 
@@ -401,34 +403,34 @@ int nTypesVector[NUM_VARS] = {
 , 17	/*98*/
 , 17	/*99*/
 , 17	/*100*/
-, 23	/*101*/
-, 23	/*102*/
+, 17	/*101*/
+, 17	/*102*/
 , 17	/*103*/
 , 17	/*104*/
 , 17	/*105*/
 , 23	/*106*/
-, 17	/*107*/
+, 23	/*107*/
 , 23	/*108*/
-, 23	/*109*/
+, 17	/*109*/
 , 17	/*110*/
 , 17	/*111*/
-, 17	/*112*/
-, 17	/*113*/
-, 17	/*114*/
-, 23	/*115*/
-, 23	/*116*/
-, 23	/*117*/
+, 23	/*112*/
+, 23	/*113*/
+, 23	/*114*/
+, 17	/*115*/
+, 17	/*116*/
+, 17	/*117*/
 , 23	/*118*/
-, 17	/*119*/
-, 17	/*120*/
-, 17	/*121*/
+, 23	/*119*/
+, 23	/*120*/
+, 23	/*121*/
 , 23	/*122*/
 , 23	/*123*/
 , 23	/*124*/
-, 23	/*125*/
-, 23	/*126*/
-, 23	/*127*/
-, 23	/*128*/
+, 17	/*125*/
+, 17	/*126*/
+, 17	/*127*/
+, 17	/*128*/
 , 17	/*129*/
 , 17	/*130*/
 , 17	/*131*/
@@ -515,11 +517,11 @@ int nTypesVector[NUM_VARS] = {
 , 17	/*212*/
 , 17	/*213*/
 , 17	/*214*/
-, 17	/*215*/
+, 23	/*215*/
 , 17	/*216*/
 , 17	/*217*/
 , 17	/*218*/
-, 23	/*219*/
+, 17	/*219*/
 , 17	/*220*/
 , 17	/*221*/
 , 17	/*222*/
@@ -531,17 +533,17 @@ int nTypesVector[NUM_VARS] = {
 , 17	/*228*/
 , 17	/*229*/
 , 17	/*230*/
-, 17	/*231*/
-, 17	/*232*/
-, 17	/*233*/
-, 17	/*234*/
+, 23	/*231*/
+, 23	/*232*/
+, 23	/*233*/
+, 23	/*234*/
 , 23	/*235*/
 , 23	/*236*/
 , 23	/*237*/
-, 23	/*238*/
-, 23	/*239*/
-, 23	/*240*/
-, 23	/*241*/
+, 17	/*238*/
+, 17	/*239*/
+, 17	/*240*/
+, 17	/*241*/
 , 17	/*242*/
 , 17	/*243*/
 , 17	/*244*/
@@ -553,10 +555,10 @@ int nTypesVector[NUM_VARS] = {
 , 17	/*250*/
 , 17	/*251*/
 , 17	/*252*/
-, 17	/*253*/
-, 17	/*254*/
-, 17	/*255*/
-, 17	/*256*/
+, 23	/*253*/
+, 23	/*254*/
+, 23	/*255*/
+, 23	/*256*/
 , 23	/*257*/
 , 23	/*258*/
 , 23	/*259*/
@@ -565,7 +567,7 @@ int nTypesVector[NUM_VARS] = {
 , 23	/*262*/
 , 23	/*263*/
 , 23	/*264*/
-, 23	/*265*/
+, 17	/*265*/
 , 23	/*266*/
 , 23	/*267*/
 , 23	/*268*/
@@ -573,11 +575,13 @@ int nTypesVector[NUM_VARS] = {
 , 23	/*270*/
 , 23	/*271*/
 , 23	/*272*/
-, 17	/*273*/
-, 17	/*274*/
+, 23	/*273*/
+, 23	/*274*/
 , 17	/*275*/
 , 17	/*276*/
 , 17	/*277*/
+, 17	/*278*/
+, 17	/*279*/
 };
 
 charutf8 *strLookupNames[NUM_LOOKUPS] = { 
@@ -588,46 +592,48 @@ charutf8 *strLookupNames[NUM_LOOKUPS] = {
 
 void InitConstants()
 {
-SetConstant (101, "FINAL TIME", 100.000000);
-SetConstant (102, "growth rate a", 0.010000);
-SetConstant (106, "INITIAL TIME", 0.000000);
-SetConstant (108, "\"test =\"", 2.000000);
-SetConstant (109, "\"test [\"", 2.000000);
-SetConstant (115, "g factor", 50.000000);
-SetConstant (116, "growth rate b", 0.015000);
-SetConstant (117, "growth rate c", 0.025000);
-SetConstant (118, "growth rate x", 0.010000);
-SetConstant (122, "growth rate y", 0.015000);
-SetConstant (123, "growth rate z", 0.000000);
-SetConstant (124, "i factor[i1]", 1.000000);
-SetConstant (125, "i factor[i2]", 2.000000);
-SetConstant (126, "i factor[i3]", 3.000000);
-SetConstant (127, "i factor[i4]", 4.000000);
-SetConstant (128, "i factor[i5]", 5.000000);
-SetConstant (219, "initial stock a", 100.000000);
-SetConstant (235, "initial stock b", 200.000000);
-SetConstant (236, "initial stock c", 50.000000);
-SetConstant (237, "initial stock x[x1]", 100.000000);
-SetConstant (238, "initial stock x[x2]", 100.000000);
-SetConstant (239, "initial stock x[x3]", 100.000000);
-SetConstant (240, "initial stock x[x4]", 100.000000);
-SetConstant (241, "initial stock x[x5]", 100.000000);
-SetConstant (257, "initial stock y[x1]", 120.000000);
-SetConstant (258, "initial stock y[x2]", 120.000000);
-SetConstant (259, "initial stock y[x3]", 120.000000);
-SetConstant (260, "initial stock y[x4]", 120.000000);
-SetConstant (261, "initial stock y[x5]", 120.000000);
-SetConstant (262, "initial stock z[x1]", 80.000000);
-SetConstant (263, "initial stock z[x2]", 80.000000);
-SetConstant (264, "initial stock z[x3]", 80.000000);
-SetConstant (265, "initial stock z[x4]", 80.000000);
-SetConstant (266, "initial stock z[x5]", 80.000000);
-SetConstant (267, "ref stock", 50.000000);
-SetConstant (268, "test without max", 1.000000);
-SetConstant (269, "test without min", 1.000000);
-SetConstant (270, "test without unit", 0.500000);
-SetConstant (271, "TIME STEP", 1.000000);
-SetConstant (272, "u reference", 100.000000);
+SetConstant (106, "FINAL TIME", 100.000000);
+SetConstant (107, "g factor", 50.000000);
+SetConstant (108, "growth rate a", 0.010000);
+SetConstant (112, "growth rate b", 0.015000);
+SetConstant (113, "growth rate c", 0.025000);
+SetConstant (114, "growth rate x", 0.010000);
+SetConstant (118, "growth rate y", 0.015000);
+SetConstant (119, "growth rate z", 0.000000);
+SetConstant (120, "i factor[i1]", 1.000000);
+SetConstant (121, "i factor[i2]", 2.000000);
+SetConstant (122, "i factor[i3]", 3.000000);
+SetConstant (123, "i factor[i4]", 4.000000);
+SetConstant (124, "i factor[i5]", 5.000000);
+SetConstant (215, "initial stock a", 100.000000);
+SetConstant (231, "initial stock b", 200.000000);
+SetConstant (232, "initial stock c", 50.000000);
+SetConstant (233, "initial stock x[x1]", 100.000000);
+SetConstant (234, "initial stock x[x2]", 100.000000);
+SetConstant (235, "initial stock x[x3]", 100.000000);
+SetConstant (236, "initial stock x[x4]", 100.000000);
+SetConstant (237, "initial stock x[x5]", 100.000000);
+SetConstant (253, "initial stock y[x1]", 120.000000);
+SetConstant (254, "initial stock y[x2]", 120.000000);
+SetConstant (255, "initial stock y[x3]", 120.000000);
+SetConstant (256, "initial stock y[x4]", 120.000000);
+SetConstant (257, "initial stock y[x5]", 120.000000);
+SetConstant (258, "initial stock z[x1]", 80.000000);
+SetConstant (259, "initial stock z[x2]", 80.000000);
+SetConstant (260, "initial stock z[x3]", 80.000000);
+SetConstant (261, "initial stock z[x4]", 80.000000);
+SetConstant (262, "initial stock z[x5]", 80.000000);
+SetConstant (263, "INITIAL TIME", 0.000000);
+SetConstant (264, "ref stock", 50.000000);
+SetConstant (266, "\"test =\"", 2.000000);
+SetConstant (267, "\"test [\"[a]", 2.000000);
+SetConstant (268, "\"test [\"[b]", 2.000000);
+SetConstant (269, "\"test [\"[c]", 2.000000);
+SetConstant (270, "test without max", 1.000000);
+SetConstant (271, "test without min", 1.000000);
+SetConstant (272, "test without unit", 0.500000);
+SetConstant (273, "TIME STEP", 1.000000);
+SetConstant (274, "u reference", 100.000000);
 {
 	// lookup factor
 	REAL fxVals[7];
@@ -655,8 +661,8 @@ long Get_NUM_LEVELS() { return NUM_LEVELS; }
 long Get_NUM_DELAYS() { return NUM_DELAYS; }
 long Get_NUM_AUX() { return NUM_AUX; }
 long Get_NUM_LOOKUPS() { return NUM_LOOKUPS; }
-charutf8 *Get_VarName(long nIndex) { return (char*)strVarNames[nIndex]; }
-charutf8 *Get_LookupName(long nIndex) { return (char*)strLookupNames[nIndex]; }
+charutf8 *Get_VarName(long nIndex) { return strVarNames[nIndex]; }
+charutf8 *Get_LookupName(long nIndex) { return strLookupNames[nIndex]; }
 int Get_VarType(long nIndex) { return nTypesVector[nIndex]; }
 static COMPREAL temp0,temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8
 ,temp9,temp10,temp11,temp12,temp13,temp14,temp15,temp16,temp17,temp18
@@ -688,26 +694,26 @@ static int sub3[]  /* xyz */ = {0,1,2,-1} ;
 void SetupDIMS(){
 CreateDIMS(8);
 SetDIM_INFO(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1);
-SetDIM_INFO(1,464,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(1,486,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 5);
-SetDIM_INFO(2,618,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(2,266,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 3);
-SetDIM_INFO(3,354,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(3,376,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 3);
 SetDIM_INFO(4,662,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 5);
-SetDIM_INFO(5,618,464,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
+SetDIM_INFO(5,266,486,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
 2,15);
-SetDIM_INFO(6,464,662,354,0,0,0,0,0,5,5,3,0,0,0,0,0,15,3,1,0,0,0,0,
+SetDIM_INFO(6,486,662,376,0,0,0,0,0,5,5,3,0,0,0,0,0,15,3,1,0,0,0,0,
 0,3,75);
-SetDIM_INFO(7,354,464,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
+SetDIM_INFO(7,376,486,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
 2,15);
 };
 #ifndef LINKEXTERN
 #endif
 unsigned char *mdl_desc()
 {
-return("(Fri May 29 20:20:35 2020) From placeholder.mdl") ;
+return("(Mon Jun  1 10:38:12 2020) From placeholder.mdl") ;
 }
 
 /* compute the model rates */
@@ -720,7 +726,7 @@ for(forind0=0;forind0<3;forind0++)
 for(forind1=0;forind1<5;forind1++)
  {
   VGV->lastpos = 1+sub0[forind0]*5+sub2[forind1]*1 ;
-  VGV->RATE[1+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[129+sub0[forind0]
+  VGV->RATE[1+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[125+sub0[forind0]
 *5+sub2[forind1]*1] ;
 } /* stock abc */
 
@@ -732,7 +738,7 @@ for(forind2=0;forind2<3;forind2++)
   VGV->lastpos = 16+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]
 *1 ;
   VGV->RATE[16+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] = 
-VGV->LEVEL[144+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] ;
+VGV->LEVEL[140+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] ;
 } /* stock xyz */
 
 } /* comp_rate */
@@ -748,7 +754,7 @@ void mdl_func2()
 {
 double temp[10];
 vec_arglist_init();
-VGV->LEVEL[0] = VGV->LEVEL[106] ;
+VGV->LEVEL[0] = VGV->LEVEL[263] ;
 } /* init_time */
 
 /* initialize time step */
@@ -765,44 +771,44 @@ double temp[10];
 /* initial stock abc */
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 220+0*5+sub2[forind1]*1 ;
-  VGV->LEVEL[220+0*5+sub2[forind1]*1] = VGV->LEVEL[219] ;
+  VGV->lastpos = 216+0*5+sub2[forind1]*1 ;
+  VGV->LEVEL[216+0*5+sub2[forind1]*1] = VGV->LEVEL[215] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 220+1*5+sub2[forind1]*1 ;
-  VGV->LEVEL[220+1*5+sub2[forind1]*1] = VGV->LEVEL[235] ;
+  VGV->lastpos = 216+1*5+sub2[forind1]*1 ;
+  VGV->LEVEL[216+1*5+sub2[forind1]*1] = VGV->LEVEL[231] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 220+2*5+sub2[forind1]*1 ;
-  VGV->LEVEL[220+2*5+sub2[forind1]*1] = VGV->LEVEL[236] ;
+  VGV->lastpos = 216+2*5+sub2[forind1]*1 ;
+  VGV->LEVEL[216+2*5+sub2[forind1]*1] = VGV->LEVEL[232] ;
 }
 /* stock abc */
 for(forind0=0;forind0<3;forind0++)
 for(forind1=0;forind1<5;forind1++)
  {
   VGV->lastpos = 1+sub0[forind0]*5+sub2[forind1]*1 ;
-  VGV->LEVEL[1+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[220+sub0[forind0]
+  VGV->LEVEL[1+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[216+sub0[forind0]
 *5+sub2[forind1]*1] ;
 }
 /* initial stock xyz */
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 242+0*5+sub2[forind1]*1 ;
-  VGV->LEVEL[242+0*5+sub2[forind1]*1] = VGV->LEVEL[237+sub2[forind1]
+  VGV->lastpos = 238+0*5+sub2[forind1]*1 ;
+  VGV->LEVEL[238+0*5+sub2[forind1]*1] = VGV->LEVEL[233+sub2[forind1]
 *1] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 242+1*5+sub2[forind1]*1 ;
-  VGV->LEVEL[242+1*5+sub2[forind1]*1] = VGV->LEVEL[257+sub2[forind1]
+  VGV->lastpos = 238+1*5+sub2[forind1]*1 ;
+  VGV->LEVEL[238+1*5+sub2[forind1]*1] = VGV->LEVEL[253+sub2[forind1]
 *1] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 242+2*5+sub2[forind1]*1 ;
-  VGV->LEVEL[242+2*5+sub2[forind1]*1] = VGV->LEVEL[262+sub2[forind1]
+  VGV->lastpos = 238+2*5+sub2[forind1]*1 ;
+  VGV->LEVEL[238+2*5+sub2[forind1]*1] = VGV->LEVEL[258+sub2[forind1]
 *1] ;
 }
 /* stock xyz */
@@ -813,7 +819,7 @@ for(forind2=0;forind2<3;forind2++)
   VGV->lastpos = 16+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]
 *1 ;
   VGV->LEVEL[16+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] = 
-VGV->LEVEL[242+sub3[forind2]*5+sub2[forind0]*1] ;
+VGV->LEVEL[238+sub3[forind2]*5+sub2[forind0]*1] ;
 }
 } /* comp_init */
 
@@ -835,20 +841,20 @@ double temp[10];
 /* feedback var */
 for(forind0=0;forind0<5;forind0++)
  {
-  VGV->lastpos = 110+sub2[forind0]*1 ;
+  VGV->lastpos = 101+sub2[forind0]*1 ;
     temp0 = 0.0 ;
 for(sumind0=0;sumind0<5;sumind0++)
 for(sumind1=0;sumind1<3;sumind1++)
     temp0 += VGV->LEVEL[16+sub2[forind0]*15+sub1[sumind0]*3+sub3[sumind1]
 *1] ;
-  VGV->LEVEL[110+sub2[forind0]*1] = temp0/(COMPREAL)5/(COMPREAL)3 ;
+  VGV->LEVEL[101+sub2[forind0]*1] = temp0/(COMPREAL)5/(COMPREAL)3 ;
 }
 /* adjusted feedback */
 for(forind0=0;forind0<5;forind0++)
  {
   VGV->lastpos = 91+sub2[forind0]*1 ;
-  VGV->LEVEL[91+sub2[forind0]*1] = TABLE(&VGV->TAB[0],VGV->LEVEL[110
-+sub2[forind0]*1]/VGV->LEVEL[272]) ;
+  VGV->LEVEL[91+sub2[forind0]*1] = TABLE(&VGV->TAB[0],VGV->LEVEL[101
++sub2[forind0]*1]/VGV->LEVEL[274]) ;
 }
 /* aggregate stocks */
 for(forind0=0;forind0<5;forind0++)
@@ -861,49 +867,44 @@ for(sumind0=0;sumind0<3;sumind0++)
 }
 /* growth rate abc */
  {
-  VGV->lastpos = 103+0*1 ;
-  VGV->LEVEL[103+0*1] = VGV->LEVEL[102] ;
+  VGV->lastpos = 109+0*1 ;
+  VGV->LEVEL[109+0*1] = VGV->LEVEL[108] ;
 }
  {
-  VGV->lastpos = 103+1*1 ;
-  VGV->LEVEL[103+1*1] = VGV->LEVEL[116] ;
+  VGV->lastpos = 109+1*1 ;
+  VGV->LEVEL[109+1*1] = VGV->LEVEL[112] ;
 }
  {
-  VGV->lastpos = 103+2*1 ;
-  VGV->LEVEL[103+2*1] = VGV->LEVEL[117] ;
-}
-/* SAVEPER */
- {
-  VGV->lastpos = 107 ;
-  VGV->LEVEL[107] = VGV->LEVEL[271] ;
+  VGV->lastpos = 109+2*1 ;
+  VGV->LEVEL[109+2*1] = VGV->LEVEL[113] ;
 }
 /* growth rate xyz */
  {
-  VGV->lastpos = 119+0*1 ;
-  VGV->LEVEL[119+0*1] = VGV->LEVEL[118] ;
+  VGV->lastpos = 115+0*1 ;
+  VGV->LEVEL[115+0*1] = VGV->LEVEL[114] ;
 }
  {
-  VGV->lastpos = 119+1*1 ;
-  VGV->LEVEL[119+1*1] = VGV->LEVEL[122] ;
+  VGV->lastpos = 115+1*1 ;
+  VGV->LEVEL[115+1*1] = VGV->LEVEL[118] ;
 }
  {
-  VGV->lastpos = 119+2*1 ;
-  VGV->LEVEL[119+2*1] = VGV->LEVEL[123] ;
+  VGV->lastpos = 115+2*1 ;
+  VGV->LEVEL[115+2*1] = VGV->LEVEL[119] ;
 }
 /* x factor */
 for(forind0=0;forind0<5;forind0++)
  {
-  VGV->lastpos = 273+sub2[forind0]*1 ;
-  VGV->LEVEL[273+sub2[forind0]*1] = RANDOM_UNIFORM(0,1.000000,2323.000000
+  VGV->lastpos = 275+sub2[forind0]*1 ;
+  VGV->LEVEL[275+sub2[forind0]*1] = RANDOM_UNIFORM(0,1.000000,2323.000000
 ) ;
 }
 /* inflow abc */
 for(forind0=0;forind0<3;forind0++)
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 129+sub0[forind0]*5+sub2[forind1]*1 ;
-  VGV->LEVEL[129+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[110
-+sub2[forind1]*1]*VGV->LEVEL[103+sub0[forind0]*1]*VGV->LEVEL[273+sub2[forind1]
+  VGV->lastpos = 125+sub0[forind0]*5+sub2[forind1]*1 ;
+  VGV->LEVEL[125+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[101
++sub2[forind1]*1]*VGV->LEVEL[109+sub0[forind0]*1]*VGV->LEVEL[275+sub2[forind1]
 *1]*VGV->LEVEL[91+sub2[forind1]*1] ;
 }
 /* inflow xyz */
@@ -911,46 +912,51 @@ for(forind0=0;forind0<5;forind0++)
 for(forind1=0;forind1<5;forind1++)
 for(forind2=0;forind2<3;forind2++)
  {
-  VGV->lastpos = 144+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]
+  VGV->lastpos = 140+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]
 *1 ;
-  VGV->LEVEL[144+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] = 
-(VGV->LEVEL[267]-VGV->LEVEL[96+sub2[forind0]*1]*VGV->LEVEL[124+sub1[forind1]
-*1])*VGV->LEVEL[119+sub3[forind2]*1]*VGV->LEVEL[115] ;
+  VGV->LEVEL[140+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] = 
+(VGV->LEVEL[264]-VGV->LEVEL[96+sub2[forind0]*1]*VGV->LEVEL[120+sub1[forind1]
+*1])*VGV->LEVEL[115+sub3[forind2]*1]*VGV->LEVEL[107] ;
 }
 /* initial stock abc */
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 220+0*5+sub2[forind1]*1 ;
-  VGV->LEVEL[220+0*5+sub2[forind1]*1] = VGV->LEVEL[219] ;
+  VGV->lastpos = 216+0*5+sub2[forind1]*1 ;
+  VGV->LEVEL[216+0*5+sub2[forind1]*1] = VGV->LEVEL[215] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 220+1*5+sub2[forind1]*1 ;
-  VGV->LEVEL[220+1*5+sub2[forind1]*1] = VGV->LEVEL[235] ;
+  VGV->lastpos = 216+1*5+sub2[forind1]*1 ;
+  VGV->LEVEL[216+1*5+sub2[forind1]*1] = VGV->LEVEL[231] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 220+2*5+sub2[forind1]*1 ;
-  VGV->LEVEL[220+2*5+sub2[forind1]*1] = VGV->LEVEL[236] ;
+  VGV->lastpos = 216+2*5+sub2[forind1]*1 ;
+  VGV->LEVEL[216+2*5+sub2[forind1]*1] = VGV->LEVEL[232] ;
 }
 /* initial stock xyz */
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 242+0*5+sub2[forind1]*1 ;
-  VGV->LEVEL[242+0*5+sub2[forind1]*1] = VGV->LEVEL[237+sub2[forind1]
+  VGV->lastpos = 238+0*5+sub2[forind1]*1 ;
+  VGV->LEVEL[238+0*5+sub2[forind1]*1] = VGV->LEVEL[233+sub2[forind1]
 *1] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 242+1*5+sub2[forind1]*1 ;
-  VGV->LEVEL[242+1*5+sub2[forind1]*1] = VGV->LEVEL[257+sub2[forind1]
+  VGV->lastpos = 238+1*5+sub2[forind1]*1 ;
+  VGV->LEVEL[238+1*5+sub2[forind1]*1] = VGV->LEVEL[253+sub2[forind1]
 *1] ;
 }
 for(forind1=0;forind1<5;forind1++)
  {
-  VGV->lastpos = 242+2*5+sub2[forind1]*1 ;
-  VGV->LEVEL[242+2*5+sub2[forind1]*1] = VGV->LEVEL[262+sub2[forind1]
+  VGV->lastpos = 238+2*5+sub2[forind1]*1 ;
+  VGV->LEVEL[238+2*5+sub2[forind1]*1] = VGV->LEVEL[258+sub2[forind1]
 *1] ;
+}
+/* SAVEPER */
+ {
+  VGV->lastpos = 265 ;
+  VGV->LEVEL[265] = VGV->LEVEL[273] ;
 }
 } /* comp_aux */
 int execute_curloop() {return(0);}

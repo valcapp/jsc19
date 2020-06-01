@@ -12,7 +12,8 @@ varTypes ={
 };
 mdlStr = mdlString.mdlString;
 chunks = mdlStr.split("|\n\n").filter((chunk)=>!chunk.includes("**********************"));
-
+variables = {};
+subscripts = {};
 
 // function indx(str,target){
 //     let index = str.indexOf(target),
@@ -21,20 +22,20 @@ chunks = mdlStr.split("|\n\n").filter((chunk)=>!chunk.includes("****************
 // }
 
 $(document).ready(function(){
-    readVarDone = false;
+    readVarStarted = false;
     setInterval(function(){
         if (VensimLoadedFlag == 0){
             return;
-        }else if (!readVarDone) {
+        }else if (!readVarStarted) {
             readVars();
+            populateDashbView();
         }
     },100);
 });
 
 function readVars(){
-    readVarDone = true;
-    variables = {};
-    subscripts = {};
+    readVarStarted = true;
+
     // numVariables = GetNumVariables();
     // console.log(`numVariables = ${numVariables}\nnumChunks = ${numChunks}`)
     for(let i=0; i<GetNumVariables() ;i++){
@@ -72,6 +73,7 @@ function readVars(){
         if (varNames.indexOf(variables[variable].name)<0){varNames.push(name);}
     }
     varNames.sort((a,b)=> b.length - a.length); //descending order because a shorter name can be contained in a longer name but not viceversa
+    // console.log(varNames);
     unexpectedMeta ={};
     unmatchedChunks = [];
     checkChunks = {varNames,unexpectedMeta,unmatchedChunks};
@@ -86,14 +88,20 @@ function readVars(){
                 iVars.map((iVar)=>{if(variables[iVar].meta){unexpectedMeta[iVar]=variables[iVar].meta;}});
                 iVars.map((iVar)=>{variables[iVar].meta = meta;});
                 varNames.splice(varNames.indexOf(iName),1); // once a variable got metadata assigned to it, we don't need to loop over it for the next chunks
+                if(iName === 'INITIAL TIME'){variables[iName].meta.value = t0 = Number(lines[0].split(" = ")[1].trim());}
                 break; // once we found a variable that matches the chunk we don't need to check other variables as well, so we break the loop across variables
             }
         }
         if (!match){unmatchedChunks.push(lines[0]);}//if the loop across variables didn't break, there was no variable matching the chunk
     }
+
+    // assign an initial default value to constants
+    constants = Object.keys(variables).filter((v)=>variables[v].type === 'constant');
+    constants.map((c)=>variables[c].meta.value=GetValueAtTime(c,t0));
     // console.log("subscripts: ",subscripts);
     // console.log("checkChunks: ",checkChunks);
     // console.log("variables: ",variables);
+
 }
 
 function getSubs(variable){ //returns the name of the variable without subscripts, and its 

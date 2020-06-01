@@ -5,10 +5,43 @@ function SetConstant(strParameter, fValue)
 	return _SetConstant(-1, ptr, fValue);
 }
 
+function GetConstant(strParameter, fValue)
+{
+	var ptr  = allocate(intArrayFromString(strParameter), 'i8', ALLOC_NORMAL);
+	return _GetConstant(ptr);
+}
+
 function GetVariableIndex(strParameter)
 {
 	var ptr  = allocate(intArrayFromString(strParameter), 'i8', ALLOC_NORMAL);
 	return _GetVariableIndex(ptr);
+}
+
+function LoadFileFromServer(filePath)
+{
+	var result = null;
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("GET", filePath, false);
+	xmlhttp.send();
+
+	if (xmlhttp.status==200)
+	{
+		result = xmlhttp.responseText;
+	}
+	
+	return result;
+}
+
+function AddCINFileFromServer(strFileToLoad)
+{
+	var strCINFile = LoadFileFromServer(strFileToLoad);
+			
+	var bFileCreated = FS.writeFile(strFileToLoad, strCINFile);
+	
+	var ptr  = allocate(intArrayFromString(strFileToLoad), 'i8', ALLOC_NORMAL);
+	var nResult = _AddCINFile(ptr);
+	
+	return nResult;
 }
 
 function SetConstantUsingIndex(nIndex, fValue)

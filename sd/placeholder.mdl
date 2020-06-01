@@ -409,7 +409,7 @@ stock abc[c,x2],Graph
 72:0
 73:0
 4:Time
-5:"test ["[abc]
+5:adjusted feedback[xs]
 35:Date
 36:YYYY-MM-DD
 37:2000

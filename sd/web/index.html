@@ -276,6 +276,13 @@ d3.selectAll("div.io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber)
 });
 }
 
+function updateAllSliders() {
+d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
+i.value = GetConstant(i.name);
+d3.selectAll("div.io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
+});
+}
+
 function runModel(run) {
 if (  VensimLoadedFlag == 0)
 {

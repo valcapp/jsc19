@@ -8,7 +8,7 @@
 		Problems occur when double quotes " appear in the name.
 	|
 
-"test ["=
+"test ["[abc]=
 	2
 	~	u [0,10,1]
 	~	This is a test to see if wasm compilation is still successful with \

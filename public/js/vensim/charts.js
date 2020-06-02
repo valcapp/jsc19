@@ -3,10 +3,12 @@ var VensimLoadedFlag = 0;
 function OnVensimLoaded()
     {
         VensimLoadedFlag = _IsVensimLoaded();
-        runModel("Current");
+        runModel("current");
     }
 
 var VensimCharts = [];
+var colorList = "1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf".match(/.{6}/g).map(s=>'#'+s); 
+// var colorList = ['red','blue','green','orange','purple','turquoise','brown','olive','violet','navy'];
 
 function UpdateCharts(run){
     var margin = {left: 70, right: 30, top: 30, bottom: 50};
@@ -80,9 +82,11 @@ function UpdateCharts(run){
             .text(div.attr("yaxisname"));
         
         //legend
-        // var colorList = ['red','blue','green','orange','purple','turquoise','brown','olive','violet','navy'];
-        var colorList = "1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf".match(/.{6}/g).map(s=>'#'+s); 
+        // console.log(chart.select('g'));
+        chart.select('.legendGroup').remove();
+        
         var legendGroup = chart.append('g')
+            .attr("class","legendGroup")
             .attr('transform',`translate(${0.7*width},${0.15*height})`);
         var runNames = Object.keys(o.runs);
         var color = d3.scaleOrdinal()

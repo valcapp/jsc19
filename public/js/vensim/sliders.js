@@ -1,6 +1,6 @@
 function startOff(){
     resetAllSliders();
-    runModel("Current");
+    runModel("current");
 }
 
 function activateD3(){
@@ -29,5 +29,13 @@ function activateD3(){
         runModel(runName.value);
         runName.value = '';
     });
+
+    window.addEventListener('resize',setChartsHeight);
 }
 
+function setChartsHeight(){
+    $('.div.io-chart').each((div)=>{
+        div.height = div.width*0.85;
+    });
+    runModel('current');
+}

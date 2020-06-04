@@ -20,3 +20,13 @@ node run.js
 ## Limitations
 
 Being built on top of the Vensim Web folder, this app has same limitation as for the models complexity it can support. It supports all functiona and subscript, but not read from file or optimization for example. For the same reason, the graphs that can be visualized as of now are just one-variable line graphs, not bar charts or stack graphs for example.
+
+## Next steps
+The Vensim Dashboard generator is still work in progress. Next steps for development:
+* capability to add charts
+* capability to remove sliders and charts and diagrams
+* capability to add more than one dashboard view
+* capability to load diagrams
+* capability to customize landing, intro and links page
+* capability to compare variables in the graph (for a singular scenario)
+* capability to use different visualizations than just line charts

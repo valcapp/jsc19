@@ -10,10 +10,11 @@ The app also requires node.js to run.
 
 ## Usage
 
-Clone the repository on your machine. Inside the repository there is a "sd" directory: replace that with your own directory, which is the one containing the system-dynamics model you want to publish (or a copy of it). Make sure the web folder within that has been published and then run:
+Clone the repository on your machine. Inside the repository there is a "sd" directory: replace that with your own directory, which is the one containing the system-dynamics model you want to publish (or a copy of it). Make sure the web folder within that has been published.
+To launch the app: open the command line or terminal, change directory to the vensim-dash repo cloned on your machine and finally launch run.js via node:
 
 ```bash
-cd "\path\to\your\folder"
+cd "your\path\to\vens-dash\folder"
 node run.js
 ```
 

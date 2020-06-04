@@ -2,6 +2,7 @@
 function populateDashbView(){
     $.getJSON("/config/dashbViews.json", function(viewsObj) {
         dashbViews = viewsObj;
+        // console.log(dashbViews);
         createSliders();
         createCharts();
         activateD3();
@@ -96,10 +97,13 @@ function sendSliderForm(){
     toAddConstant.length>1?console.log("Error: the slider to add is not uniquely identified"):{};
     // console.log(toAddConstant);
     toAddConstant = toAddConstant[0];
-    // if (toAddConstant[0] && configSliders.indexOf(toAddConstant)<0){
     if (toAddConstant){
-        configSliders.push(toAddConstant);
-        updateConfig();
+        if (configSliders.indexOf(toAddConstant)>=0){
+            alert(`Slider "${toAddConstant}" is already in view.`);
+        }else{
+            configSliders.push(toAddConstant);
+            updateConfig();
+        }
     }
 }
 

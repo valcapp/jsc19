@@ -10,18 +10,6 @@ dashbDiagram = fs.existsSync(sketchPath)? sketchHref :
     fs.existsSync(diagramPath)? diagramHref :
         false;
 
-// const checkPath = function(filePath,successCallback){
-//         fs.access(filePath, (err) => {
-//             if (err) {
-//                 console.error(err);
-//             }else{
-//                 successCallback();
-//             }
-//         });
-//     };
-// dashbDiagram = false;
-// checkPath(sketchPath, ()=> {dashbDiagram = sketchHref;});
-// checkPath(diagramPath, ()=> {dashbDiagram = diagramHref;});
 
 
 

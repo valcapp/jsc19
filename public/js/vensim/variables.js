@@ -10,8 +10,10 @@ varTypes ={
     26 :'lookup table',
     27 :'string variable'  
 };
-mdlStr = mdlString.mdlString;
-chunks = mdlStr.split("|\n\n").filter((chunk)=>!chunk.includes("**********************"));
+mdlStr = mdlString.mdlString.replace(/\r\n/g,"\n");
+if(!mdlStr){console.log("Error: mdlString undefined.");}
+chunks = mdlStr.split("|\n\n").filter((chunk)=>chunk.indexOf("**********************")<0);
+if(chunks.length<=1){console.log("Error: mdlString splitting into chunks failed.");}
 variables = {};
 subscripts = {};
 
@@ -36,7 +38,8 @@ function readVars(){
         variables[varName]={
             index: i,
             // name: varName,
-            type: varTypes[GetVariableType(i)]
+            type: varTypes[GetVariableType(i)],
+            meta: getMeta() // empty object at this stage, but at least all variables have one
         };
     }
     //identify subscripts
@@ -55,7 +58,7 @@ function readVars(){
             i--;
         }
     }
-    // identify subscripts of subscripted variables
+    // identify subscripts of subscripted variables, assign name and subscripts
     for (let variable in variables){
         Object.assign(variables[variable],getSubs(variable));
     }
@@ -81,7 +84,7 @@ function readVars(){
                 iVars.map((iVar)=>{if(variables[iVar].meta){unexpectedMeta[iVar]=variables[iVar].meta;}});
                 iVars.map((iVar)=>{variables[iVar].meta = meta;});
                 varNames.splice(varNames.indexOf(iName),1); // once a variable got metadata assigned to it, we don't need to loop over it for the next chunks
-                if(iName === 'INITIAL TIME'){variables[iName].meta.value = t0 = Number(lines[0].split(" = ")[1].trim());}
+                // if(iName === 'INITIAL TIME'){variables[iName].meta.value = t0 = Number(lines[0].split(" = ")[1].trim());}
                 break; // once we found a variable that matches the chunk we don't need to check other variables as well, so we break the loop across variables
             }
         }
@@ -89,8 +92,9 @@ function readVars(){
     }
 
     // assign an initial default value to constants
+    t0 = GetSeries('Time')[0];
     constants = Object.keys(variables).filter((v)=>variables[v].type === 'constant');
-    constants.map((c)=>variables[c].meta.value=GetValueAtTime(c,t0));
+    constants.map((c)=>{variables[c].meta.value=GetValueAtTime(c,t0);});
     controlVars = ['Time','INITIAL TIME','TIME STEP','FINAL TIME'];
     constantNames = [];
     constants.forEach(function(constant){
@@ -142,9 +146,9 @@ function getSubs(variable){ //returns the name of the variable without subscript
     name = name.replace(/"/g,"");
     return{name,subs};
 }
-function getMeta(lines){
+function getMeta(lines=[]){
     let metaLines = lines.filter((line)=>(line.includes("~")&&!line.includes("~~"))); //check if \t~ works as well
-    [unit,min,max,step]=new Array(4).fill(undefined);
+    [unit,min,max,step,comment]=new Array(5).fill(undefined);
     if(metaLines[0]){
         let meta = metaLines[0];
         meta = meta.split('~')[1].trim();
@@ -155,6 +159,6 @@ function getMeta(lines){
             [min,max,step] = meta[1].replace("]","").split(",").map(m=>m.trim()).map(m=>m!="?"?m:undefined);
         }
     }
-    let comment = metaLines[1]?metaLines[1].split('~')[1].trim():undefined;
+    if (metaLines[1]){comment = metaLines[1].split('~')[1].trim();}
     return {unit,min,max,step,comment};
 }

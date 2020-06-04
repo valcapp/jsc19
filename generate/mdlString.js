@@ -19,7 +19,7 @@ if (mdlFile){
     const mdlPath = path.join(sdDir,mdlFile);
     sdTitle = mdlFile.slice(0,-4);
     mdlString = fs.readFileSync(mdlPath,"utf8"); 
-    mdlString = mdlString.replace("{UTF-8}\n","");
+    mdlString = mdlString.replace("{UTF-8}","");
     mdlString = mdlString.slice(0,mdlString.indexOf("\n\\\\\\---///"));
 }
 

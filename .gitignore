@@ -1,6 +1,10 @@
 __pycache__/
 *.pyc
 sd1/
+sd2/
+sd3/
+sd4/
+sd5/
 *.0mdl
 *.1mdl
 *.2mdl

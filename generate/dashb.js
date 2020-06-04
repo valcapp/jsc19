@@ -10,21 +10,23 @@ const path = require("path"),
     // targetPath = path.join(appDir,'views','dashb.ejs');
 
 alreadyConfig = fs.existsSync(dashbConfigPath)? true:false;
-alreadyConfig?()=>{console.log("config file for dashboard exists already");}:{};
+if (alreadyConfig){console.log("Already existing: "+dashbConfigPath);}
+var forceOverWrite = true;
+
 
 let sliders = [],
     charts = [];
 
-JSDOM.fromFile(sourcePath).then(dom => {
-    sourceElmts(dom.window);
-});
+if(!alreadyConfig || forceOverWrite ){
+    JSDOM.fromFile(sourcePath).then(dom => {
+        sourceElmts(dom.window);
+    });
+}
 
 function sourceElmts(window){
     let $ = jquery(window),
         vensSliders=[],
         vensCharts=[];
-    // identify title
-    // sdTitle = $("h1").html();
     
     // identify sliders
     $(".io-slider-slide").each(function(){
@@ -37,13 +39,12 @@ function sourceElmts(window){
     sliders=vensSliders.filter((x)=>Boolean(x));
     charts=vensCharts.filter((x)=>Boolean(x));
     dashbViews = {main: {sliders,charts}};
-    // console.log(dashbViews);
-    // dump json
-    let dashbViewsString = JSON.stringify(dashbViews);
-    fs.writeFile(dashbConfigPath, dashbViewsString, function (err) {
+    
+    fs.writeFile(dashbConfigPath, JSON.stringify(dashbViews), function (err) {
         if (err) return console.log(err);
         else return console.log(`Created: ${dashbConfigPath}`);
     });
+    
 }
 
 

@@ -7,15 +7,17 @@ const fs = require('fs'),
 let mdlFile = undefined;
 // find mdl file
 for (let f of sdFiles){
-    if (format = f.split('.').slice(-1)[0]==='mdl'){
+    if (f.split('.').slice(-1)[0]==='mdl'){
         mdlFile = f;
         break;
     }
 }
+sdTitle = 'sd';
 mdlString = '';
 
 if (mdlFile){
     const mdlPath = path.join(sdDir,mdlFile);
+    sdTitle = mdlFile.slice(0,-4);
     mdlString = fs.readFileSync(mdlPath,"utf8"); 
     mdlString = mdlString.replace("{UTF-8}\n","");
     mdlString = mdlString.slice(0,mdlString.indexOf("\n\\\\\\---///"));

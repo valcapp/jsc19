@@ -1,11 +1,11 @@
-require('./dashb.js');
-if (!debugMode){
+if (mdlChanges){
+    require('./dashb.js');
     require('./public.js');
     require('./vensim.js');
 }
 mdlString = require('./mdlString.js');
 require('./diagram.js');
-debugMode=false;
+
 
 
 

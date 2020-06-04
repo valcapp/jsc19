@@ -102,10 +102,11 @@
     <div id="contentDiv">
 
         <br>
-        <div id="runTalk" class="jumbotron" style="margin-top:0;padding-top:32px;padding-bottom:24px;background-color:transparent;">
+        <div id="runTalk" class="jumbotron">
             <h1>Run the model</h1>
             <p> Modify model inputs to see the change in the results.</p>
         </div>
+
 
         <div id="ioDiv">
 
@@ -117,13 +118,41 @@
 
             <div class="slidersDiv container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
+                    <div class="col d-flex align-items-stretch">
+                        <div class="sliderGroup d-flex align-items-start flex-column justify-content-center addSlider" type="button" data-toggle="collapse" data-target="#sliderAdderDiv" aria-expanded="false">
+                            <label class="mb-auto mx-auto"> <strong>Add Slider</strong></label>
+                            <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="card collapse container" id="sliderAdderDiv">
+                <div class="card-body">
+                    <h5 class="card-title">Add Slider</h5>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="sliderNameSelector">Name</label>
+                        </div>
+                        <select class="custom-select" id="sliderNameSelector">
+                        </select>
+                    </div>
+                    <div class="subsGroup"></div>
+                    <div class="buttonsGroup">
+                        <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#sliderAdderDiv" aria-expanded="false">
+                            Back
+                        </button>
+                        <button id="addSliderSubmit" onclick="sendSliderForm()" type="button" class="btn btn-primary">Add</button>
+                    </div>
                 </div>
             </div>
 
             <div class="container"><hr></div>
 
             <div class="chartsDiv container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 d-flex justify-content-around">
+                <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 d-flex justify-content-around">
+                    
                 </div>
             </div>
 

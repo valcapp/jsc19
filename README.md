@@ -14,7 +14,7 @@ Clone the repository on your machine. Inside the repository there is a "sd" dire
 
 ```bash
 cd "\path\to\your\folder"
-node app.js
+node run.js
 ```
 
 ## Limitations

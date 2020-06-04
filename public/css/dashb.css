@@ -98,12 +98,12 @@ a[data-toggle="collapse"] {
     margin-left:250px;
 }
 
-/* #runTalk{
-    width:100%;
-    padding: 32px auto 24px;
-    background-color: #e9ecef;
-    margin: 0 auto 12px;
-} */
+#runTalk{
+    margin-top:0;
+    padding-top:32px;
+    padding-bottom:24px;
+    background-color:transparent;
+}
 
 #ioDiv{
     margin-top:32px;
@@ -130,6 +130,14 @@ a[data-toggle="collapse"] {
 }
 .unit{
     font-size: smaller;
+}
+.addButton{
+    width:2em;
+    filter: invert(0.75);
+    transition: 0.3s;
+}
+.sliderGroup:hover .addButton{
+    filter: invert(0);
 }
 .chartsDiv{
     min-width:80%;

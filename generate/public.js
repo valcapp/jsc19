@@ -13,7 +13,7 @@ const path = require("path"),
     copyPaste = function(from,to){
         fs.copyFile(from, to, (err) => {
             if (err) throw err;
-            // console.log(`\n file copied from:  ${from}\n to:                ${to}`);
+            console.log(`Created: ${to}`);
         });
     };
 

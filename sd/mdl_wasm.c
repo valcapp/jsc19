@@ -1,4 +1,4 @@
-/*(Mon Jun  1 10:38:12 2020) From placeholder.mdl - C equations for the model */
+/*(Wed Jun  3 12:14:52 2020) From placeholder.mdl - C equations for the model */
 
 #define _VDFX
 #define VDFX
@@ -11,10 +11,10 @@
 #define _WASM
 
 typedef unsigned char charutf8;
-#define NUM_VARS 280
+#define NUM_VARS 355
 #define NUM_LEVELS 91
 #define NUM_DELAYS 0
-#define NUM_AUX 189
+#define NUM_AUX 264
 #define NUM_LOOKUPS 1
 
 
@@ -283,22 +283,97 @@ charutf8 *strVarNames[NUM_VARS] = {
 , "initial stock z[x4]" 	/*261*/
 , "initial stock z[x5]" 	/*262*/
 , "INITIAL TIME" 	/*263*/
-, "ref stock" 	/*264*/
-, "SAVEPER" 	/*265*/
-, "\"test =\"" 	/*266*/
-, "\"test [\"[a]" 	/*267*/
-, "\"test [\"[b]" 	/*268*/
-, "\"test [\"[c]" 	/*269*/
-, "test without max" 	/*270*/
-, "test without min" 	/*271*/
-, "test without unit" 	/*272*/
-, "TIME STEP" 	/*273*/
-, "u reference" 	/*274*/
-, "x factor[x1]" 	/*275*/
-, "x factor[x2]" 	/*276*/
-, "x factor[x3]" 	/*277*/
-, "x factor[x4]" 	/*278*/
-, "x factor[x5]" 	/*279*/
+, "many subs var[a,i1,x1]" 	/*264*/
+, "many subs var[a,i1,x2]" 	/*265*/
+, "many subs var[a,i1,x3]" 	/*266*/
+, "many subs var[a,i1,x4]" 	/*267*/
+, "many subs var[a,i1,x5]" 	/*268*/
+, "many subs var[a,i2,x1]" 	/*269*/
+, "many subs var[a,i2,x2]" 	/*270*/
+, "many subs var[a,i2,x3]" 	/*271*/
+, "many subs var[a,i2,x4]" 	/*272*/
+, "many subs var[a,i2,x5]" 	/*273*/
+, "many subs var[a,i3,x1]" 	/*274*/
+, "many subs var[a,i3,x2]" 	/*275*/
+, "many subs var[a,i3,x3]" 	/*276*/
+, "many subs var[a,i3,x4]" 	/*277*/
+, "many subs var[a,i3,x5]" 	/*278*/
+, "many subs var[a,i4,x1]" 	/*279*/
+, "many subs var[a,i4,x2]" 	/*280*/
+, "many subs var[a,i4,x3]" 	/*281*/
+, "many subs var[a,i4,x4]" 	/*282*/
+, "many subs var[a,i4,x5]" 	/*283*/
+, "many subs var[a,i5,x1]" 	/*284*/
+, "many subs var[a,i5,x2]" 	/*285*/
+, "many subs var[a,i5,x3]" 	/*286*/
+, "many subs var[a,i5,x4]" 	/*287*/
+, "many subs var[a,i5,x5]" 	/*288*/
+, "many subs var[b,i1,x1]" 	/*289*/
+, "many subs var[b,i1,x2]" 	/*290*/
+, "many subs var[b,i1,x3]" 	/*291*/
+, "many subs var[b,i1,x4]" 	/*292*/
+, "many subs var[b,i1,x5]" 	/*293*/
+, "many subs var[b,i2,x1]" 	/*294*/
+, "many subs var[b,i2,x2]" 	/*295*/
+, "many subs var[b,i2,x3]" 	/*296*/
+, "many subs var[b,i2,x4]" 	/*297*/
+, "many subs var[b,i2,x5]" 	/*298*/
+, "many subs var[b,i3,x1]" 	/*299*/
+, "many subs var[b,i3,x2]" 	/*300*/
+, "many subs var[b,i3,x3]" 	/*301*/
+, "many subs var[b,i3,x4]" 	/*302*/
+, "many subs var[b,i3,x5]" 	/*303*/
+, "many subs var[b,i4,x1]" 	/*304*/
+, "many subs var[b,i4,x2]" 	/*305*/
+, "many subs var[b,i4,x3]" 	/*306*/
+, "many subs var[b,i4,x4]" 	/*307*/
+, "many subs var[b,i4,x5]" 	/*308*/
+, "many subs var[b,i5,x1]" 	/*309*/
+, "many subs var[b,i5,x2]" 	/*310*/
+, "many subs var[b,i5,x3]" 	/*311*/
+, "many subs var[b,i5,x4]" 	/*312*/
+, "many subs var[b,i5,x5]" 	/*313*/
+, "many subs var[c,i1,x1]" 	/*314*/
+, "many subs var[c,i1,x2]" 	/*315*/
+, "many subs var[c,i1,x3]" 	/*316*/
+, "many subs var[c,i1,x4]" 	/*317*/
+, "many subs var[c,i1,x5]" 	/*318*/
+, "many subs var[c,i2,x1]" 	/*319*/
+, "many subs var[c,i2,x2]" 	/*320*/
+, "many subs var[c,i2,x3]" 	/*321*/
+, "many subs var[c,i2,x4]" 	/*322*/
+, "many subs var[c,i2,x5]" 	/*323*/
+, "many subs var[c,i3,x1]" 	/*324*/
+, "many subs var[c,i3,x2]" 	/*325*/
+, "many subs var[c,i3,x3]" 	/*326*/
+, "many subs var[c,i3,x4]" 	/*327*/
+, "many subs var[c,i3,x5]" 	/*328*/
+, "many subs var[c,i4,x1]" 	/*329*/
+, "many subs var[c,i4,x2]" 	/*330*/
+, "many subs var[c,i4,x3]" 	/*331*/
+, "many subs var[c,i4,x4]" 	/*332*/
+, "many subs var[c,i4,x5]" 	/*333*/
+, "many subs var[c,i5,x1]" 	/*334*/
+, "many subs var[c,i5,x2]" 	/*335*/
+, "many subs var[c,i5,x3]" 	/*336*/
+, "many subs var[c,i5,x4]" 	/*337*/
+, "many subs var[c,i5,x5]" 	/*338*/
+, "ref stock" 	/*339*/
+, "SAVEPER" 	/*340*/
+, "\"test =\"" 	/*341*/
+, "\"test [\"[a]" 	/*342*/
+, "\"test [\"[b]" 	/*343*/
+, "\"test [\"[c]" 	/*344*/
+, "test without max" 	/*345*/
+, "test without min" 	/*346*/
+, "test without unit" 	/*347*/
+, "TIME STEP" 	/*348*/
+, "u reference" 	/*349*/
+, "x factor[x1]" 	/*350*/
+, "x factor[x2]" 	/*351*/
+, "x factor[x3]" 	/*352*/
+, "x factor[x4]" 	/*353*/
+, "x factor[x5]" 	/*354*/
 };
 
 int nTypesVector[NUM_VARS] = { 
@@ -567,7 +642,7 @@ int nTypesVector[NUM_VARS] = {
 , 23	/*262*/
 , 23	/*263*/
 , 23	/*264*/
-, 17	/*265*/
+, 23	/*265*/
 , 23	/*266*/
 , 23	/*267*/
 , 23	/*268*/
@@ -577,11 +652,86 @@ int nTypesVector[NUM_VARS] = {
 , 23	/*272*/
 , 23	/*273*/
 , 23	/*274*/
-, 17	/*275*/
-, 17	/*276*/
-, 17	/*277*/
-, 17	/*278*/
-, 17	/*279*/
+, 23	/*275*/
+, 23	/*276*/
+, 23	/*277*/
+, 23	/*278*/
+, 23	/*279*/
+, 23	/*280*/
+, 23	/*281*/
+, 23	/*282*/
+, 23	/*283*/
+, 23	/*284*/
+, 23	/*285*/
+, 23	/*286*/
+, 23	/*287*/
+, 23	/*288*/
+, 23	/*289*/
+, 23	/*290*/
+, 23	/*291*/
+, 23	/*292*/
+, 23	/*293*/
+, 23	/*294*/
+, 23	/*295*/
+, 23	/*296*/
+, 23	/*297*/
+, 23	/*298*/
+, 23	/*299*/
+, 23	/*300*/
+, 23	/*301*/
+, 23	/*302*/
+, 23	/*303*/
+, 23	/*304*/
+, 23	/*305*/
+, 23	/*306*/
+, 23	/*307*/
+, 23	/*308*/
+, 23	/*309*/
+, 23	/*310*/
+, 23	/*311*/
+, 23	/*312*/
+, 23	/*313*/
+, 23	/*314*/
+, 23	/*315*/
+, 23	/*316*/
+, 23	/*317*/
+, 23	/*318*/
+, 23	/*319*/
+, 23	/*320*/
+, 23	/*321*/
+, 23	/*322*/
+, 23	/*323*/
+, 23	/*324*/
+, 23	/*325*/
+, 23	/*326*/
+, 23	/*327*/
+, 23	/*328*/
+, 23	/*329*/
+, 23	/*330*/
+, 23	/*331*/
+, 23	/*332*/
+, 23	/*333*/
+, 23	/*334*/
+, 23	/*335*/
+, 23	/*336*/
+, 23	/*337*/
+, 23	/*338*/
+, 23	/*339*/
+, 17	/*340*/
+, 23	/*341*/
+, 23	/*342*/
+, 23	/*343*/
+, 23	/*344*/
+, 23	/*345*/
+, 23	/*346*/
+, 23	/*347*/
+, 23	/*348*/
+, 23	/*349*/
+, 17	/*350*/
+, 17	/*351*/
+, 17	/*352*/
+, 17	/*353*/
+, 17	/*354*/
 };
 
 charutf8 *strLookupNames[NUM_LOOKUPS] = { 
@@ -624,16 +774,91 @@ SetConstant (260, "initial stock z[x3]", 80.000000);
 SetConstant (261, "initial stock z[x4]", 80.000000);
 SetConstant (262, "initial stock z[x5]", 80.000000);
 SetConstant (263, "INITIAL TIME", 0.000000);
-SetConstant (264, "ref stock", 50.000000);
-SetConstant (266, "\"test =\"", 2.000000);
-SetConstant (267, "\"test [\"[a]", 2.000000);
-SetConstant (268, "\"test [\"[b]", 2.000000);
-SetConstant (269, "\"test [\"[c]", 2.000000);
-SetConstant (270, "test without max", 1.000000);
-SetConstant (271, "test without min", 1.000000);
-SetConstant (272, "test without unit", 0.500000);
-SetConstant (273, "TIME STEP", 1.000000);
-SetConstant (274, "u reference", 100.000000);
+SetConstant (264, "many subs var[a,i1,x1]", 0.500000);
+SetConstant (265, "many subs var[a,i1,x2]", 0.500000);
+SetConstant (266, "many subs var[a,i1,x3]", 0.500000);
+SetConstant (267, "many subs var[a,i1,x4]", 0.500000);
+SetConstant (268, "many subs var[a,i1,x5]", 0.500000);
+SetConstant (269, "many subs var[a,i2,x1]", 0.500000);
+SetConstant (270, "many subs var[a,i2,x2]", 0.500000);
+SetConstant (271, "many subs var[a,i2,x3]", 0.500000);
+SetConstant (272, "many subs var[a,i2,x4]", 0.500000);
+SetConstant (273, "many subs var[a,i2,x5]", 0.500000);
+SetConstant (274, "many subs var[a,i3,x1]", 0.500000);
+SetConstant (275, "many subs var[a,i3,x2]", 0.500000);
+SetConstant (276, "many subs var[a,i3,x3]", 0.500000);
+SetConstant (277, "many subs var[a,i3,x4]", 0.500000);
+SetConstant (278, "many subs var[a,i3,x5]", 0.500000);
+SetConstant (279, "many subs var[a,i4,x1]", 0.500000);
+SetConstant (280, "many subs var[a,i4,x2]", 0.500000);
+SetConstant (281, "many subs var[a,i4,x3]", 0.500000);
+SetConstant (282, "many subs var[a,i4,x4]", 0.500000);
+SetConstant (283, "many subs var[a,i4,x5]", 0.500000);
+SetConstant (284, "many subs var[a,i5,x1]", 0.500000);
+SetConstant (285, "many subs var[a,i5,x2]", 0.500000);
+SetConstant (286, "many subs var[a,i5,x3]", 0.500000);
+SetConstant (287, "many subs var[a,i5,x4]", 0.500000);
+SetConstant (288, "many subs var[a,i5,x5]", 0.500000);
+SetConstant (289, "many subs var[b,i1,x1]", 0.500000);
+SetConstant (290, "many subs var[b,i1,x2]", 0.500000);
+SetConstant (291, "many subs var[b,i1,x3]", 0.500000);
+SetConstant (292, "many subs var[b,i1,x4]", 0.500000);
+SetConstant (293, "many subs var[b,i1,x5]", 0.500000);
+SetConstant (294, "many subs var[b,i2,x1]", 0.500000);
+SetConstant (295, "many subs var[b,i2,x2]", 0.500000);
+SetConstant (296, "many subs var[b,i2,x3]", 0.500000);
+SetConstant (297, "many subs var[b,i2,x4]", 0.500000);
+SetConstant (298, "many subs var[b,i2,x5]", 0.500000);
+SetConstant (299, "many subs var[b,i3,x1]", 0.500000);
+SetConstant (300, "many subs var[b,i3,x2]", 0.500000);
+SetConstant (301, "many subs var[b,i3,x3]", 0.500000);
+SetConstant (302, "many subs var[b,i3,x4]", 0.500000);
+SetConstant (303, "many subs var[b,i3,x5]", 0.500000);
+SetConstant (304, "many subs var[b,i4,x1]", 0.500000);
+SetConstant (305, "many subs var[b,i4,x2]", 0.500000);
+SetConstant (306, "many subs var[b,i4,x3]", 0.500000);
+SetConstant (307, "many subs var[b,i4,x4]", 0.500000);
+SetConstant (308, "many subs var[b,i4,x5]", 0.500000);
+SetConstant (309, "many subs var[b,i5,x1]", 0.500000);
+SetConstant (310, "many subs var[b,i5,x2]", 0.500000);
+SetConstant (311, "many subs var[b,i5,x3]", 0.500000);
+SetConstant (312, "many subs var[b,i5,x4]", 0.500000);
+SetConstant (313, "many subs var[b,i5,x5]", 0.500000);
+SetConstant (314, "many subs var[c,i1,x1]", 0.500000);
+SetConstant (315, "many subs var[c,i1,x2]", 0.500000);
+SetConstant (316, "many subs var[c,i1,x3]", 0.500000);
+SetConstant (317, "many subs var[c,i1,x4]", 0.500000);
+SetConstant (318, "many subs var[c,i1,x5]", 0.500000);
+SetConstant (319, "many subs var[c,i2,x1]", 0.500000);
+SetConstant (320, "many subs var[c,i2,x2]", 0.500000);
+SetConstant (321, "many subs var[c,i2,x3]", 0.500000);
+SetConstant (322, "many subs var[c,i2,x4]", 0.500000);
+SetConstant (323, "many subs var[c,i2,x5]", 0.500000);
+SetConstant (324, "many subs var[c,i3,x1]", 0.500000);
+SetConstant (325, "many subs var[c,i3,x2]", 0.500000);
+SetConstant (326, "many subs var[c,i3,x3]", 0.500000);
+SetConstant (327, "many subs var[c,i3,x4]", 0.500000);
+SetConstant (328, "many subs var[c,i3,x5]", 0.500000);
+SetConstant (329, "many subs var[c,i4,x1]", 0.500000);
+SetConstant (330, "many subs var[c,i4,x2]", 0.500000);
+SetConstant (331, "many subs var[c,i4,x3]", 0.500000);
+SetConstant (332, "many subs var[c,i4,x4]", 0.500000);
+SetConstant (333, "many subs var[c,i4,x5]", 0.500000);
+SetConstant (334, "many subs var[c,i5,x1]", 0.500000);
+SetConstant (335, "many subs var[c,i5,x2]", 0.500000);
+SetConstant (336, "many subs var[c,i5,x3]", 0.500000);
+SetConstant (337, "many subs var[c,i5,x4]", 0.500000);
+SetConstant (338, "many subs var[c,i5,x5]", 0.500000);
+SetConstant (339, "ref stock", 50.000000);
+SetConstant (341, "\"test =\"", 2.000000);
+SetConstant (342, "\"test [\"[a]", 2.000000);
+SetConstant (343, "\"test [\"[b]", 2.000000);
+SetConstant (344, "\"test [\"[c]", 2.000000);
+SetConstant (345, "test without max", 1.000000);
+SetConstant (346, "test without min", 1.000000);
+SetConstant (347, "test without unit", 0.500000);
+SetConstant (348, "TIME STEP", 1.000000);
+SetConstant (349, "u reference", 100.000000);
 {
 	// lookup factor
 	REAL fxVals[7];
@@ -692,28 +917,30 @@ static int sub1[]  /* is */ = {0,1,2,3,4,-1} ;
 static int sub2[]  /* xs */ = {0,1,2,3,4,-1} ;
 static int sub3[]  /* xyz */ = {0,1,2,-1} ;
 void SetupDIMS(){
-CreateDIMS(8);
+CreateDIMS(9);
 SetDIM_INFO(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1);
-SetDIM_INFO(1,486,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(1,266,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 5);
-SetDIM_INFO(2,266,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(2,222,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 3);
-SetDIM_INFO(3,376,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(3,442,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 3);
-SetDIM_INFO(4,662,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
+SetDIM_INFO(4,244,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,
 5);
-SetDIM_INFO(5,266,486,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
+SetDIM_INFO(5,222,266,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
 2,15);
-SetDIM_INFO(6,486,662,376,0,0,0,0,0,5,5,3,0,0,0,0,0,15,3,1,0,0,0,0,
+SetDIM_INFO(6,266,244,442,0,0,0,0,0,5,5,3,0,0,0,0,0,15,3,1,0,0,0,0,
 0,3,75);
-SetDIM_INFO(7,376,486,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
+SetDIM_INFO(7,442,266,0,0,0,0,0,0,3,5,0,0,0,0,0,0,5,1,0,0,0,0,0,0,
 2,15);
+SetDIM_INFO(8,222,244,266,0,0,0,0,0,3,5,5,0,0,0,0,0,25,5,1,0,0,0,0,
+0,3,75);
 };
 #ifndef LINKEXTERN
 #endif
 unsigned char *mdl_desc()
 {
-return("(Mon Jun  1 10:38:12 2020) From placeholder.mdl") ;
+return("(Wed Jun  3 12:14:52 2020) From placeholder.mdl") ;
 }
 
 /* compute the model rates */
@@ -854,7 +1081,7 @@ for(forind0=0;forind0<5;forind0++)
  {
   VGV->lastpos = 91+sub2[forind0]*1 ;
   VGV->LEVEL[91+sub2[forind0]*1] = TABLE(&VGV->TAB[0],VGV->LEVEL[101
-+sub2[forind0]*1]/VGV->LEVEL[274]) ;
++sub2[forind0]*1]/VGV->LEVEL[349]) ;
 }
 /* aggregate stocks */
 for(forind0=0;forind0<5;forind0++)
@@ -894,8 +1121,8 @@ for(sumind0=0;sumind0<3;sumind0++)
 /* x factor */
 for(forind0=0;forind0<5;forind0++)
  {
-  VGV->lastpos = 275+sub2[forind0]*1 ;
-  VGV->LEVEL[275+sub2[forind0]*1] = RANDOM_UNIFORM(0,1.000000,2323.000000
+  VGV->lastpos = 350+sub2[forind0]*1 ;
+  VGV->LEVEL[350+sub2[forind0]*1] = RANDOM_UNIFORM(0,1.000000,2323.000000
 ) ;
 }
 /* inflow abc */
@@ -904,7 +1131,7 @@ for(forind1=0;forind1<5;forind1++)
  {
   VGV->lastpos = 125+sub0[forind0]*5+sub2[forind1]*1 ;
   VGV->LEVEL[125+sub0[forind0]*5+sub2[forind1]*1] = VGV->LEVEL[101
-+sub2[forind1]*1]*VGV->LEVEL[109+sub0[forind0]*1]*VGV->LEVEL[275+sub2[forind1]
++sub2[forind1]*1]*VGV->LEVEL[109+sub0[forind0]*1]*VGV->LEVEL[350+sub2[forind1]
 *1]*VGV->LEVEL[91+sub2[forind1]*1] ;
 }
 /* inflow xyz */
@@ -915,7 +1142,7 @@ for(forind2=0;forind2<3;forind2++)
   VGV->lastpos = 140+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]
 *1 ;
   VGV->LEVEL[140+sub2[forind0]*15+sub1[forind1]*3+sub3[forind2]*1] = 
-(VGV->LEVEL[264]-VGV->LEVEL[96+sub2[forind0]*1]*VGV->LEVEL[120+sub1[forind1]
+(VGV->LEVEL[339]-VGV->LEVEL[96+sub2[forind0]*1]*VGV->LEVEL[120+sub1[forind1]
 *1])*VGV->LEVEL[115+sub3[forind2]*1]*VGV->LEVEL[107] ;
 }
 /* initial stock abc */
@@ -955,8 +1182,8 @@ for(forind1=0;forind1<5;forind1++)
 }
 /* SAVEPER */
  {
-  VGV->lastpos = 265 ;
-  VGV->LEVEL[265] = VGV->LEVEL[273] ;
+  VGV->lastpos = 340 ;
+  VGV->LEVEL[340] = VGV->LEVEL[348] ;
 }
 } /* comp_aux */
 int execute_curloop() {return(0);}

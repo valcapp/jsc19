@@ -1,22 +1,27 @@
 {
-  "name": "jsapp",
+  "name": "vens-dash",
   "version": "1.0.0",
-  "description": "A little app using express JS to run a system dynamics model, Community Corona Model is used as a test",
+  "description": "An app that generates and runs an interface on top of a system-dynamics model.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "nodemonConfig": {
+    "ignore": ["public/config/*"]
+  },
   "keywords": [
     "system-dynamics",
-    "corona",
-    "virus",
-    "covid-19",
+    "dashboard",
+    "custom-view",
+    "interface",
+    "sliders-charts",
     "express",
     "js"
   ],
   "author": "valerio cappuccio",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "ejs": "^3.1.2",
     "express": "^4.17.1",
     "jquery": "^3.5.1",

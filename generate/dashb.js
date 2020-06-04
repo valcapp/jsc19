@@ -24,7 +24,7 @@ function sourceElmts(window){
         vensSliders=[],
         vensCharts=[];
     // identify title
-    sdTitle = $("h1").html();
+    // sdTitle = $("h1").html();
     
     // identify sliders
     $(".io-slider-slide").each(function(){
@@ -42,6 +42,7 @@ function sourceElmts(window){
     let dashbViewsString = JSON.stringify(dashbViews);
     fs.writeFile(dashbConfigPath, dashbViewsString, function (err) {
         if (err) return console.log(err);
+        else return console.log(`Created: ${dashbConfigPath}`);
     });
 }
 

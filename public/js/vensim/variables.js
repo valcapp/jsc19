@@ -15,23 +15,16 @@ chunks = mdlStr.split("|\n\n").filter((chunk)=>!chunk.includes("****************
 variables = {};
 subscripts = {};
 
-// function indx(str,target){
-//     let index = str.indexOf(target),
-//         length = str.length;
-//     return (length+index)%length;
-// }
+readVarStarted = false;
+setInterval(function(){
+    if (VensimLoadedFlag == 0){
+        return;
+    }else if (!readVarStarted) {
+        readVars();
+        populateDashbView();
+    }
+},100);
 
-$(document).ready(function(){
-    readVarStarted = false;
-    setInterval(function(){
-        if (VensimLoadedFlag == 0){
-            return;
-        }else if (!readVarStarted) {
-            readVars();
-            populateDashbView();
-        }
-    },100);
-});
 
 function readVars(){
     readVarStarted = true;
@@ -98,6 +91,21 @@ function readVars(){
     // assign an initial default value to constants
     constants = Object.keys(variables).filter((v)=>variables[v].type === 'constant');
     constants.map((c)=>variables[c].meta.value=GetValueAtTime(c,t0));
+    controlVars = ['Time','INITIAL TIME','TIME STEP','FINAL TIME'];
+    constantNames = [];
+    constants.forEach(function(constant){
+        var c = variables[constant];
+        if(constantNames.indexOf(c.name)<0 && controlVars.indexOf(c.name)<0){
+            constantNames.push(c.name);
+        }
+    });
+    varNames = [];
+    Object.keys(variables).forEach(function(variable){
+        var v = variables[variable];
+        if(varNames.indexOf(v.name)<0 && controlVars.indexOf(v.name)<0){
+            varNames.push(v.name);
+        }
+    });
     // console.log("subscripts: ",subscripts);
     // console.log("checkChunks: ",checkChunks);
     // console.log("variables: ",variables);

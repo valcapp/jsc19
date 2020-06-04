@@ -19,7 +19,7 @@ function activateD3(){
             // update the number shown for all sliders of this var
             d3.selectAll(".io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
             d3.selectAll("input.io-slider-slide[name=\"" + i.name + "\"]").each(function() { this.value = i.valueAsNumber; });
-            runModel("Current");
+            runModel("current");
         };
     });
 
@@ -39,3 +39,5 @@ function setChartsHeight(){
     });
     runModel('current');
 }
+
+

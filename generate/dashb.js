@@ -11,7 +11,7 @@ const path = require("path"),
 
 alreadyConfig = fs.existsSync(dashbConfigPath)? true:false;
 if (alreadyConfig){console.log("Already existing: "+dashbConfigPath);}
-var forceOverWrite = true;
+var forceOverWrite = false;
 
 
 let sliders = [],

@@ -38,9 +38,9 @@ function createCharts(){
     let chartsRow = $(".chartsDiv .row");
     for (let name of configCharts){
         if(variables[name]){
-            let chart = $('<div>').addClass("io-chart").attr("name",name).attr("varname",name).attr("xaxisname",variables['INITIAL TIME'].meta.unit).attr("yaxisname",variables[name].meta.unit),
+            let chart = $('<div>').addClass("io-chart io-chart-style").attr("name",name).attr("varname",name).attr("xaxisname",variables['INITIAL TIME'].meta.unit).attr("yaxisname",variables[name].meta.unit),
                 col = $("<div>").addClass("col").append(chart); // here here here
-            chartsRow.append(col);
+            chartsRow.prepend(col);
         }else{
             configCharts.splice(configCharts.indexOf(name),1);
         }
@@ -49,24 +49,26 @@ function createCharts(){
 
 function activateCustomization(){
     // console.log(dashbViews);
-    addSlider();
-    addChart();
+    addIo('slider');
+    addIo('chart');
 }
 
-function addSlider(){
-    let select = $('#sliderNameSelector').on('change',selectSubscript);
-    constantNames.forEach((c)=>{
-        option = $('<option>').attr("value",c).html(c);
+function addIo(ioType){
+    let select = $(`#${ioType}NameSelector`).on('change',()=>selectSubscript(ioType)),
+        names = (ioType==="slider")? constantNames:varNames;
+    $(`#${ioType}Submit`).on('click',()=>sendForm(ioType));
+    names.forEach((name)=>{
+        option = $('<option>').attr("value",name).html(name);
         select.append(option);
     });
-    selectSubscript();
+    selectSubscript(ioType);
 }
 
-function selectSubscript(){
-    selectedSliderName = $('#sliderNameSelector').children("option:selected").attr('value');
-    selectedConstants = constants.filter(c => variables[c].name===selectedSliderName);
-    let subsRanges = variables[selectedConstants[0]].subs,
-        adderGroup = $('#sliderAdderDiv div.card-body'),
+function selectSubscript(ioType){
+    let selectedName = $(`#${ioType}NameSelector`).children("option:selected").attr('value'),
+        selectedVars = Object.keys(variables).filter(v => variables[v].name===selectedName),
+        subsRanges = variables[selectedVars[0]].subs,
+        adderGroup = $(`#${ioType}AdderDiv div.card-body`),
         subsGroup = adderGroup.find('.subsGroup').empty();
     if(subsRanges){
         subsRanges.forEach((range)=>{
@@ -83,32 +85,30 @@ function selectSubscript(){
     }
 }
 
-function sendSliderForm(){
-    let subsGroup = $('#sliderAdderDiv .subsGroup');
-        selectedSubs = [],
-        subsGroup.find('.subSelector').each(function(){
-            selectedSubs.push($(this).children("option:selected").attr("value"));
+function sendForm(ioType){
+    let selectedName = $(`#${ioType}NameSelector`).children("option:selected").attr('value'),
+        selectedVars = Object.keys(variables).filter(v => variables[v].name===selectedName),
+        subsGroup = $(`#${ioType}AdderDiv .subsGroup`),
+        selectedSubs = [];
+    subsGroup.find('.subSelector').each(function(){
+        selectedSubs.push($(this).children("option:selected").attr("value"));
+    });
+    toAddVar = selectedSubs.length<1 ? selectedVars:
+        selectedVars.filter( v => {
+            let vSubs = v.split("[").slice(-1)[0].replace("]","").split(",");
+            return selectedSubs.every(s=>vSubs.indexOf(s)>=0);
         });
-    toAddConstant = selectedSubs.length<1? selectedConstants:
-        selectedConstants.filter((c)=>{
-            let cSubs = c.split("[").slice(-1)[0].replace("]","").split(",");
-            return selectedSubs.every(s=>cSubs.indexOf(s)>=0);
-        });
-    toAddConstant.length>1?console.log("Error: the slider to add is not uniquely identified"):{};
-    // console.log(toAddConstant);
-    toAddConstant = toAddConstant[0];
-    if (toAddConstant){
-        if (configSliders.indexOf(toAddConstant)>=0){
-            alert(`Slider "${toAddConstant}" is already in view.`);
+    toAddVar.length>1?console.log("Error: the slider to add is not uniquely identified"):{};
+    // console.log(toAddVar);
+    toAddVar = toAddVar[0];
+    if (toAddVar){
+        if (configSliders.indexOf(toAddVar)>=0){
+            alert(`The ${ioType} "${toAddVar}" is already in view.`);
         }else{
-            configSliders.push(toAddConstant);
+            dashbViews.main[ioType+'s'].push(toAddVar);
             updateConfig();
         }
     }
-}
-
-function addChart(){
-
 }
 
 function updateConfig(){

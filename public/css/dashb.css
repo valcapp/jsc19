@@ -133,17 +133,31 @@ a[data-toggle="collapse"] {
 }
 .addButton{
     width:2em;
+}
+.addButton,
+div.addSlider label,
+div.addChart label
+{
     filter: invert(0.75);
     transition: 0.3s;
 }
-.sliderGroup:hover .addButton{
+div.addSlider:hover .addButton,
+div.addChart:hover .addButton,
+div.addSlider:hover label,
+div.addChart:hover label
+{
     filter: invert(0);
 }
+/* .sliderGroup:hover .addButton,
+div.addChart:hover .addButton{
+    filter: invert(0);
+} */
+
 .chartsDiv{
     min-width:80%;
     /* margin:auto; */
 }
-div.io-chart {
+div.io-chart, div.addChart {
     background-color: rgba(248, 248, 255,0.6);
     border-radius:15px;
     height: 300px;

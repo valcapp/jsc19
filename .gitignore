@@ -8,4 +8,4 @@ sd5/
 *.0mdl
 *.1mdl
 *.2mdl
-dashbViews.json
+/public/config/*

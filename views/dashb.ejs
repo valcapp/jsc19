@@ -11,6 +11,8 @@
 <script>
     var mdlString = <%- JSON.stringify(mdlString) %>;
 </script>
+
+<script type="text/javascript" src="/js/vensim/customize.js"></script>
 <script type="text/javascript" src="/js/vensim/generate.js"></script>
 <script type="text/javascript" src="/js/vensim/variables.js"></script>
 
@@ -45,6 +47,7 @@
 
 <div class="wrapper" id="mainContainer">
 
+    <!--  SIDE BAR  -->
     <nav id="sideBar" class="compressed nav flex-column navbar-light bg-light">
         
         <div id="sidebarCollapse" class="sidebar-header btn btn-primary" type="button">
@@ -55,11 +58,9 @@
             </div>
         </div>
 
-        <!-- <div class="dropdown-divider"></div> -->
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link resetAll" type="button">
-                    <!-- <i class="fas fa-fast-backward"></i> -->
                     <img src="/img/icons/reset.svg" alt="">
                     <span class="compress">Reset sliders</span>
                 </a>
@@ -67,7 +68,6 @@
             <% if (dashbDiagram) { %>
             <li class="nav-item">
                 <a class="nav-link" type="button" data-toggle="collapse" data-target="#diagram" aria-expanded="false" aria-controls="diagram">
-                    <!-- <i class="fas fa-project-diagram"></i> -->
                     <img src="/img/icons/eye.svg" alt="">
                     <span class="compress">Show diagram</span>
                 </a>
@@ -75,9 +75,15 @@
             <% } %>
 
             <li class="nav-item">
+                <a type="button" class="nav-link customizeButton">
+                    <img src="/img/icons/sliders.svg" alt="">
+                    <span class="compress">Customize View</span>
+                </a>
+            </li>
+
+            <!-- <li class="nav-item">
                 <div class="dropright">
                     <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!-- <i class="fas fa-tachometer-alt"></i> -->
                         <img src="/img/icons/sliders.svg" alt="">
                         <span class="compress">Customize View</span> 
                     </a>
@@ -88,7 +94,7 @@
                             Charts</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             
             <li class="nav-item">
@@ -101,27 +107,35 @@
         </ul>
     </nav>
 
+    <!-- CONTENT -->
     <div id="contentDiv">
 
         <br>
         <div id="runTalk" class="jumbotron">
             <h1>Run the model</h1>
             <p> Modify model inputs to see the change in the results.</p>
+            
         </div>
 
+        <div class="container" id="saveViewButtonDiv">
+            <a class="btn btn-primary btn-lg editMode hidden saveConfigButton" role="button" ">Save View</a>
+        </div>
+        
 
         <div id="ioDiv">
 
+            <!-- DIAGRAM -->
             <% if (dashbDiagram) { %>
                 <div class="diagramDiv collapse container" id="diagram">
                     <img src="<%= dashbDiagram %>"></img>
                 </div>
             <% } %>
-
+            
+            <!-- SLIDERS -->
             <div class="slidersDiv container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
-                    <div class="col d-flex align-items-stretch">
-                        <div class="sliderGroup d-flex align-items-center flex-column justify-content-center addSlider addSliderCollapse" type="button" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
+                    <div class="col d-flex align-items-stretch editMode hidden">
+                        <div class="sliderGroup d-flex align-items-center flex-column justify-content-center addSlider addSliderHider" type="button" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
                             <label class="mx-auto"> <strong>Add Slider</strong></label>
                             <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
                         </div>
@@ -130,7 +144,7 @@
             </div>
 
 
-        <div class="card collapse container addSliderCollapse" id="sliderAdderDiv">
+            <div class="card collapse container addSliderCollapse editMode hidden" id="sliderAdderDiv">
                 <div class="card-body">
                     <h5 class="card-title">Add Slider</h5>
                     <div class="input-group mb-3">
@@ -142,7 +156,7 @@
                     </div>
                     <div class="subsGroup"></div>
                     <div class="buttonsGroup">
-                        <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
+                        <button type="button" class="btn btn-outline-secondary addSliderHider" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
                             Back
                         </button>
                         <button id="sliderSubmit" type="button" class="btn btn-primary">
@@ -156,8 +170,8 @@
 
             <div class="chartsDiv container">
                 <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 d-flex justify-content-around">
-                    <div class="col">
-                        <div class="d-flex align-items-center flex-column justify-content-center addChart addChartCollapse" type="button" data-toggle="collapse" data-target=".addChartCollapse" aria-expanded="false">
+                    <div class="col editMode hidden">
+                        <div class="d-flex align-items-center flex-column justify-content-center addChart addChartHider" type="button" data-toggle="collapse" data-target=".addChartCollapse" aria-expanded="false">
                             <label class="mx-auto"> <strong>Add Chart</strong></label>
                             <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
                         </div>
@@ -165,7 +179,7 @@
                 </div>
             </div>
 
-            <div class="card collapse container addChartCollapse" id="chartAdderDiv">
+            <div class="card collapse container addChartCollapse editMode hidden" id="chartAdderDiv">
                 <div class="card-body">
                     <h5 class="card-title">Add Chart</h5>
                     <div class="input-group mb-3">
@@ -177,7 +191,7 @@
                     </div>
                     <div class="subsGroup"></div>
                     <div class="buttonsGroup">
-                        <button type="button" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
+                        <button type="button" class="btn btn-outline-secondary addChartHider" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
                             Back
                         </button>
                         <button id="chartSubmit" type="button" class="btn btn-primary">

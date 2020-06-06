@@ -85,6 +85,9 @@ a[data-toggle="collapse"] {
     right: 20px;
     transform: translateY(-50%);
 }
+#sideBar img{
+    margin: auto;
+}
 
 
 /* CONTENT  */
@@ -93,23 +96,20 @@ a[data-toggle="collapse"] {
     width:100%;
     transition: all 0.3s;
 }
-
 #contentDiv.compressed {
     margin-left:250px;
 }
-
 #runTalk{
     margin-top:0;
     padding-top:32px;
     padding-bottom:24px;
     background-color:transparent;
 }
-
 #ioDiv{
     margin-top:32px;
     width:100%;
 }
-
+/* DIAGRAM */
 .diagramDiv{
     margin: 30px auto;
     overflow: hidden;
@@ -119,6 +119,8 @@ a[data-toggle="collapse"] {
     width: 100%;
     object-fit: cover;
 }
+
+/* SLIDERS */
 .sliderGroup{
     background-color:rgba(245,245,245,0.6);
     margin: 7px auto;
@@ -131,28 +133,8 @@ a[data-toggle="collapse"] {
 .unit{
     font-size: smaller;
 }
-.addButton{
-    width:2em;
-}
-.addButton,
-div.addSlider label,
-div.addChart label
-{
-    filter: invert(0.75);
-    transition: 0.3s;
-}
-div.addSlider:hover .addButton,
-div.addChart:hover .addButton,
-div.addSlider:hover label,
-div.addChart:hover label
-{
-    filter: invert(0);
-}
-/* .sliderGroup:hover .addButton,
-div.addChart:hover .addButton{
-    filter: invert(0);
-} */
 
+/*  CHARTS */
 .chartsDiv{
     min-width:80%;
     /* margin:auto; */
@@ -167,4 +149,65 @@ div.io-chart > .svg {
     width: 100%;
     height: 100%;
     /* padding-bottom:85%; */
+}
+
+/* EDIT MODE */
+.hidden{
+    display:none!important;
+}
+.hideAdder{
+    display:none!important;
+}
+#saveViewButtonDiv{
+    color:white;
+    text-align: center;
+}
+.addButton{
+    width:2em;
+}
+div.addSlider label,
+div.addChart label
+{
+    filter: invert(0.75);
+    transition: 0.3s;
+}
+div.addSlider .addButton,
+div.addChart .addButton{
+    filter: invert(0.75);
+    transition: filter none, transform 0.3s;
+    transition: 0.3s;
+    transition-property: transform;
+}
+div.addSlider:hover .addButton,
+div.addChart:hover .addButton
+{
+    filter: invert(0.2) sepia(0.3) saturate(10000%) hue-rotate(230deg) opacity(0.7);
+    transform: scale(1.3);
+    transition: filter none, transform 0.3s;
+}
+div.addSlider:hover .addButton,
+div.addChart:hover .addButton
+{
+    transform: scale(1.3);
+    transition: 0.3s;
+    transition-property: transform;
+}
+div.addSlider:hover label,
+div.addChart:hover label
+{
+    filter: invert(0);
+}
+.deleter{
+    width: 15px;
+    margin-top: 5%;
+    margin-right: 5%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: rotate(45deg);
+    filter: invert(0.7) sepia(1) saturate(10000%) hue-rotate(30deg) opacity(0.7);
+}
+.deleter:hover{
+    transform: rotate(45deg) scale(1.5);
+    transition: 0.3s;
 }

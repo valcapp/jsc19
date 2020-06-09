@@ -4,18 +4,17 @@
 <link href="/css/dashb.css" rel="stylesheet" type="text/css">
 
 <!-- CHARTS SETUP -->
-<script type="text/javascript" src="/js/vensim/charts.js"></script>
-<script type="text/javascript" src="/js/vensim/sliders.js"></script>
+<script type="text/javascript" src="/js/vensim/d3io.js"></script>
 <script type="text/javascript" src="/js/vensim/mdl.js"></script>
 <script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
 <script>
     var mdlString = <%- JSON.stringify(mdlString) %>;
+    var c0there = <%- c0there %>;
 </script>
 
 <script type="text/javascript" src="/js/vensim/customize.js"></script>
-<script type="text/javascript" src="/js/vensim/generate.js"></script>
 <script type="text/javascript" src="/js/vensim/variables.js"></script>
-
+<script type="text/javascript" src="/js/vensim/loadview.js"></script>
 
 <%- include("partials/navbar.ejs") %>
 
@@ -209,5 +208,6 @@
 
 <!-- dynamic sidebar -->
 <script type="text/javascript" src="/js/vensim/compress.js"></script>
+<script type="text/javascript" src="/js/vensim/scenarios.js"></script>
 
 <%- include("partials/footer") %> 

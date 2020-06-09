@@ -8,3 +8,7 @@ sd5/
 *.0mdl
 *.1mdl
 *.2mdl
+generate/genvar.html
+generate/genvar.js
+public/js/vensim/initconst.js
+views/initconst.ejs

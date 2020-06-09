@@ -17,17 +17,6 @@ if(chunks.length<=1){console.log("Error: mdlString splitting into chunks failed.
 variables = {};
 subscripts = {};
 
-readVarStarted = false;
-setInterval(function(){
-    if (VensimLoadedFlag == 0){
-        return;
-    }else if (!readVarStarted) {
-        readVars();
-        populateDashbView();
-    }
-},100);
-
-
 function readVars(){
     readVarStarted = true;
 
@@ -94,7 +83,11 @@ function readVars(){
     // assign an initial default value to constants
     t0 = GetSeries('Time')[0];
     constants = Object.keys(variables).filter((v)=>variables[v].type === 'constant');
-    constants.map((c)=>{variables[c].meta.value=GetValueAtTime(c,t0);});
+    // c0 = {};
+    constants.map((c)=>{
+        // c0[c]=GetValueAtTime(c,t0);
+        variables[c].meta.value=GetValueAtTime(c,t0);
+    });
     controlVars = ['Time','INITIAL TIME','TIME STEP','FINAL TIME'];
     constantNames = [];
     constants.forEach(function(constant){

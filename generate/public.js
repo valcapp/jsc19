@@ -9,6 +9,7 @@ const path = require("path"),
     wasmPublic = path.join(sdPublic,'mdl.wasm'),
     sketchWeb = path.join(sdWeb,'sketch.png'),
     sketchPublic = path.join(appDir,'public','img','sketch.png'),
+    c0Path = path.join(appDir,"/public/config/c0.json"),
 
     copyPaste = function(from,to){
         fs.copyFile(from, to, (err) => {
@@ -20,3 +21,10 @@ const path = require("path"),
 copyPaste(mdlWeb,mdlPublic);
 copyPaste(wasmWeb,wasmPublic);
 copyPaste(sketchWeb,sketchPublic);
+
+if (fs.existsSync(c0Path)){
+    fs.unlink(c0Path,(err)=>{
+        if (err) throw err;
+        console.log(`Deleted: ${c0Path}`);
+    });
+}

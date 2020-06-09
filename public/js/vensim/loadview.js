@@ -1,4 +1,29 @@
 
+readVarStarted = false;
+setInterval(function(){
+    if (VensimLoadedFlag == 0){
+        return;
+    }else if (!readVarStarted) {
+        readVars();
+        initConst();
+        
+    }
+},100);
+
+function initConst(){
+    if (c0there){
+        $getJSON("/config/c0.json",function(data){
+            c0 = data;
+        });
+    }else{
+        c0 = {};
+        constants.map((c)=>{
+            c0[c]=GetValueAtTime(c,t0);
+        });
+    }
+    populateDashbView();
+}
+
 function populateDashbView(){
     $.getJSON("/config/dashbViews.json", function(viewsObj) {
         dashbViews = viewsObj;
@@ -7,6 +32,7 @@ function populateDashbView(){
         configCharts = dashbViews.main.charts;
         configCharts.map(name=>addChartToView(name));
         activateD3();
+        populateRuns();
         activateCustomization();
     });
 }
@@ -41,6 +67,19 @@ function addChartToView(name,edit=false){
     }else{
         configCharts.splice(configCharts.indexOf(name),1);
     }
+}
+
+function populateRuns(){
+    // check if the json exists
+    // you need to get the object first from json
+    $.getJSON("/config/dashbRuns.json", function(runsObj) {
+        dashbRuns = runsObj;
+        // console.log(dashbRuns);
+        for (let runName in dashbRuns){
+            runModelWithParams(runName,dashbRuns[runName]);
+        }
+    });
+
 }
 
 

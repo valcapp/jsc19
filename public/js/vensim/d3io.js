@@ -6,6 +6,7 @@ function OnVensimLoaded()
         runModel("current");
     }
 
+
 var VensimCharts = [];
 var colorList = "1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf".match(/.{6}/g).map(s=>'#'+s); 
 // var colorList = ['red','blue','green','orange','purple','turquoise','brown','olive','violet','navy'];
@@ -100,6 +101,7 @@ function UpdateCharts(run){
         legendGroup.call(legend);
         legendGroup.selectAll('text').attr('font-size', '10px');
         
+        // console.log(o);
         for (r in o.runs) {
             chart.selectAll("path.data" + r)
             .data([o.runs[r].vals])
@@ -118,9 +120,10 @@ function UpdateCharts(run){
 
 function resetAllSliders() {
     d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
-        i.value = i.getAttribute("value");
+        if(c0there){ if(c0[i.name]){i.value = c0[i.name];}}
+        else {i.value = i.getAttribute("value");}
         d3.selectAll("div.io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
-    });
+    }); 
 }
 
 function runModel(run) {
@@ -136,5 +139,65 @@ function runModel(run) {
     RunSim();
     UpdateCharts(run);
 }
+
+function runModelWithParams(run,constants) {
+    if (  VensimLoadedFlag == 0){
+        return;
+    }
+    InitializeModel();
+    for (let param in constants){
+        // console.log(param, Number(constants[param]));
+        SetConstant(param, Number(constants[param]));
+    }
+    RunSim();
+    UpdateCharts(run);
+}
+
+// function saveRunOnView(run,constants){
+//     if (!runsOnView) {
+//         runsOnView = {};
+//     }
+//     if (!run==="current"){
+//         runsOnView[run]=constants;
+//     }
+// }
+
+
+
+function activateD3(){
+    startOff();
+
+    // ACTIVATE RESET BUTTON
+    d3.selectAll(".resetAll").nodes().forEach(function(i){
+        i.onclick = startOff;
+    });
+
+    // ACTIVATE SLIDERS
+    d3.selectAll("input.io-slider-slide").nodes().forEach(function(i){
+        i.oninput = function() {
+            // update the number shown for all sliders of this var
+            d3.selectAll(".io-slider-box[name=\"" + i.name + "\"]").text(i.valueAsNumber);
+            d3.selectAll("input.io-slider-slide[name=\"" + i.name + "\"]").each(function() { this.value = i.valueAsNumber; });
+            runModel("current");
+        };
+    });
+
+    window.addEventListener('resize',setChartsHeight);
+}
+
+function startOff(){
+    resetAllSliders();
+    runModel("current");
+}
+
+function setChartsHeight(){
+    $('.div.io-chart').each((div)=>{
+        div.height = div.width*0.85;
+    });
+    runModel('current');
+}
+
+
+
 
 

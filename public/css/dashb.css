@@ -155,11 +155,7 @@ div.io-chart > .svg {
 .hidden{
     display:none!important;
 }
-.hideAdder{
-    display:none!important;
-}
-#saveViewButtonDiv{
-    color:white;
+.saveViewButtonDiv{
     text-align: center;
 }
 .addButton{

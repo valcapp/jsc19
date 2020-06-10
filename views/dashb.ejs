@@ -152,8 +152,9 @@
             
         </div>
 
-        <div class="container" id="saveViewButtonDiv">
-            <a class="btn btn-primary btn-lg editMode hidden saveConfigButton" role="button" ">Save View</a>
+        <div class="container editMode hidden saveViewButtonDiv">
+            <button class="btn btn-outline-secondary btn-lg customizeButton" role="button" type="button">Back</button>
+            <button class="btn btn-success btn-lg saveConfigButton" role="button" >Save View</button>
         </div>
         
 
@@ -169,12 +170,15 @@
             <!-- SLIDERS -->
             <div class="slidersDiv container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
-                    <div class="col d-flex align-items-stretch editMode hidden">
+
+
+                    <div class="col lastSlider d-flex align-items-stretch editMode hidden">
                         <div class="sliderGroup d-flex align-items-center flex-column justify-content-center addSlider addSliderHider" type="button" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
                             <label class="mx-auto"> <strong>Add Slider</strong></label>
                             <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -194,7 +198,7 @@
                         <button type="button" class="btn btn-outline-secondary addSliderHider" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
                             Back
                         </button>
-                        <button id="sliderSubmit" type="button" class="btn btn-primary">
+                        <button id="sliderSubmit" type="button" class="btn btn-primary" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
                             Add
                         </button>
                     </div>
@@ -205,12 +209,14 @@
 
             <div class="chartsDiv container">
                 <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 d-flex justify-content-around">
-                    <div class="col editMode hidden">
+
+                    <div class="col lastChart editMode hidden">
                         <div class="d-flex align-items-center flex-column justify-content-center addChart addChartHider" type="button" data-toggle="collapse" data-target=".addChartCollapse" aria-expanded="false">
                             <label class="mx-auto"> <strong>Add Chart</strong></label>
                             <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -229,7 +235,7 @@
                         <button type="button" class="btn btn-outline-secondary addChartHider" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
                             Back
                         </button>
-                        <button id="chartSubmit" type="button" class="btn btn-primary">
+                        <button id="chartSubmit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
                             Add
                         </button>
                     </div>

@@ -1,14 +1,10 @@
 function activateCustomization(){
     $(".customizeButton").click(displayEditMode);
-    $(".addSliderHider").on("click",()=>toggleAdderHider(".addSlider"));
-    $(".addChartHider").on("click",()=>toggleAdderHider(".addChart"));
+    $(".addSliderHider, #sliderSubmit").on("click",()=>$(".addSlider").toggleClass("hidden")); // to hide the add slider button when the add slider form is in show, as if the form replaced the button
+    $(".addChartHider, #chartSubmit").on("click",()=>$(".addChart").toggleClass("hidden"));
     $(".saveConfigButton").on("click",updateConfigData);
     selectNameToAdd('slider');
     selectNameToAdd('chart');
-}
-
-function toggleAdderHider(query){
-    $(query).toggleClass("hideAdder");
 }
 
 function displayEditMode(){
@@ -55,7 +51,7 @@ function addSelectedVar(ioType){
     subsGroup.find('.subSelector').each(function(){
         selectedSubs.push($(this).children("option:selected").attr("value"));
     });
-    toAddVar = selectedSubs.length<1 ? selectedVars:
+    let toAddVar = selectedSubs.length<1 ? selectedVars:
         selectedVars.filter( v => {
             let vSubs = v.split("[").slice(-1)[0].replace("]","").split(",");
             return selectedSubs.every(s=>vSubs.indexOf(s)>=0);
@@ -64,7 +60,7 @@ function addSelectedVar(ioType){
     // console.log(toAddVar);
     toAddVar = toAddVar[0];
     if (toAddVar){
-        if (configSliders.indexOf(toAddVar)>=0){
+        if (dashbViews.main[ioType+'s'].indexOf(toAddVar)>=0){
             alert(`The ${ioType} "${toAddVar}" is already in view.`);
         }else{
             dashbViews.main[ioType+'s'].push(toAddVar);
@@ -93,6 +89,7 @@ function updateView(){
             addChartToView(param,edit=true);
         }
     });
+    populateRuns();
 }
 
 

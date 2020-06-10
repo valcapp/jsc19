@@ -102,11 +102,11 @@ function UpdateCharts(run){
         legendGroup.selectAll('text').attr('font-size', '10px');
         
         // console.log(o);
-        for (r in o.runs) {
-            chart.selectAll("path.data" + r)
+        Object.keys(o.runs).forEach((r,j)=> {
+            chart.selectAll("path.data" + j)
             .data([o.runs[r].vals])
             .join("path")
-            .attr("class", "data" + r)
+            .attr("class", "data" + j)
             .attr("d", (d, i) => 
                 d3.line()
                     .x((d, i) => xscale(o.runs[r].times[i]))
@@ -114,7 +114,7 @@ function UpdateCharts(run){
                 )
             .attr("stroke", color(r))
             .attr("fill", "none");
-        }
+        });
     });
 }
 

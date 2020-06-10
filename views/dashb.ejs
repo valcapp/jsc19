@@ -18,12 +18,13 @@
 
 <%- include("partials/navbar.ejs") %>
 
-<!-- SAVE MODAL -->
-<div class="modal fade" id="runSaveModal" tabindex="-1" role="dialog" aria-labelledby="unSaveModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- MODIFY RUNS MODAL -->
+<div class="modal fade" id="modifyRunsModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- SAVE RUN -->
+    <div class="modal-dialog saveRunModal">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="unSaveModalLabel">Save Run</h5>
+            <h5 class="modal-title">Save Run</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -37,6 +38,27 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveButton">Save</button>
+        </div>
+        </div>
+    </div>
+    <!-- DELETE RUN -->
+    <div class="modal-dialog deleteRunModal">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Delete Runs</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <p>Please, select the name of the runs you want to delete.</p>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteButton">Delete</button>
         </div>
         </div>
     </div>
@@ -73,6 +95,19 @@
             </li>
             <% } %>
 
+            <li class="nav-item dropright">
+                <a type="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="/img/icons/save.svg" alt="">
+                    <span class="compress">Modify Runs</span> 
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item showSaveModal" type="button" data-toggle="modal" data-target="#modifyRunsModal">
+                        New Run</a>
+                    <a class="dropdown-item showDeleteModal" type="button" data-toggle="modal" data-target="#modifyRunsModal">
+                        Delete Run</a>
+                </div>
+            </li>
+
             <li class="nav-item">
                 <a type="button" class="nav-link customizeButton">
                     <img src="/img/icons/sliders.svg" alt="">
@@ -95,14 +130,15 @@
                 </div>
             </li> -->
 
-            
+
+<!-- 
             <li class="nav-item">
                 <a class="nav-link" type="button" data-toggle="modal" data-target="#runSaveModal">
-                    <!-- <i class="far fa-save"></i> -->
                     <img src="/img/icons/save.svg" alt="">
                     <span class="compress">Save run</span>
                 </a>
-            </li>
+            </li> -->
+
         </ul>
     </nav>
 

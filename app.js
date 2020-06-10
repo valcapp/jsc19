@@ -70,7 +70,7 @@ app.post("/update-run-view",(req,res)=>{
     });
 });
 
-app.post("/update-runs",(req,res)=>{
+app.post("/create-run",(req,res)=>{
     let c0={},
         newRun = {},
         runName = req.body.runName;
@@ -101,6 +101,23 @@ app.post("/update-runs",(req,res)=>{
         console.log("Updated: "+runsConfig);
         res.redirect('/run');
     });
+});
+
+app.post("/delete-runs",(req,res)=>{
+    data = req.body.run
+    let runsToDelete = Array.isArray(data)? data : [data] ;
+    console.log(runsToDelete);
+    if (fs.existsSync(runsConfig)){
+        let config = JSON.parse(fs.readFileSync(runsConfig));
+        runsToDelete.forEach( run => delete config[run] );
+        fs.writeFile(runsConfig,JSON.stringify(config),function(err){
+            if (err) throw err;
+            console.log("Updated: "+runsConfig);
+            res.redirect('/run');
+        });
+    } else {
+        res.redirect('/run');
+    }
 });
 
 // app.get("/init",(req,res)=>{

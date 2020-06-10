@@ -12,7 +12,7 @@ setInterval(function(){
 
 function initConst(){
     if (c0there){
-        $getJSON("/config/c0.json",function(data){
+        $.getJSON("/config/c0.json",function(data){
             c0 = data;
         });
     }else{
@@ -74,10 +74,19 @@ function populateRuns(){
     // you need to get the object first from json
     $.getJSON("/config/dashbRuns.json", function(runsObj) {
         dashbRuns = runsObj;
+
         // console.log(dashbRuns);
         for (let runName in dashbRuns){
             runModelWithParams(runName,dashbRuns[runName]);
         }
+
+        let modal = $('.deleteRunModal .modal-body');
+        Object.keys(dashbRuns).forEach((run,i)=>{
+            let div = $('<div class="form-check">'),
+                checkbox = $('<input type="checkbox" class="form-check-input">').attr("id",i).attr("name",run).appendTo(div),
+                label = $('<label class="form-check-label">').attr('for',i).html(run).appendTo(div);
+            modal.append(div);
+        });
     });
 
 }

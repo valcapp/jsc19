@@ -157,6 +157,7 @@ div.io-chart > .svg {
 }
 .saveViewButtonDiv{
     text-align: center;
+    margin: 36px auto;
 }
 .addButton{
     width:2em;

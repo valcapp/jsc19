@@ -95,6 +95,7 @@ function updateView(){
 
 function updateConfigData(){
     let form = $('<form>').attr("action","/update-run-view").attr("method","POST");
+    form.append($('#diagramInput'));
     for(let i=0;i<configSliders.length;i++){
         form.append($(`<input type="text" name="slider${i}">`).attr("value",configSliders[i]));
     }

@@ -12,3 +12,5 @@ generate/genvar.html
 generate/genvar.js
 public/js/vensim/initconst.js
 views/initconst.ejs
+public/img/sketch.png
+public/img/diagram.*

@@ -27,10 +27,11 @@ Being built on top of the Vensim Web folder, this app has same limitation as for
 
 ## Next steps
 The Vensim Dashboard generator is still work in progress. Next steps for development:
-* capability to add charts
-* capability to remove sliders and charts and diagrams
-* capability to add more than one dashboard view
-* capability to load diagrams
+* tooltips on variables
 * capability to customize landing, intro and links page
+* causal tracing
+* capability to add more than one dashboard view
 * capability to compare variables in the graph (for a singular scenario)
-* capability to use different visualizations than just line charts
+* capability to use alternative visualizations other than just line charts
+* capability to drag element or personalize layouts
+* capability to draw diagrams on the page

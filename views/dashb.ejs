@@ -151,11 +151,6 @@
             <p> Modify model inputs to see the change in the results.</p>
             
         </div>
-
-        <div class="container editMode hidden saveViewButtonDiv">
-            <button class="btn btn-outline-secondary btn-lg customizeButton" role="button" type="button">Back</button>
-            <button class="btn btn-success btn-lg saveConfigButton" role="button" >Save View</button>
-        </div>
         
 
         <div id="ioDiv">
@@ -166,6 +161,25 @@
                     <img src="<%= dashbDiagram %>"></img>
                 </div>
             <% } %>
+
+            <div class="container editMode hidden">
+                <form action="/upload-diagram" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="diagramInput">Load diagram picture</label>
+                        <!-- <input type="file" class="form-control-file" id="diagramInput" name="diagram"> -->
+                        <input type="file" accept="image/*" name="diagram" class="form-control-file" id="diagramInput">
+                        <!-- <input type="file" accept="image/*" name="diagram"> -->
+                        <br>
+                        <input type="submit" value="Upload" class="btn btn-primary">
+                    </div>
+                </form>
+                <hr>
+            </div>
+            
+            <div class="container editMode hidden saveViewButtonDiv">
+                <button class="btn btn-outline-secondary btn-lg customizeButton" role="button" type="button">Back</button>
+                <button class="btn btn-success btn-lg saveConfigButton" role="button" >Save View</button>
+            </div>
             
             <!-- SLIDERS -->
             <div class="slidersDiv container">

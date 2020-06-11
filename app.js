@@ -6,6 +6,13 @@ require('./generate');
 const   express = require('express'),
         bodyParser = require('body-parser'),
         fs = require('fs'),
+        path = require('path'),
+        multer = require('multer'),
+        multerStorage = multer.diskStorage({
+            destination: (req, file, cb) => {cb(null, 'public/img');},
+            filename: (req, file, cb) => {cb(null,'diagram'+path.extname(file.originalname) );}
+        }),
+        upload = multer({storage: multerStorage}),
         app = express(),
         dashbConfig = __dirname + "/public/config/dashbViews.json",
         c0Config = __dirname + "/public/config/c0.json",
@@ -50,6 +57,11 @@ app.post("/update-run-view",(req,res)=>{
     let newSliders = [],
         newCharts = [],
         view = req.body.view;
+
+    if(req.file){
+        console.log(req.file);
+    }
+    
     for(let par in req.body){
         if(par.indexOf("slider")>=0){
             newSliders.push(req.body[par]);
@@ -118,6 +130,15 @@ app.post("/delete-runs",(req,res)=>{
     } else {
         res.redirect('/run');
     }
+});
+
+app.post('/upload-diagram', upload.single('diagram'), (req, res, next) => {
+    if(req.file) {
+        // console.log(req.file);
+        dashbDiagram = path.join('img','diagram'+path.extname(req.file.originalname));
+        res.redirect('/run');
+    }
+    else throw 'error';
 });
 
 // app.get("/init",(req,res)=>{

@@ -111,13 +111,16 @@ a[data-toggle="collapse"] {
 }
 /* DIAGRAM */
 .diagramDiv{
-    margin: 30px auto;
+    margin: 30px 30px;
     overflow: hidden;
     border: none;
+    text-align: center;
 }
 .diagramDiv img{
     width: 100%;
+    height: auto;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 /* SLIDERS */
@@ -172,9 +175,15 @@ div.io-chart > .svg {
 .hidden{
     display:none!important;
 }
+hr.thicker{
+    border-top: 3px solid lightgrey;
+}
 .saveViewButtonDiv{
     text-align: center;
     margin: 36px auto;
+}
+#ioDiv h4{
+    margin: 32px auto 24px;
 }
 .addButton{
     width:2em;

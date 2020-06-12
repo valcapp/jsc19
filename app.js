@@ -9,16 +9,22 @@ const   express = require('express'),
         path = require('path'),
         multer = require('multer'),
         multerStorage = multer.diskStorage({
-            destination: (req, file, cb) => {cb(null, 'public/img');},
+            destination: (req, file, cb) => {
+                let prevDiagram = fs.readdirSync(path.join('public','img')).filter(i=>i.split('.')[0]==='diagram');
+                if (prevDiagram.length>0) {fs.unlinkSync(path.join('public','img',prevDiagram[0]));}
+                cb(null, 'public/img');
+            },
             filename: (req, file, cb) => {cb(null,'diagram'+path.extname(file.originalname) );}
         }),
         upload = multer({storage: multerStorage}),
+        sizeOf = require('image-size'),
         app = express(),
         dashbConfig = __dirname + "/public/config/dashbViews.json",
         c0Config = __dirname + "/public/config/c0.json",
         runsConfig = __dirname + "/public/config/dashbRuns.json";
         // request = require('request');
 
+diagramWidth = dashbDiagram? sizeOf(path.join('public',dashbDiagram)).width : false;
 introText = '';
 aboutText = '';
 linksList = {};
@@ -136,6 +142,7 @@ app.post('/upload-diagram', upload.single('diagram'), (req, res, next) => {
     if(req.file) {
         // console.log(req.file);
         dashbDiagram = path.join('img','diagram'+path.extname(req.file.originalname));
+        diagramWidth = sizeOf(path.join('public',dashbDiagram)).width;
         res.redirect('/run');
     }
     else throw 'error';

@@ -154,29 +154,32 @@
         
 
         <div id="ioDiv">
-
+            <hr class="editMode hidden thicker">
             <!-- DIAGRAM -->
-            <% if (dashbDiagram) { %>
-                <div class="diagramDiv collapse container" id="diagram">
-                    <img src="<%= dashbDiagram %>"></img>
-                </div>
-            <% } %>
-
             <div class="container editMode hidden">
+                <h4> Change diagram </h4>
                 <form action="/upload-diagram" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="diagramInput">Load diagram picture</label>
                         <!-- <input type="file" class="form-control-file" id="diagramInput" name="diagram"> -->
-                        <input type="file" accept="image/*" name="diagram" class="form-control-file" id="diagramInput">
+                        <input type="file" accept="image/*" name="diagram" class="form-control-file" id="diagramInput" required>
                         <!-- <input type="file" accept="image/*" name="diagram"> -->
                         <br>
                         <input type="submit" value="Upload" class="btn btn-primary">
                     </div>
                 </form>
-                <hr>
             </div>
-            
+
+            <% if (dashbDiagram) { %>
+                <div class="diagramDiv collapse" id="diagram">
+                    <img src="<%= dashbDiagram %>" style="max-width: <%= diagramWidth %>px;"></img>
+                </div>
+            <% } %>
+
+            <hr class="editMode hidden thicker">
+
             <div class="container editMode hidden saveViewButtonDiv">
+                <h4> Change sliders and charts</h4>
                 <button class="btn btn-outline-secondary btn-lg customizeButton" role="button" type="button">Back</button>
                 <button class="btn btn-success btn-lg saveConfigButton" role="button" >Save View</button>
             </div>

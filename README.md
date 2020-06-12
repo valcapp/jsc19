@@ -27,7 +27,6 @@ Being built on top of the Vensim Web folder, this app has same limitation as for
 
 ## Next steps
 The Vensim Dashboard generator is still work in progress. Next steps for development:
-* tooltips on variables
 * capability to customize landing, intro and links page
 * causal tracing
 * capability to add more than one dashboard view

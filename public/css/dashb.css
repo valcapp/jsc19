@@ -133,7 +133,24 @@ a[data-toggle="collapse"] {
 .unit{
     font-size: smaller;
 }
-
+.info{
+    margin-top: 5px;
+    width: 15px;
+    filter: opacity(0.2);
+    transition: 0.3s;
+}
+.info:hover{
+    filter: opacity(0.4);
+    transform: scale(1.5);
+    transition: 0.3s;
+}
+.io-chart .info{
+    margin-top: 5%;
+    margin-left: 5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 /*  CHARTS */
 .chartsDiv{
     min-width:80%;

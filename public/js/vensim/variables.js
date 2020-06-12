@@ -88,7 +88,7 @@ function readVars(){
         // c0[c]=GetValueAtTime(c,t0);
         variables[c].meta.value=GetValueAtTime(c,t0);
     });
-    controlVars = ['Time','INITIAL TIME','TIME STEP','FINAL TIME'];
+    controlVars = ['Time','INITIAL TIME','TIME STEP','FINAL TIME', 'SAVE PER'];
     constantNames = [];
     constants.forEach(function(constant){
         var c = variables[constant];

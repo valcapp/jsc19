@@ -1,7 +1,7 @@
 const path = require("path"),
     fs = require("fs"),
     appDir = path.resolve(__dirname,'..'),
-    sdWeb = path.join(appDir,'sd','web'),
+    sdWeb = path.join(sdPath,'web'),
     sdPublic = path.join(appDir,'public','js','vensim'),
     mdlWeb = path.join(sdWeb,'mdl.js'),
     mdlPublic = path.join(sdPublic,'mdl.js'),

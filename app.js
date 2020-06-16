@@ -1,14 +1,35 @@
 // get sdTitle and mdlString
+const   fs = require('fs'),
+        env = fs.existsSync(".env")? require('dotenv').config(): null,
+        express = require('express'),
+        bodyParser = require('body-parser'),
+        path = require('path'),
+        multer = require('multer');
+
+if(env){
+    if (env.error) {
+        throw env.error;
+    }
+}
+
+if(!sdPath){
+    sdPath = path.join(__dirname,"sd");
+    if(process.env.SD_PATH){
+        if (!fs.existsSync(process.env.SD_PATH)){
+            console.log(`The path to the sd-folder specified in the .env file is not working\n${process.env.SD_PATH}`);
+        }else{
+            sdPath = process.env.SD_PATH;
+        }
+    }
+    if(!fs.existsSync(sdPath)){
+        throw new Error(`Failed to connect to path:\n${sdPath}\nMake sure the correct path to the sd folder is specified: either \n> copy and paste the sd working folder inside the app dir or  > modify the .env`);
+    }
+}
+
 mdlChanges = false; 
-// sdTitle = 'sd';
 require('./generate');
 
-const   express = require('express'),
-        bodyParser = require('body-parser'),
-        fs = require('fs'),
-        path = require('path'),
-        multer = require('multer'),
-        multerStorage = multer.diskStorage({
+const   multerStorage = multer.diskStorage({
             destination: (req, file, cb) => {
                 let prevDiagram = fs.readdirSync(path.join('public','img')).filter(i=>i.split('.')[0]==='diagram');
                 if (prevDiagram.length>0) {fs.unlinkSync(path.join('public','img',prevDiagram[0]));}
@@ -54,6 +75,7 @@ app.get("/",(req,res)=>{
     res.render("home");
 });
 
+dashbEditMode = false;
 app.get("/run",(req,res)=>{
     lastVisitedPage = "/run";
     res.render("dashb");
@@ -164,6 +186,10 @@ app.post('/upload-diagram', upload.single('diagram'), (req, res) => {
 });
 
 app.get("/edit-site",(req,res)=>{
+    if(lastVisitedPage==="/run"){
+        dashbEditMode = true;
+        res.redirect("/run");
+    }
     res.render("editSite");
 });
 
@@ -205,7 +231,9 @@ app.post("/add-to-links-page",(req,res)=>{
 lastVisitedPage="/";
 // launch the app
 app.listen(3000,()=>{
-    console.log('server running at: \n\n http://localhost:3000/\n');
+    console.log("\n--------------------------------------\n");
+    console.log('   server running at: \n\n   http://localhost:3000/\n');
+    console.log("--------------------------------------\n");
     // request('http://localhost:3000/init/', { json: true }, (err, res, body) => {
     // if (err) { return console.log(err); }
     // console.log(body);

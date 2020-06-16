@@ -4,7 +4,7 @@ const path = require("path"),
     jquery = require('jquery'),
     {JSDOM} = jsdom,
     appDir = path.resolve(__dirname,'..'),
-    sourcePath = path.join(appDir,'sd','web','index.html'),
+    sourcePath = path.join(sdPath,'web','index.html'),
     templatePath = path.join(__dirname,'vensim-template.ejs'),
     targetPath = path.join(appDir,'views','vensim.ejs');
 

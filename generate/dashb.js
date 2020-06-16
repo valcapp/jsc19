@@ -5,7 +5,7 @@ const path = require("path"),
     {JSDOM} = jsdom,
     appDir = path.resolve(__dirname,'..'),
     dashbConfigPath = path.join(appDir,'public','config','dashbViews.json'),
-    sourcePath = path.join(appDir,'sd','web','index.html');
+    sourcePath = path.join(sdPath,'web','index.html');
     // templatePath = path.join(__dirname,'dashb-template.ejs'),
     // targetPath = path.join(appDir,'views','dashb.ejs');
 

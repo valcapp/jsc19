@@ -244,5 +244,10 @@
 <!-- dynamic sidebar -->
 <script type="text/javascript" src="/js/vensim/compress.js"></script>
 <script type="text/javascript" src="/js/vensim/scenarios.js"></script>
+<script>
+    <% if (dashbEditMode){ dashbEditMode = false; %>
+        displayEditMode();
+    <% } %>
+</script>
 
 <%- include("partials/footer") %> 

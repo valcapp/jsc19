@@ -7,6 +7,14 @@
     margin-top: 73px;
 }
 
+.nav-icon{
+    width: 25px;
+    filter: opacity(0.5);
+}
+.editSiteButton:hover .nav-icon{
+    filter: invert() opacity(1);
+}
+
 footer{
     margin: 50px auto;
     margin-bottom: 20px;

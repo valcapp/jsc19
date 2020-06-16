@@ -21,16 +21,27 @@ const   express = require('express'),
         app = express(),
         dashbConfig = __dirname + "/public/config/dashbViews.json",
         c0Config = __dirname + "/public/config/c0.json",
-        runsConfig = __dirname + "/public/config/dashbRuns.json";
+        runsConfig = __dirname + "/public/config/dashbRuns.json",
+        textConfig = __dirname + "/public/config/pagesText.json";
         // request = require('request');
 
 diagramWidth = dashbDiagram? sizeOf(path.join('public',dashbDiagram)).width : false;
-introText = '';
-aboutText = '';
-linksList = {};
+
 c0there = fs.existsSync(c0Config);
+loadPagesText();
 // console.log('from app.js: mdlString = ',mdlString);
 
+
+function loadPagesText(){
+    pagesText = fs.existsSync(textConfig) ?
+        JSON.parse(fs.readFileSync(textConfig)):
+        {
+            title: sdTitle,
+            intro : '',
+            about : '',
+            links : {"Vensim bla bla \" hello":"http://vensim.com/"}
+        };
+}
 
 // set app views
 app.use(bodyParser.urlencoded({extended: true}));
@@ -39,10 +50,12 @@ app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
 
 app.get("/",(req,res)=>{
+    lastVisitedPage = "/";
     res.render("home");
 });
 
 app.get("/run",(req,res)=>{
+    lastVisitedPage = "/run";
     res.render("dashb");
 });
 
@@ -51,10 +64,12 @@ app.get("/vensim",(req,res)=>{
 });
 
 app.get("/about",(req,res)=>{
+    lastVisitedPage = "/about";
     res.render("about");
 });
 
 app.get("/links",(req,res)=>{
+    lastVisitedPage = "/links";
     res.render("links");
 });
 
@@ -122,9 +137,9 @@ app.post("/create-run",(req,res)=>{
 });
 
 app.post("/delete-runs",(req,res)=>{
-    data = req.body.run
+    data = req.body.run;
     let runsToDelete = Array.isArray(data)? data : [data] ;
-    console.log(runsToDelete);
+    // console.log(runsToDelete);
     if (fs.existsSync(runsConfig)){
         let config = JSON.parse(fs.readFileSync(runsConfig));
         runsToDelete.forEach( run => delete config[run] );
@@ -138,7 +153,7 @@ app.post("/delete-runs",(req,res)=>{
     }
 });
 
-app.post('/upload-diagram', upload.single('diagram'), (req, res, next) => {
+app.post('/upload-diagram', upload.single('diagram'), (req, res) => {
     if(req.file) {
         // console.log(req.file);
         dashbDiagram = path.join('img','diagram'+path.extname(req.file.originalname));
@@ -148,19 +163,46 @@ app.post('/upload-diagram', upload.single('diagram'), (req, res, next) => {
     else throw 'error';
 });
 
-// app.get("/init",(req,res)=>{
-//     res.render("initconst");
-// });
+app.get("/edit-site",(req,res)=>{
+    res.render("editSite");
+});
 
-// app.post("c0",(req,res)=>{
-//     let c0 = {};
-//     console.log("hello from c0.");
-//     // Object.keys(req.body)
-//     // .filter((par)=>par.indexOf("param")>=0)
-//     // .map((par)=>{
-//     // });
-// });
+// pages structure
+let pagesSections={
+    home: ['title','intro'],
+    about: ['about']
+};
 
+app.post("/update-pages/:page",(req,res)=>{
+    // res.send(req.params.page);
+    page = req.params.page;
+    pagesSections[page].forEach((section)=>{
+        pagesText[section]=req.body[section+'Text'];
+    });
+    fs.writeFile(textConfig,JSON.stringify(pagesText),function(err){
+        if (err) throw err;
+        loadPagesText();
+        let next = (page === 'home')? "/" : "/"+page;
+        res.redirect(next);
+    });
+});
+
+app.post("/add-to-links-page",(req,res)=>{
+    let removeLink = req.body.removeLink,
+        removeLinks = Array.isArray(removeLink)? removeLink : [removeLink],
+        newLink = req.body.linkDescription,
+        newUrl = req.body.linkUrl;
+    removeLinks.forEach(link => delete pagesText.links[link]);
+    pagesText.links[newLink]= newUrl ;
+    fs.writeFile(textConfig,JSON.stringify(pagesText),function(err){
+        if (err) throw err;
+        loadPagesText();
+        res.redirect("links");
+    });
+    
+});
+
+lastVisitedPage="/";
 // launch the app
 app.listen(3000,()=>{
     console.log('server running at: \n\n http://localhost:3000/\n');

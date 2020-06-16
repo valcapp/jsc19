@@ -2,10 +2,18 @@
 <%- include("partials/navbar.ejs") %>
 
 <div class="jumbotron">
-    <h1 class="display-2"><%= sdTitle %></h1>
-    <p class="display-4 lead"> Welcome to the <%= sdTitle %> Simualotor </p>
-    <p class="lead">This application simulates scenarios with the <%= sdTitle %> system-dyanmics model. </p>
-    <p><%= introText %> </p>
+    <!-- TITLE -->
+    <h1 class="display-2"><%= pagesText.title %></h1>
+
+    <!-- SUBTITLE -->
+    <p class="display-4 lead"> Welcome to the <%= pagesText.title %> Simulator </p>
+
+    <!-- LEAD -->
+    <p class="lead">This application simulates scenarios with the <%= pagesText.title %> system-dynamics model. </p>
+    
+    <!-- TEXT -->
+    <p><%= pagesText.intro %></p>
+
     <hr class="my-4">
     <p>Run the model to get started.</p>
     <p class="lead">

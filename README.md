@@ -2,6 +2,15 @@
 
 This app allows to build a decent looking dashboard from a Vensim system dynamics model and to run it locally on browser.
 
+## Purpose
+Load your system-dynamics working folder and and run the app to automatically generate a micro-website for your model with a dynamically responsive dashboard.
+
+You would be able to customize it:
+* change the text content of some page elements
+* decide which input sliders to display on the dashboard
+* decide which output charts to display on the dashboard
+* change the diagram in display on the dashboard
+
 ## Requirements
 
 Before running this application, the Vensim web folder needs to be published first. The Vensim web publishing feature is available only on  v8.1+. 
@@ -27,10 +36,9 @@ Being built on top of the Vensim Web folder, this app has same limitation as for
 
 ## Next steps
 The Vensim Dashboard generator is still work in progress. Next steps for development:
-* capability to customize landing, intro and links page
-* causal tracing
 * capability to add more than one dashboard view
-* capability to compare variables in the graph (for a singular scenario)
+* capability to compare variables in the same graph (for a singular scenario)
+* causal tracing of variables
 * capability to use alternative visualizations other than just line charts
 * capability to drag element or personalize layouts
 * capability to draw diagrams on the page

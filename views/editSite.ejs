@@ -1,0 +1,101 @@
+<%- include("partials/header.ejs") %>
+
+<link rel="stylesheet" href="css/editSite.css">
+
+<%- include("partials/navbar.ejs") %>
+
+<div class= "container editSiteContainer">
+    <h3>Edit Site</h3>
+    <p>Here you can customize the text elements of the website.</p>
+    <br>
+
+    <ul class="nav nav-tabs" id="editTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#editHome" role="tab" >Home</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" id="about-tab" data-toggle="tab" href="#editAbout" role="tab">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="links-tab" data-toggle="tab" href="#editLinks" role="tab">Links</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="TabContent">
+        <div class="tab-pane fade show active" id="editHome" role="tabpanel" aria-labelledby="home-tab">
+            <br>
+            <p>Modify the page title and the introductory text</p>
+            <form action="/update-pages/home" method="POST">
+                <div class="form-group">
+                    <label for="pageTitle">Page Title</label>
+                    <input type="text" class="form-control" id="titleText" name="titleText" placeholder="<%= pagesText.title %>">
+                </div>
+                <div class="form-group">
+                    <label for="introText">Intro text</label>
+                    <textarea class="form-control" id="introText" name="introText" rows="3"><%= pagesText.intro %></textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="editAbout" role="tabpanel" aria-labelledby="about-tab">
+            <br>
+            <p>Add an explanation of the model for the About page</p>
+            <form action="/update-pages/about" method="POST">
+                <div class="form-group">
+                    <label for="aboutText">About text</label>
+                    <textarea class="form-control" id="aboutText" name="aboutText" rows="3"><%= pagesText.about %></textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="tab-pane fade" id="editLinks" role="tabpanel" aria-labelledby="links-tab">
+            <br>
+            <p>Add a new link with a description or remove existing ones</p>
+
+            <form action="/add-to-links-page" method="POST">
+                <div class="form-group">
+                    <label for="linkDescription">Link description</label>
+                    <input type="text" class="form-control" id="linkDescription" name="linkDescription" placeholder="The future of humanity">
+                </div>
+
+                <div class="form-group">
+                    <label for="linkUrl">Link Url</label>
+                    <input type="url" class="form-control" id="linkUrl" name="linkUrl" placeholder="https://www.if.only.I.knew.com/">
+                </div>
+
+                <br>
+                <p>Select the links to remove (if any)</p>
+                
+                <% Object.keys(pagesText.links).forEach( (key,i)=>{ %>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="removeLink<%=i%>" name="removeLink" value="<%= key %>">
+                    <label class="form-check-label" for="removeLink<%=i%>">
+                        <%= key %>
+                    </label>
+                </div>
+                <% }); %>
+                
+
+
+                <br><br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    let tabsIndex = {
+        "/": "#editHome",
+        "/about" : "#editAbout",
+        "/links" : "#editLinks"
+    }
+    $('a[href="' + tabsIndex["<%=lastVisitedPage%>"]+ '"]').trigger('click');
+</script>
+
+<%- include("partials/footer") %> 

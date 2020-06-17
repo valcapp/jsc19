@@ -12,7 +12,7 @@ if(env){
     }
 }
 
-if(!sdPath){
+if(typeof(sdPath) === 'undefined'){
     sdPath = path.join(__dirname,"sd");
     if(process.env.SD_PATH){
         if (!fs.existsSync(process.env.SD_PATH)){

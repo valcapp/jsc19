@@ -19,7 +19,11 @@ The app also requires node.js to run.
 
 ## Usage
 
-Clone the repository on your machine. Inside the repository there is a "sd" directory: replace that with your own directory, which is the one containing the system-dynamics model you want to publish (or a copy of it). Make sure the web folder within that has been published.
+Clone the repository on your machine.
+
+Then replace the "sd" directory with your own working directory. Your working dir is the folder containing the model you are working on. Make sure the "sd" folder contains:
+* your system-dynamics model in .mdl format. Make sure there is only one .mdl file in the "sd" dir.
+* the web directory published by Vensim. Make sure the web folder has been published and is up to date with your model.
 
 To launch the app: open the command line or terminal, change directory to the vensim-dash repo cloned on your machine and finally launch run.js via node:
 
@@ -36,9 +40,10 @@ Being built on top of the Vensim Web folder, this app has same limitation as for
 
 ## Next steps
 The Vensim Dashboard generator is still work in progress. Next steps for development:
+* capability to customize the setup for the model (baseline inputs configuration)
 * capability to add more than one dashboard view
-* capability to compare variables in the same graph (for a singular scenario)
 * causal tracing of variables
+* capability to compare variables in the same graph (for a singular scenario)
 * capability to use alternative visualizations other than just line charts
 * capability to drag element or personalize layouts
 * capability to draw diagrams on the page

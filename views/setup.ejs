@@ -1,0 +1,53 @@
+<%- include("partials/header.ejs") %>
+
+<link rel="stylesheet" href="css/setup.css">
+<script src="js/setup/setup.js"></script>
+
+<%- include("partials/navbar.ejs") %>
+
+<div class= "container mainContainer">
+    <h3>Setup</h3>
+    <p>Answer a few questions to define the baseline or default scenario.</p>
+    <p>Any newly defined scenario would be a variation of the one defined here.</p>
+    <br>
+
+    <ul class="nav nav-tabs" id="setupTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane1" role="tab" >Main</a>
+            <input type="text" name="nameTab1" id="#nameTab1" class="hidden nav-link" value="Main">
+        </li>
+        <li class="nav-item lastTab">
+            <a class="nav-link" data-toggle="tab" role="tab" href="#">
+                Add <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="TabContent">
+        <div class="tab-pane fade show active" id="pane1" role="tabpanel">
+            <br>
+            <h4>Tab 1</h4>
+            <p>Add input elements to enable the user to setup the model.</p>
+            <p>Each input element is made up of: a label (which can be a question) and the input for the constant.</p>
+            <!-- <form action="/update-pages/home" method="POST">
+                <div class="form-group">
+                    <label for="pageTitle">Page Title</label>
+                    <input type="text" class="form-control" id="titleText" name="titleText" placeholder="<%= pagesText.title %>">
+                </div>
+                <div class="form-group">
+                    <label for="introText">Intro text</label>
+                    <textarea class="form-control" id="introText" name="introText" rows="3"><%= pagesText.intro %></textarea>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form> -->
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<%- include("partials/footer") %> 

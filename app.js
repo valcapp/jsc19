@@ -90,6 +90,11 @@ app.get("/about",(req,res)=>{
     res.render("about");
 });
 
+app.get("/setup",(req,res)=>{
+    lastVisitedPage = "/setup";
+    res.render("setup");
+});
+
 app.get("/links",(req,res)=>{
     lastVisitedPage = "/links";
     res.render("links");
@@ -186,10 +191,6 @@ app.post('/upload-diagram', upload.single('diagram'), (req, res) => {
 });
 
 app.get("/edit-site",(req,res)=>{
-    if(lastVisitedPage==="/run"){
-        dashbEditMode = true;
-        res.redirect("/run");
-    }
     res.render("editSite");
 });
 

@@ -10,7 +10,7 @@ varTypes ={
     26 :'lookup table',
     27 :'string variable'  
 };
-mdlStr = mdlString.mdlString.replace(/\r\n/g,"\n");
+mdlStr = mdlString.replace(/\r\n/g,"\n");
 if(!mdlStr){console.log("Error: mdlString undefined.");}
 chunks = mdlStr.split("|\n\n").filter((chunk)=>chunk.indexOf("**********************")<0);
 if(chunks.length<=1){console.log("Error: mdlString splitting into chunks failed.");}

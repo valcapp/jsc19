@@ -1,7 +1,18 @@
 <%- include("partials/header.ejs") %>
 
 <link rel="stylesheet" href="css/setup.css">
-<script src="js/setup/setup.js"></script>
+
+<script type="text/javascript" src="/js/vensim/d3io.js"></script>
+<script type="text/javascript" src="/js/vensim/mdl.js"></script>
+<script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
+<script>
+    var mdlString = <%- JSON.stringify(mdlString) %>;
+    var c0there = <%- c0there %>;
+</script>
+<script type="text/javascript" src="/js/vensim/variables.js"></script>
+
+<script src="js/utils/jsonForm.js"></script>
+<script src="js/setup/customize.js"></script>
 
 <%- include("partials/navbar.ejs") %>
 
@@ -9,45 +20,88 @@
     <h3>Setup</h3>
     <p>Answer a few questions to define the baseline or default scenario.</p>
     <p>Any newly defined scenario would be a variation of the one defined here.</p>
-    <br>
+    <button type="button" class="customizeButton editMode btn btn-outline-primary designerMode">Customize Setup</button>
+    
+    
+    <button type="button" class="customizeButton editMode hidden btn btn-outline-secondary designerMode">Back</button>
+    <button type="button" class="saveSetup editMode hidden btn btn-success designerMode">Save Setup</button>
+    <br><br>
 
     <ul class="nav nav-tabs" id="setupTabs" role="tablist">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane1" role="tab" >Main</a>
             <input type="text" name="nameTab1" id="#nameTab1" class="hidden nav-link" value="Main">
-        </li>
-        <li class="nav-item lastTab">
+        </li> -->
+
+        <li class="nav-item lastTab editMode hidden">
             <a class="nav-link" data-toggle="tab" role="tab" href="#">
                 Add <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
             </a>
         </li>
     </ul>
 
-    <div class="tab-content" id="TabContent">
-        <div class="tab-pane fade show active" id="pane1" role="tabpanel">
+    <div class="tab-content" id="tabContent">
+        <!-- <div class="tab-pane fade show active" id="pane1" role="tabpanel">
             <br>
             <h4>Tab 1</h4>
             <p>Add input elements to enable the user to setup the model.</p>
-            <p>Each input element is made up of: a label (which can be a question) and the input for the constant.</p>
-            <!-- <form action="/update-pages/home" method="POST">
-                <div class="form-group">
-                    <label for="pageTitle">Page Title</label>
-                    <input type="text" class="form-control" id="titleText" name="titleText" placeholder="<%= pagesText.title %>">
+            <p>Each input element is made up of a label (which can be a question) and the input for the constant.</p>
+
+            <button type="button" class="btn btn-outline-secondary addInput addInputHider editMode hidden" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">
+                New Input
+            </button>
+
+            
+            <div class="card collapse container inputAdderDiv editMode hidden">
+                <div class="card-body">
+                    <h5 class="card-title">Add Input</h5>
+
+                    <div class="form-group">
+                        <label>Question</label>
+                        <input type="text" class="form-control" placeholder="Enter question">
+                        <small class="form-text text-muted">The question to the user represented by the input</small>
+                    </div>
+
+                    <label>Variable</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Name</label>
+                        </div>
+                        <select class="custom-select inputNameSelector">
+                        </select>
+                    </div>
+                    <small class="form-text text-muted">The model variable set by this input</small>
+                    
+
+                    <div class="subsGroup"></div>
+
+                    <br>
+                    <div class="buttonsGroup">
+                        <button type="button" class="btn btn-outline-secondary addInputHider" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">
+                            Back
+                        </button>
+                        <button type="button" class="btn btn-primary inputSubmit" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">
+                            Add
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="introText">Intro text</label>
-                    <textarea class="form-control" id="introText" name="introText" rows="3"><%= pagesText.intro %></textarea>
-                </div>
-                <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form> -->
-        </div>
+            </div>
+
+        </div> -->
 
 
     </div>
 
+    <div class="container" style="text-align: center;">
+        <br>
+        <hr>
+
+        <button type="button" class="setBaseline btn btn-lg btn-primary">Set Baseline</button>
+    </div>
+    
+
 </div>
 
-
+<script src="js/setup/loadsetup.js"></script>
 
 <%- include("partials/footer") %> 

@@ -6,6 +6,9 @@
     filter: opacity(0.5);
     transition: all 0.3s;
 }
+.subsGroup{
+    margin-top:8px;
+}
 li:hover .addButton
 {
     filter: invert(0.2) sepia(0.3) saturate(10000%) hue-rotate(230deg) opacity(0.7);
@@ -19,3 +22,21 @@ li:hover .addButton
 .hidden{
     display: none !important;
 }
+.tab-pane h4{
+    margin-top: 16px;
+}
+.question{
+    margin-top: 24px;
+}
+.unit{
+    font-size: smaller;;
+}
+.setupInput{
+    margin: 0 8px;
+}
+.card.addInputCollapse{
+    margin: 24px auto;
+}
+/* .setBaseline{
+    margin: 0 auto;
+} */

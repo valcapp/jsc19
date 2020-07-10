@@ -51,7 +51,7 @@ function addSliderToView(param,edit=false){
         col = $("<div>").addClass("col d-flex align-items-stretch").attr("id",groupId),
         sliderGroup = $("<div>").addClass("sliderGroup d-flex align-items-start flex-column justify-content-center"),
         label = $("<label>").attr('for', param).html("<strong>"+param+"</strong>").addClass("mb-auto mx-auto"),
-        slider = $('<input type="range">').addClass("io-slider-slide mx-auto").attr("name",param).attr("value",meta.value).attr("min",meta.min).attr("max",meta.max).attr("step",meta.step), // here here here
+        slider = $('<input type="range">').addClass("io-slider-slide mx-auto").attr("name",param).attr("value",c0[param]).attr("min",meta.min).attr("max",meta.max).attr("step",meta.step), // here here here
         output = $("<div>").addClass("mx-auto").html(`&nbsp&nbsp<span class="unit">${meta.unit}</span>`).prepend($('<span>').addClass("io-slider-box mx-auto").attr("name",param).html(slider.attr('value'))),
         info = $('<img type="button" data-container="body" data-toggle="popover" data-placement="bottom">').attr('data-content',meta.comment).attr("src","img/icons/info.svg").addClass("info mx-auto"),
         deleter = $(`<img>`).addClass("deleter editMode").attr("src","/img/icons/add.svg").click(()=>{deleteThis(groupId);});

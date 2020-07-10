@@ -1,35 +1,17 @@
-// get sdTitle and mdlString
+sdPath = require('./bin/sdPath.js');
+mdlChanges = false; 
+const   gen = require('./generate');
+// those are used in the ejs views, hence I declare them globally
+mdlString = gen.mdlString,
+pagesText = gen.text,
+setupTabs = gen.setup,
+dashbDiagram = gen.diagram;
 const   fs = require('fs'),
-        env = fs.existsSync(".env")? require('dotenv').config(): null,
         express = require('express'),
         bodyParser = require('body-parser'),
         path = require('path'),
-        multer = require('multer');
-
-if(env){
-    if (env.error) {
-        throw env.error;
-    }
-}
-
-if(typeof(sdPath) === 'undefined'){
-    sdPath = path.join(__dirname,"sd");
-    if(process.env.SD_PATH){
-        if (!fs.existsSync(process.env.SD_PATH)){
-            console.log(`The path to the sd-folder specified in the .env file is not working\n${process.env.SD_PATH}`);
-        }else{
-            sdPath = process.env.SD_PATH;
-        }
-    }
-    if(!fs.existsSync(sdPath)){
-        throw new Error(`Failed to connect to path:\n${sdPath}\nMake sure the correct path to the sd folder is specified: either \n> copy and paste the sd working folder inside the app dir or  > modify the .env`);
-    }
-}
-
-mdlChanges = false; 
-require('./generate');
-
-const   multerStorage = multer.diskStorage({
+        multer = require('multer'),
+        multerStorage = multer.diskStorage({
             destination: (req, file, cb) => {
                 let prevDiagram = fs.readdirSync(path.join('public','img')).filter(i=>i.split('.')[0]==='diagram');
                 if (prevDiagram.length>0) {fs.unlinkSync(path.join('public','img',prevDiagram[0]));}
@@ -40,29 +22,16 @@ const   multerStorage = multer.diskStorage({
         upload = multer({storage: multerStorage}),
         sizeOf = require('image-size'),
         app = express(),
+        jf = require('./public/js/utils/jsonForm'),
+        setupConfig = __dirname + "/public/config/setupTabs.json",
         dashbConfig = __dirname + "/public/config/dashbViews.json",
         c0Config = __dirname + "/public/config/c0.json",
-        runsConfig = __dirname + "/public/config/dashbRuns.json",
-        textConfig = __dirname + "/public/config/pagesText.json";
-        // request = require('request');
+        runsConfig = __dirname + "/public/config/dashbRuns.json";
+
 
 diagramWidth = dashbDiagram? sizeOf(path.join('public',dashbDiagram)).width : false;
 
 c0there = fs.existsSync(c0Config);
-loadPagesText();
-// console.log('from app.js: mdlString = ',mdlString);
-
-
-function loadPagesText(){
-    pagesText = fs.existsSync(textConfig) ?
-        JSON.parse(fs.readFileSync(textConfig)):
-        {
-            title: sdTitle,
-            intro : '',
-            about : '',
-            links : {"Vensim bla bla \" hello":"http://vensim.com/"}
-        };
-}
 
 // set app views
 app.use(bodyParser.urlencoded({extended: true}));
@@ -122,7 +91,7 @@ app.post("/update-run-view",(req,res)=>{
         let config = JSON.parse(data);
         config[view].sliders = newSliders;
         config[view].charts = newCharts;
-        fs.writeFile(dashbConfig,JSON.stringify(config),function(err){
+        fs.writeFile(dashbConfig,JSON.stringify(config, null, 4),function(err){
             if (err) throw err;
             console.log("Updated: "+dashbConfig);
             res.redirect('/run');
@@ -142,7 +111,7 @@ app.post("/create-run",(req,res)=>{
             c0[req.body[par]] = req.body["init"+index];
     });
     if (Object.keys(c0).length>0){
-        fs.writeFileSync(c0Config,JSON.stringify(c0));
+        fs.writeFileSync(c0Config,JSON.stringify(c0, null, 4));
     }
 
     
@@ -156,7 +125,7 @@ app.post("/create-run",(req,res)=>{
         JSON.parse(fs.readFileSync(runsConfig)):
         {};
     config[runName]=newRun;
-    fs.writeFile(runsConfig,JSON.stringify(config),function(err){
+    fs.writeFile(runsConfig,JSON.stringify(config, null, 4),function(err){
         if (err) throw err;
         console.log("Updated: "+runsConfig);
         res.redirect('/run');
@@ -170,7 +139,7 @@ app.post("/delete-runs",(req,res)=>{
     if (fs.existsSync(runsConfig)){
         let config = JSON.parse(fs.readFileSync(runsConfig));
         runsToDelete.forEach( run => delete config[run] );
-        fs.writeFile(runsConfig,JSON.stringify(config),function(err){
+        fs.writeFile(runsConfig,JSON.stringify(config, null, 4),function(err){
             if (err) throw err;
             console.log("Updated: "+runsConfig);
             res.redirect('/run');
@@ -206,7 +175,7 @@ app.post("/update-pages/:page",(req,res)=>{
     pagesSections[page].forEach((section)=>{
         pagesText[section]=req.body[section+'Text'];
     });
-    fs.writeFile(textConfig,JSON.stringify(pagesText),function(err){
+    fs.writeFile(textConfig,JSON.stringify(pagesText, null, 4),function(err){
         if (err) throw err;
         loadPagesText();
         let next = (page === 'home')? "/" : "/"+page;
@@ -221,13 +190,41 @@ app.post("/add-to-links-page",(req,res)=>{
         newUrl = req.body.linkUrl;
     removeLinks.forEach(link => delete pagesText.links[link]);
     pagesText.links[newLink]= newUrl ;
-    fs.writeFile(textConfig,JSON.stringify(pagesText),function(err){
+    fs.writeFile(textConfig,JSON.stringify(pagesText, null, 4),function(err){
         if (err) throw err;
         loadPagesText();
-        res.redirect("links");
+        res.redirect("/links");
     });
-    
 });
+
+app.post("/set-baseline",(req,res) => {
+    let c0 = {};
+    Object.keys(req.body)
+        .filter((par)=>par.indexOf("constant")>=0)
+        .map((par)=>{
+            let index = par.replace("constant","");
+            c0[req.body[par]] = req.body["init"+index];
+    });
+    if (Object.keys(c0).length>0){
+        fs.writeFile(c0Config,JSON.stringify(c0, null, 4),err=>{
+            if (err) throw err;
+            res.redirect('/run');
+        });
+    }
+});
+
+app.post("/update-setup",(req,res)=>{
+    let data = req.body,
+        setupForm = {};
+    Object.keys(data)
+        .filter( key => key.indexOf('setupForm')===0)
+        .map( key => setupForm[key]=data[key]);
+    setupData = jf.read(setupForm,'setupForm');
+    fs.writeFile(setupConfig,JSON.stringify(setupData, null, 4), err => {
+        if (err) throw err;
+        res.redirect("/setup");
+    });
+})
 
 lastVisitedPage="/";
 // launch the app

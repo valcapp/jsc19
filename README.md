@@ -10,6 +10,7 @@ You would be able to customize it:
 * decide which input sliders to display on the dashboard
 * decide which output charts to display on the dashboard
 * change the diagram in display on the dashboard
+* capability to customize the setup for the model (baseline inputs configuration)
 
 ## Requirements
 
@@ -25,10 +26,9 @@ Then replace the "sd" directory with your own working directory. Your working di
 * your system-dynamics model in .mdl format. Make sure there is only one .mdl file in the "sd" dir.
 * the web directory published by Vensim. Make sure the web folder has been published and is up to date with your model.
 
-To launch the app: open the command line or terminal, change directory to the vensim-dash repo cloned on your machine and finally launch run.js via node:
+To launch the app: if on Windows double click on the run.bat file. Otherwise just open the command line or terminal from the vens-dash folder and launch run.js via node:
 
 ```bash
-cd "your\path\to\vens-dash\folder"
 node run.js
 ```
 
@@ -40,7 +40,6 @@ Being built on top of the Vensim Web folder, this app has same limitation as for
 
 ## Next steps
 The Vensim Dashboard generator is still work in progress. Next steps for development:
-* capability to customize the setup for the model (baseline inputs configuration)
 * capability to add more than one dashboard view
 * causal tracing of variables
 * capability to compare variables in the same graph (for a singular scenario)

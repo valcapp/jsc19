@@ -78,6 +78,7 @@ const enableChangeTabName = (title)=>{
 const changeTabName = (title,newName)=> {
     const i = title.attr('id').replace("tab","");
     title.html(newName);
+    setupTabs[i] = setupTabs[i]? setupTabs[i] : {};
     setupTabs[i].name = newName;
     $('#pane'+i).find('h4').html(newName);
 };
@@ -157,6 +158,7 @@ function addSelectedVar(tabId, ioType){
             questionToAdd = $(`#${tabId} .inputQuestion`).val();
         if (questionToAdd){ inputToAdd.question = questionToAdd; }
         inputToAdd.variable = toAddVar;
+        if(!setupTabs[tabIndx].inputs){setupTabs[tabIndx].inputs=[]}
         setupTabs[tabIndx].inputs.push(inputToAdd)
         loadTabInput(tabIndx,inputToAdd);
     //     if (dashbViews.main[ioType+'s'].indexOf(toAddVar)>=0){

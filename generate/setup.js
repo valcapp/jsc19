@@ -6,7 +6,7 @@ const   fs = require("fs"),
             if (fs.existsSync(setupConfigPath)) {
                 setupConfig = JSON.parse(fs.readFileSync(setupConfigPath));
             } else {
-                setupConfig = { main:{}};
+                setupConfig = { tabs:[]};
                 fs.writeFileSync(setupConfigPath,JSON.stringify(setupConfig));
             }
             return setupConfig;

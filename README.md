@@ -5,12 +5,13 @@ This app allows to build a decent looking dashboard from a Vensim system dynamic
 ## Purpose
 Load your system-dynamics working folder and and run the app to automatically generate a micro-website for your model with a dynamically responsive dashboard.
 
-You would be able to customize it:
-* change the text content of some page elements
-* decide which input sliders to display on the dashboard
-* decide which output charts to display on the dashboard
-* change the diagram in display on the dashboard
-* capability to customize the setup for the model (baseline inputs configuration)
+You would be able to customize by:
+* changing the text content of some page elements
+* deciding which input sliders to display on the dashboard
+* deciding which output charts to display on the dashboard
+* changing the diagram in display on the dashboard
+* customizing the setup for the model (baseline inputs configuration)
+* adding multiple views for the setup and the dashboard
 
 ## Requirements
 
@@ -39,10 +40,12 @@ Once the app is launched, the user can customize the dashboard view. If you chan
 Being built on top of the Vensim Web folder, this app has same limitation as for the models complexity it can support. It supports all functiona and subscript, but not read from file or optimization for example. For the same reason, the graphs that can be visualized as of now are just one-variable line graphs, not bar charts or stack graphs for example.
 
 ## Next steps
-The Vensim Dashboard generator is still work in progress. Next steps for development:
-* capability to add more than one dashboard view
-* causal tracing of variables
+The Vensim Dashboard generator is still work in progress. Apart from fixing [bugs](bugs.md), next steps for development:
+* capability to remove setup inputs
+* capability to reorder elements (sliders, charts, tabs, setup-inputs, text-boxes)
+* possibility to launch the app in 2 different modes (designer and user)
 * capability to compare variables in the same graph (for a singular scenario)
 * capability to use alternative visualizations other than just line charts
+* causal tracing of variables
 * capability to drag element or personalize layouts
 * capability to draw diagrams on the page

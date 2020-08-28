@@ -21,3 +21,9 @@ footer{
     padding-left: 30px;
     color: grey
 }
+.hidden{
+    display:none!important;
+}
+.editModeHidden{
+    display:none!important;
+}

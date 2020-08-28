@@ -2,8 +2,11 @@
 
 
 <link href="/css/dashb.css" rel="stylesheet" type="text/css">
+<link href="/css/sideBar.css" rel="stylesheet" type="text/css">
+<link href="/css/tabs.css" rel="stylesheet" type="text/css">
+<link href="/css/inputCard.css" rel="stylesheet" type="text/css">
 
-<!-- CHARTS SETUP -->
+<!-- TO ENABLE MODEL RUNNING AND READING -->
 <script type="text/javascript" src="/js/vensim/d3io.js"></script>
 <script type="text/javascript" src="/js/vensim/mdl.js"></script>
 <script type="text/javascript" src="/js/vensim/vensim_wasm.js"></script>
@@ -11,10 +14,12 @@
     var mdlString = <%- JSON.stringify(mdlString) %>;
     var c0there = <%- c0there %>;
 </script>
-
-<script type="text/javascript" src="/js/vensim/customize.js"></script>
 <script type="text/javascript" src="/js/vensim/variables.js"></script>
-<script type="text/javascript" src="/js/vensim/loadview.js"></script>
+
+<!-- TO LOAD AND CUSTOMIZE THE VIEW -->
+<script src="js/utils/jsonForm.js"></script>
+<script type="text/javascript" src="/js/dashb/customize.js"></script>
+<!-- <script type="text/javascript" src="/js/dashb/loadview.js"></script> -->
 
 <%- include("partials/navbar.ejs") %>
 
@@ -127,114 +132,140 @@
             <p> Modify model inputs to see the change in the results.</p>
             
         </div>
+
+
+        <hr class="editMode editModeHidden thicker">
+        <!-- DIAGRAM -->
+        <div class="container editMode editModeHidden" style="margin-bottom:48px;">
+            <h4> Change diagram </h4>
+            <form action="/upload-diagram" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="diagramInput">Load diagram picture</label>
+                    <!-- <input type="file" class="form-control-file" id="diagramInput" name="diagram"> -->
+                    <input type="file" accept="image/*" name="diagram" class="form-control-file" id="diagramInput" required>
+                    <!-- <input type="file" accept="image/*" name="diagram"> -->
+                    <br>
+                    <input type="submit" value="Upload" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+
+        <% if (dashbDiagram) { %>
+            <div class="diagramDiv collapse" id="diagram">
+                <img src="<%= dashbDiagram %>" style="max-width: <%= diagramWidth %>px;"></img>
+            </div>
+        <% } %>
+
+        <hr class="editMode editModeHidden thicker">
+
+        <!-- EDIT TAB CONTROL-EXPLAIN -->
+        <div class="container editMode editModeHidden tabControl">
+            <h4> Change sliders and charts</h4>
+            <p>You can now modify the sliders and charts shown in the dashboard views. Any change would be immediately displayed but will not be saved unless you click on the Save button.</p>
+            <p>By clicking the Save button any change made on any of the views (or tabs) will be saved and the page will be automatically reloaded.</p>
+            <button class="btn btn-outline-secondary btn-lg customizeButton" role="button" type="button">Back</button>
+            <button class="btn btn-success btn-lg saveDashb" role="button" >Save Tabs</button>
+            <br><br>
+        </div>
+
         
+        <!-- TAB BAR -->
 
-        <div id="ioDiv">
-            <hr class="editMode hidden thicker">
-            <!-- DIAGRAM -->
-            <div class="container editMode hidden" style="margin-bottom:48px;">
-                <h4> Change diagram </h4>
-                <form action="/upload-diagram" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="diagramInput">Load diagram picture</label>
-                        <!-- <input type="file" class="form-control-file" id="diagramInput" name="diagram"> -->
-                        <input type="file" accept="image/*" name="diagram" class="form-control-file" id="diagramInput" required>
-                        <!-- <input type="file" accept="image/*" name="diagram"> -->
-                        <br>
-                        <input type="submit" value="Upload" class="btn btn-primary">
+        <ul class="nav nav-tabs tabsBar" role="tablist">
+            <!-- <li class="nav-item">
+                <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane1" role="tab" >Main</a>
+                <input type="text" name="nameTab1" id="#nameTab1" class="hidden nav-link" value="Main">
+            </li> -->
+    
+            <li class="nav-item lastTab editMode editModeHidden">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#">
+                    Add <img src="/img/icons/add.svg" alt="" class="addTabButton mx-auto">
+                </a>
+            </li>
+        </ul>
+
+
+        <div class="ioDiv">
+
+            <!-- TAB BAR -->
+            <div class="tab-content" id="tabContent">
+
+                
+                <!-- SLIDERS -->
+                <!-- <div class="slidersDiv container">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
+
+                        
+                        <div class="col lastSlider d-flex align-items-stretch editMode hidden">
+                            <div class="sliderGroup d-flex align-items-center flex-column justify-content-center addSlider addSliderHider" type="button" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
+                                <label class="mx-auto"> <strong>Add Slider</strong></label>
+                                <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+                            </div>
+                        </div>
+
                     </div>
-                </form>
-            </div>
-
-            <% if (dashbDiagram) { %>
-                <div class="diagramDiv collapse" id="diagram">
-                    <img src="<%= dashbDiagram %>" style="max-width: <%= diagramWidth %>px;"></img>
                 </div>
-            <% } %>
-
-            <hr class="editMode hidden thicker">
-
-            <div class="container editMode hidden saveViewButtonDiv">
-                <h4> Change sliders and charts</h4>
-                <button class="btn btn-outline-secondary btn-lg customizeButton" role="button" type="button">Back</button>
-                <button class="btn btn-success btn-lg saveConfigButton" role="button" >Save View</button>
-            </div>
-            
-            <!-- SLIDERS -->
-            <div class="slidersDiv container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-around">
 
 
-                    <div class="col lastSlider d-flex align-items-stretch editMode hidden">
-                        <div class="sliderGroup d-flex align-items-center flex-column justify-content-center addSlider addSliderHider" type="button" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
-                            <label class="mx-auto"> <strong>Add Slider</strong></label>
-                            <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+                <div class="card collapse container addSliderCollapse editMode hidden" id="sliderAdderDiv">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Slider</h5>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="sliderNameSelector">Name</label>
+                            </div>
+                            <select class="custom-select" id="sliderNameSelector">
+                            </select>
+                        </div>
+                        <div class="subsGroup"></div>
+                        <div class="buttonsGroup">
+                            <button type="button" class="btn btn-outline-secondary addSliderHider" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
+                                Back
+                            </button>
+                            <button id="sliderSubmit" type="button" class="btn btn-primary" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
+                                Add
+                            </button>
                         </div>
                     </div>
+                </div> -->
 
-                </div>
-            </div>
+                <!-- <div class="container"><hr></div> -->
 
+                <!-- <div class="chartsDiv container">
+                    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 d-flex justify-content-around">
 
-            <div class="card collapse container addSliderCollapse editMode hidden" id="sliderAdderDiv">
-                <div class="card-body">
-                    <h5 class="card-title">Add Slider</h5>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="sliderNameSelector">Name</label>
+                        <div class="col lastChart editMode hidden">
+                            <div class="d-flex align-items-center flex-column justify-content-center addChart addChartHider" type="button" data-toggle="collapse" data-target=".addChartCollapse" aria-expanded="false">
+                                <label class="mx-auto"> <strong>Add Chart</strong></label>
+                                <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+                            </div>
                         </div>
-                        <select class="custom-select" id="sliderNameSelector">
-                        </select>
-                    </div>
-                    <div class="subsGroup"></div>
-                    <div class="buttonsGroup">
-                        <button type="button" class="btn btn-outline-secondary addSliderHider" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
-                            Back
-                        </button>
-                        <button id="sliderSubmit" type="button" class="btn btn-primary" data-toggle="collapse" data-target=".addSliderCollapse" aria-expanded="false">
-                            Add
-                        </button>
+
                     </div>
                 </div>
-            </div>
 
-            <div class="container"><hr></div>
-
-            <div class="chartsDiv container">
-                <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 d-flex justify-content-around">
-
-                    <div class="col lastChart editMode hidden">
-                        <div class="d-flex align-items-center flex-column justify-content-center addChart addChartHider" type="button" data-toggle="collapse" data-target=".addChartCollapse" aria-expanded="false">
-                            <label class="mx-auto"> <strong>Add Chart</strong></label>
-                            <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+                <div class="card collapse container addChartCollapse editMode hidden" id="chartAdderDiv">
+                    <div class="card-body">
+                        <h5 class="card-title">Add Chart</h5>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="sliderNameSelector">Name</label>
+                            </div>
+                            <select class="custom-select" id="chartNameSelector">
+                            </select>
+                        </div>
+                        <div class="subsGroup"></div>
+                        <div class="buttonsGroup">
+                            <button type="button" class="btn btn-outline-secondary addChartHider" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
+                                Back
+                            </button>
+                            <button id="chartSubmit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
+                                Add
+                            </button>
                         </div>
                     </div>
-
-                </div>
+                </div> -->
             </div>
-
-            <div class="card collapse container addChartCollapse editMode hidden" id="chartAdderDiv">
-                <div class="card-body">
-                    <h5 class="card-title">Add Chart</h5>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="sliderNameSelector">Name</label>
-                        </div>
-                        <select class="custom-select" id="chartNameSelector">
-                        </select>
-                    </div>
-                    <div class="subsGroup"></div>
-                    <div class="buttonsGroup">
-                        <button type="button" class="btn btn-outline-secondary addChartHider" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
-                            Back
-                        </button>
-                        <button id="chartSubmit" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#chartAdderDiv" aria-expanded="false">
-                            Add
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
@@ -242,11 +273,14 @@
 
 
 <!-- dynamic sidebar -->
-<script type="text/javascript" src="/js/vensim/compress.js"></script>
-<script type="text/javascript" src="/js/vensim/scenarios.js"></script>
+<script type="text/javascript" src="/js/utils/tabs.js"></script>
+<script type="text/javascript" src="js/utils/inputCard.js"></script>
+<script type="text/javascript" src="/js/dashb/loaddashb.js"></script>
+<script type="text/javascript" src="/js/dashb/compress.js"></script>
+<script type="text/javascript" src="/js/dashb/scenarios.js"></script>
 <script>
     <% if (dashbEditMode){ dashbEditMode = false; %>
-        displayEditMode();
+        toggleEditMode();
     <% } %>
 </script>
 

@@ -1,6 +1,8 @@
 <%- include("partials/header.ejs") %>
 
 <link rel="stylesheet" href="css/setup.css">
+<link href="/css/tabs.css" rel="stylesheet" type="text/css">
+<link href="/css/inputCard.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="/js/vensim/d3io.js"></script>
 <script type="text/javascript" src="/js/vensim/mdl.js"></script>
@@ -18,24 +20,24 @@
 
 <div class= "container mainContainer">
     <h3>Setup</h3>
-    <p>Answer a few questions to define the baseline or default scenario.</p>
-    <p>Any newly defined scenario would be a variation of the one defined here.</p>
+    <p>Answer a few questions to define the baseline scenario.</p>
+    <p>The baseline is the default scenario, any change in inputs would generate a new scenario to be compared against the baseline.</p>
     <button type="button" class="customizeButton editMode btn btn-outline-primary designerMode">Customize Setup</button>
     
     
-    <button type="button" class="customizeButton editMode hidden btn btn-outline-secondary designerMode">Back</button>
-    <button type="button" class="saveSetup editMode hidden btn btn-success designerMode">Save Setup</button>
+    <button type="button" class="customizeButton editMode editModeHidden btn btn-outline-secondary designerMode">Back</button>
+    <button type="button" class="saveSetup editMode editModeHidden btn btn-success designerMode">Save Setup</button>
     <br><br>
 
-    <ul class="nav nav-tabs" id="setupTabs" role="tablist">
+    <ul class="nav nav-tabs tabsBar" role="tablist">
         <!-- <li class="nav-item">
             <a class="nav-link active" id="tab1" data-toggle="tab" href="#pane1" role="tab" >Main</a>
             <input type="text" name="nameTab1" id="#nameTab1" class="hidden nav-link" value="Main">
         </li> -->
 
-        <li class="nav-item lastTab editMode hidden">
+        <li class="nav-item lastTab editMode editModeHidden">
             <a class="nav-link" data-toggle="tab" role="tab" href="#">
-                Add <img src="/img/icons/add.svg" alt="" class="addButton mx-auto">
+                Add <img src="/img/icons/add.svg" alt="" class="addTabButton mx-auto">
             </a>
         </li>
     </ul>
@@ -102,6 +104,8 @@
 
 </div>
 
+<script src="js/utils/tabs.js"></script>
+<script src="js/utils/inputCard.js"></script>
 <script src="js/setup/loadsetup.js"></script>
 
 <%- include("partials/footer") %> 

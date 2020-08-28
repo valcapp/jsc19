@@ -45,7 +45,7 @@ function populateSetup(){
             (tab,i) => {
                 addTab(i,tab.name ? tab.name : 'Tab'+i );
                 if (tab.inputs){
-                    tab.inputs.map(input=>loadTabInput(i,input));
+                    tab.inputs.map(input=>loadInput(i,input));
                 }
             }
         );
@@ -54,29 +54,7 @@ function populateSetup(){
     });
 }
 
-
-const addTab = (i,title)=>{
-    const tabToAdd = createTab(i,title).insertBefore('#setupTabs .lastTab'),
-        paneToAdd = createTabPane(i,title).appendTo('#tabContent');
-    currentActiveTabs = new activeTabsCount();
-    
-    $(document).ready(()=>{
-        const tab = $(`#tab${i}`);
-        tab.on('click',function(e){
-            e.preventDefault();
-            if (currentActiveTabs.check(this.id)){
-                enableChangeTabName($(this));
-            }
-            $(this).tab('show');
-        });
-        $(document).ready(()=>{
-            $('li.lastTab .nav-link').removeClass('active');
-        });
-    });
-
-};
-
-const loadTabInput = (indexTab, data) => {
+const loadInput = (indexTab, data) => {
     // check if they've got these attributes?
     // const question = input.question,
     //     variable = input.variable;
@@ -102,85 +80,81 @@ const loadTabInput = (indexTab, data) => {
     }
     // console.log(question,variable);
 };
- 
-
-const createTab = (i,title)=>{
-    const tab = $('<li>').addClass('nav-item'),
-        activeness = i===1? ' active' : '',
-        link = $(`<a id="tab${i}" data-toggle="tab" role="tab">`).addClass('nav-link'+activeness)
-            .attr('href',`#pane${i}`).html(title).appendTo(tab),
-        input = $(`<input type="text" name="nameTab${i}" id="#nameTab${i}" value="${title}">`)
-            .addClass('hidden nav-link').appendTo(tab);
-            
-    return tab;
-}
 
 const createTabPane = (i,title)=> {
     // const tabContent = $('#tabContent');
     const activeness = i===1? ' active' : '', 
         pane = $(`<div class="tab-pane fade show${activeness}" id="pane${i}" role="tabpanel">`),
         h4 = $('<h4>').html(title).appendTo(pane),
-        newInputButton = $('<button type=["button"]>').addClass('btn btn-outline-secondary addInput addInputHider editMode')
-            .attr('data-toggle','collapse').attr('data-target','.inputAdderDiv').attr('aria-expanded',"false")
-            .html('New Input').appendTo(pane),
-        newInputCard = inputCard().appendTo(pane);
-        if (!editMode){newInputButton.addClass('hidden');}
+        newInputButton = $('<button type=["button"]>').addClass('btn btn-outline-secondary addInput editMode')
+            .click( ev => toggleInputCard(ev,'.addInput',".inputAdderDiv"))
+            // .attr('data-toggle','collapse').attr('data-target','.inputAdderDiv').attr('aria-expanded',"false")
+            .html('New Input').appendTo(pane);
+        inputCard('input',addInput,true).appendTo(pane);
+        if (!editMode){newInputButton.addClass('editModeHidden');}
     return pane;
 };
 
-const inputCard = ()=>{
-    const inputAdderDiv = $('<div>').addClass('card collapse container inputAdderDiv editMode hidden'),
-        cardBody = $('<div>').addClass('card-body').appendTo(inputAdderDiv),
-        cardTitle = $('<h5>').addClass('card-title').html('Add Input').appendTo(cardBody),
+// const inputCard = (ioType)=>{
+//     const inputAdderDiv = $('<div>').addClass(`card container ${ioType}AdderDiv editMode editModeHidden adderDivHidden`),
+//         cardBody = $('<div>').addClass('card-body').appendTo(inputAdderDiv),
+//         cardTitle = $('<h5>').addClass('card-title').html(`Add ${ioType}`).appendTo(cardBody),
 
-        questionGroup = $('<div>').addClass('form-group').appendTo(cardBody),
-        questionLabel = $('<label>').html('Question').appendTo(questionGroup),
-        questionInput = $('<input type=["text"] placeholder="Enter question">').addClass('form-control inputQuestion').appendTo(questionGroup),
-        questionSmall = $('<small>').addClass('form-text text-muted').html('The question to the user represented by the input').appendTo(questionGroup),
+//         varLabel = $('<label>').html("Variable").appendTo(cardBody),
+//         varNameGroup = $('<div>').addClass('input-group').appendTo(cardBody),
+//         varNamePrep = $('<div>').addClass('input-group-prepend').appendTo(varNameGroup),
+//         nameLabel = $('<label>').addClass('input-group-text').html('Name').appendTo(varNamePrep),
+//         nameSelect = $('<select>').addClass(`custom-select ${ioType}NameSelector`).appendTo(varNameGroup),
+//         nameSmall = $('<small>').addClass('form-text text-muted').html(`The model variable the new ${ioType} will refer to.`).appendTo(cardBody),
 
-        varLabel = $('<label>').html("Variable").appendTo(cardBody),
-        varNameGroup = $('<div>').addClass('input-group').appendTo(cardBody),
-        varNamePrep = $('<div>').addClass('input-group-prepend').appendTo(varNameGroup),
-        nameLabel = $('<label>').addClass('input-group-text').html('Name').appendTo(varNamePrep),
-        nameSelect = $('<select>').addClass('custom-select inputNameSelector').appendTo(varNameGroup),
-        nameSmall = $('<small>').addClass('form-text text-muted').html('The model variable set by this input').appendTo(cardBody),
+//         subsGroup = $('<div>').addClass('subsGroup').appendTo(cardBody),
 
-        subsGroup = $('<div>').addClass('subsGroup').appendTo(cardBody),
+//         br = $('<br>').appendTo(cardBody),
 
-        br = $('<br>').appendTo(cardBody),
-        buttonsGroup = $('<div>').addClass('buttonsGroup').appendTo(cardBody),
-        backButton = $('<button type="button" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">')
-            .addClass('btn btn-outline-secondary addInputHider').html('Back').appendTo(buttonsGroup),
-        addButton = $('<button type="button" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">')
-            .addClass('btn btn-primary inputSubmit').html('Add').appendTo(buttonsGroup);
-    return inputAdderDiv;
-};
+//         tagToToggle = ".add" + ioType.charAt(0).toUpperCase() + ioType.slice(1)
+//         buttonsGroup = $('<div>').addClass('buttonsGroup').appendTo(cardBody),
+//         backButton = $(`<button type="button">`)
+//             .addClass(`btn btn-outline-secondary`).html('Back')
+//             .on('click',ev=>toggleWithinPane(ev,tagToToggle,"adderDivHidden"))
+//             .appendTo(buttonsGroup),
+//         addButton = $(`<button type="button" data-toggle="collapse" data-target=".${ioType}AdderDiv" aria-expanded="false">`)
+//             .addClass(`btn btn-primary ${ioType}Submit`).html('Add')
+//             .on('click',ev=>{
+//                 toggleWithinPane(ev,tagToToggle,"adderDivHidden");
+//                 const iTab = currentPane(ev).id.replace("pane","");
+//                 addSelectedVar(iTab,ioType,addInput);
+//             })
+//             .appendTo(buttonsGroup);
+//     return inputAdderDiv;
+// };
 
+// const inputCard = ()=>{
+//     const inputAdderDiv = $('<div>').addClass('card collapse container inputAdderDiv editMode hidden'),
+//         cardBody = $('<div>').addClass('card-body').appendTo(inputAdderDiv),
+//         cardTitle = $('<h5>').addClass('card-title').html('Add Input').appendTo(cardBody),
 
+        // questionGroup = $('<div>').addClass('form-group').appendTo(cardBody),
+        // questionLabel = $('<label>').html('Question').appendTo(questionGroup),
+        // questionInput = $('<input type=["text"] placeholder="Enter question">').addClass('form-control inputQuestion').appendTo(questionGroup),
+        // questionSmall = $('<small>').addClass('form-text text-muted').html('The question to the user represented by the input').appendTo(questionGroup),
 
+//         varLabel = $('<label>').html("Variable").appendTo(cardBody),
+//         varNameGroup = $('<div>').addClass('input-group').appendTo(cardBody),
+//         varNamePrep = $('<div>').addClass('input-group-prepend').appendTo(varNameGroup),
+//         nameLabel = $('<label>').addClass('input-group-text').html('Name').appendTo(varNamePrep),
+//         nameSelect = $('<select>').addClass('custom-select inputNameSelector').appendTo(varNameGroup),
+//         nameSmall = $('<small>').addClass('form-text text-muted').html('The model variable set by this input').appendTo(cardBody),
 
-// function populateDashbView(){
-//     $.getJSON("/config/dashbViews.json", function(viewsObj) {
-//         dashbViews = viewsObj;
-//         configSliders = dashbViews.main.sliders;
-//         for (let i=0; i<configSliders.length; i++){
-//             let param = configSliders[i];
-//             if (variables[param]) { addSliderToView(param); }
-//             else { configSliders.splice(configSliders.indexOf(param),1); i--; }
-//         }
-//         configCharts = dashbViews.main.charts;
-//         for (let i=0; i<configCharts.length; i++){
-//             let param = configCharts[i];
-//             if (variables[param]) { addChartToView(param);}
-//             else { configCharts.splice(configCharts.indexOf(param),1); i--;}
-//         }
-//         letPopovers();
-//         activateD3();
-//         populateRuns();
-//         activateCustomization();
-//     });
-// }
+//         subsGroup = $('<div>').addClass('subsGroup').appendTo(cardBody),
 
+//         br = $('<br>').appendTo(cardBody),
+//         buttonsGroup = $('<div>').addClass('buttonsGroup').appendTo(cardBody),
+//         backButton = $('<button type="button" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">')
+//             .addClass('btn btn-outline-secondary addInputHider').html('Back').appendTo(buttonsGroup),
+//         addButton = $('<button type="button" data-toggle="collapse" data-target=".inputAdderDiv" aria-expanded="false">')
+//             .addClass('btn btn-primary inputSubmit').html('Add').appendTo(buttonsGroup);
+//     return inputAdderDiv;
+// };
 
 
 

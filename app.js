@@ -24,7 +24,7 @@ const   fs = require('fs'),
         app = express(),
         jf = require('./public/js/utils/jsonForm'),
         setupConfig = __dirname + "/public/config/setupTabs.json",
-        dashbConfig = __dirname + "/public/config/dashbViews.json",
+        dashbConfig = __dirname + "/public/config/dashbTabs.json",
         c0Config = __dirname + "/public/config/c0.json",
         runsConfig = __dirname + "/public/config/dashbRuns.json";
 
@@ -215,16 +215,30 @@ app.post("/set-baseline",(req,res) => {
 
 app.post("/update-setup",(req,res)=>{
     let data = req.body,
-        setupForm = {};
+        form = {};
     Object.keys(data)
         .filter( key => key.indexOf('setupForm')===0)
-        .map( key => setupForm[key]=data[key]);
-    setupData = jf.read(setupForm,'setupForm');
-    fs.writeFile(setupConfig,JSON.stringify(setupData, null, 4), err => {
+        .map( key => form[key]=data[key]);
+    formData = jf.read(form,'setupForm');
+    fs.writeFile(setupConfig,JSON.stringify(formData, null, 4), err => {
         if (err) throw err;
         res.redirect("/setup");
     });
 })
+
+app.post("/update-dashb",(req,res)=>{
+    let data = req.body,
+        form = {};
+    Object.keys(data)
+        .filter( key => key.indexOf('dashbForm')===0)
+        .map( key => form[key]=data[key]);
+    formData = jf.read(form,'dashbForm');
+    fs.writeFile(dashbConfig,JSON.stringify(formData, null, 4), err => {
+        if (err) throw err;
+        res.redirect("/run");
+    });
+})
+
 
 lastVisitedPage="/";
 // launch the app

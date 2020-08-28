@@ -4,7 +4,7 @@ const path = require("path"),
     jquery = require('jquery'),
     {JSDOM} = jsdom,
     appDir = path.resolve(__dirname,'..'),
-    dashbConfigPath = path.join(appDir,'public','config','dashbViews.json'),
+    dashbConfigPath = path.join(appDir,'public','config','dashbTabs.json'),
     sourcePath = path.join(sdPath,'web','index.html');
     // templatePath = path.join(__dirname,'dashb-template.ejs'),
     // targetPath = path.join(appDir,'views','dashb.ejs');
@@ -36,9 +36,14 @@ function sourceElmts(window){
     $(".io-chart").each(function(){
         vensCharts.push($(this).attr('name'));
     });
-    sliders=vensSliders.filter((x)=>Boolean(x));
-    charts=vensCharts.filter((x)=>Boolean(x));
-    dashbViews = {main: {sliders,charts}};
+
+    dashbViews = {tabs:[
+        {
+            name: 'main',
+            sliders: vensSliders.filter(x=>x),
+            charts: vensCharts.filter(x=>x)
+        }
+    ]};
     
     fs.writeFile(dashbConfigPath, JSON.stringify(dashbViews), function (err) {
         if (err) return console.log(err);

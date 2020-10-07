@@ -127,7 +127,7 @@ function addSliderToTab(i_tab, param){
         slider = $('<input type="range">').addClass("io-slider-slide mx-auto").attr("name",param).attr("value",c0[param]).attr("min",meta.min).attr("max",meta.max).attr("step",meta.step), // here here here
         output = $("<div>").addClass("mx-auto").html(`&nbsp&nbsp<span class="unit">${meta.unit}</span>`).prepend($('<span>').addClass("io-slider-box mx-auto").attr("name",param).html(slider.attr('value'))),
         info = $('<img type="button" data-container="body" data-toggle="popover" data-placement="bottom">').attr('data-content',meta.comment).attr("src","img/icons/info.svg").addClass("info mx-auto"),
-        deleter = $(`<img>`).addClass("deleter editMode").attr("src","/img/icons/add.svg").click(()=>{deleteThis(groupId);});
+        deleter = $(`<img>`).addClass("deleter editMode").attr("src","/img/icons/add.svg").click(()=>col.remove());
     if (!editMode){deleter.addClass("editModeHidden");}
     sliderGroup.append(label).append(output).append(slider).append(info).append(deleter);
     col.append(sliderGroup);
@@ -138,7 +138,7 @@ function addChartToTab(i_tab,name){
     // let groupId = "chartId"+variables[name].index, //FIXTHIS: needs change because the same graph can be displayed in more than one tab
     const chart = $('<div>').addClass("io-chart io-chart-style").attr("name",name).attr("varname",name).attr("xaxisname",variables['INITIAL TIME'].meta.unit).attr("yaxisname",variables[name].meta.unit),
         info = $('<img type="button" data-container="body" data-toggle="popover" data-placement="top">').attr('data-content',variables[name].meta.comment).attr("src","img/icons/info.svg").addClass("info"),
-        deleter = $("<img>").addClass("deleter editMode").attr("src","/img/icons/add.svg").click(()=>{deleteThis(groupId);}),
+        deleter = $("<img>").addClass("deleter editMode").attr("src","/img/icons/add.svg").on('click',()=>col.remove()),
         // col = $("<div>").addClass("col").attr("id",groupId).append(chart.append(info)).append(deleter); 
         col = $("<div>").addClass("col").append(chart.append(info)).append(deleter); 
     if (!editMode){deleter.addClass("editModeHidden");}

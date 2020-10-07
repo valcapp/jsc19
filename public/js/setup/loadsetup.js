@@ -38,7 +38,7 @@ const setBaseline = () => {
 }
 
 function populateSetup(){
-    $('.setBaseline').click(setBaseline);
+    $('.setBaseline').on('click', setBaseline);
     $.getJSON("/config/setupTabs.json", data =>{
         setupTabs = data.tabs;
         setupTabs.filter(tab=>tab).map(
@@ -49,7 +49,7 @@ function populateSetup(){
                 }
             }
         );
-        $(document).ready(()=>$('#tab0').trigger('click'));    
+        $(()=>$('#tab0').trigger('click'));    
         activateCustomization();
     });
 }
@@ -59,7 +59,10 @@ const loadInput = (indexTab, data) => {
     // const question = input.question,
     //     variable = input.variable;
     const pane = $(`#pane${indexTab}`),
-        inputGroup = $('<div>').addClass('form-group'),
+        inputGroup = $('<div>').addClass('form-group inputGroup').on({
+            mouseenter: () => editMode? inputGroup.addClass('highlighted') : null,
+            mouseleave: () => editMode? inputGroup.removeClass('highlighted') : null
+        }),
         question = data.question? $('<p>').addClass('question').html(`<strong>${data.question}</strong>`).appendTo(inputGroup):null,
         varInfo = variables[data.variable],
         varMeta = varInfo? varInfo.meta? varInfo.meta : null : null;
@@ -70,7 +73,10 @@ const loadInput = (indexTab, data) => {
             unit = varMeta? $('<span>').addClass('unit col-2 col-sm-1').html(varMeta.unit).appendTo(inputSubGroup) : null,
             input = $(`<input type="number" name="var${varInfo.index}">`).val(c0[data.variable])
                 .addClass('col-6 col-sm-3 col-lg-2 form-control setupInput').appendTo(inputSubGroup)
-                .change(ev=>{c0[data.variable]=ev.target.valueAsNumber});
+                .on('change',ev=>{c0[data.variable]=ev.target.valueAsNumber}),
+            deleter = $("<img>").addClass("deleter editMode ").attr("src","/img/icons/add.svg")
+                .on('click',()=>inputGroup.remove()).appendTo(inputGroup);
+            if (!editMode){deleter.addClass("editModeHidden");}
             if (varMeta){
                 input.attr('min',varMeta.min).attr('max',varMeta.max).attr('step',varMeta.step)
             }
@@ -87,7 +93,7 @@ const createTabPane = (i,title)=> {
         pane = $(`<div class="tab-pane fade show${activeness}" id="pane${i}" role="tabpanel">`),
         h4 = $('<h4>').html(title).appendTo(pane),
         newInputButton = $('<button type=["button"]>').addClass('btn btn-outline-secondary addInput editMode')
-            .click( ev => toggleInputCard(ev,'.addInput',".inputAdderDiv"))
+            .on('click', ev => toggleInputCard(ev,'.addInput',".inputAdderDiv"))
             // .attr('data-toggle','collapse').attr('data-target','.inputAdderDiv').attr('aria-expanded',"false")
             .html('New Input').appendTo(pane);
         inputCard('input',addInput,true).appendTo(pane);

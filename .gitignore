@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+node_modules
 sd1/
 sd2/
 sd3/

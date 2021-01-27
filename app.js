@@ -1,4 +1,5 @@
-sdPath = require('./bin/sdPath.js');
+sdPath = require('./utils/sdPath.js');
+viewMode = typeof(viewMode) === 'undefined' ? false : viewMode
 mdlChanges = false; 
 const   gen = require('./generate');
 // those are used in the ejs views, hence I declare them globally
